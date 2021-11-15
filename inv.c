@@ -844,8 +844,7 @@ int slot;
       use_pack_item(response - 'a',slot);
     }
   }
-  if ( optionp(TOPINV) )
-    display_possessions();
+  display_possessions();
   return slot;
 }
 
