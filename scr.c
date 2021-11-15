@@ -10,7 +10,11 @@
 # ifdef AMIGA
 #  include <curses210.h>
 # else
-#  include <curses.h>
+#  ifdef __FreeBSD__
+#   include <ncurses.h>
+#  else
+#   include <curses.h>
+#  endif
 # endif
 # include <sys/types.h>
 #endif
