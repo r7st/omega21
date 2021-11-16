@@ -8,7 +8,7 @@ LIBDIR = ${PREFIX}/share/omega
 # it will fail if none of them are defined.  If you do uncomment
 # one, make sure you comment out the other definition of CFLAGS lower down
 
-CFLAGS+= -DBSD -DOMEGALIB=\"${LIBDIR}/\"
+CFLAGS = -O2 -pipe -Wno-return-type -fstack-protector-strong -fno-strict-aliasing  -DBSD -DOMEGALIB=\"${LIBDIR}/\"  -Wl,-rpath=/usr/local/lib
 #CFLAGS = -DSYSV -O
 # I also had to define -cckr (K&R style C) for system V
 #CFLAGS = -DMSDOS -O
