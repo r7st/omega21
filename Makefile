@@ -1,3 +1,7 @@
+# PREFIX is the install location. Defaults to cwd.
+# PREFIX = /usr/local/bin
+PREFIX ?= .
+
 # These two definitions are used if you 'make install'
 # the value of LIBDIR should be the same as OMEGALIB in defs.h
 BINDIR = ${PREFIX}/bin
