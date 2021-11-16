@@ -6,6 +6,8 @@ PREFIX ?= .
 # the value of LIBDIR should be the same as OMEGALIB in defs.h
 BINDIR = ${PREFIX}/bin
 LIBDIR = ${PREFIX}/share/omega
+# the value of SAVEDIR should be the same as SAVEDIR in defs.h
+SAVEDIR = "${LIBDIR}/saves"
 
 # One of these should be uncommented, as appropriate, unless your compiler
 # does it for you.  You can test this by simply trying to 'make' omega -
@@ -20,6 +22,7 @@ CFLAGS += \
   -fno-strict-aliasing  \
   -DBSD \
   -DOMEGALIB=\"${LIBDIR}/\"  \
+  -DSAVEDIR=\"${SAVEDIR}/\" \
   -Wl,-rpath=/usr/local/lib
 
 #CFLAGS = -DSYSV -O
@@ -64,6 +67,7 @@ omega: $(OBJ)
 install: omega
 	mkdir -p $(BINDIR)
 	mkdir -p $(LIBDIR)
+	mkdir -p $(SAVEDIR)
 	chown games:games omega
 	cp omega $(BINDIR)
 	chmod 4711 $(BINDIR)/omega
