@@ -125,66 +125,42 @@ char lgetc()
 }
 
 
-int ynq()
+int ynq_helper( win )
+WINDOW *win;
 {
   char p='*'; /* the user's choice; start with something impossible
                * to prevent a loop. */
   while ((p != 'n') && (p != 'y') && (p != 'q') && (p != ESCAPE) &&
          (p != EOF) && (p != ' '))
-    p = wgetch(Msgw);
+    p = wgetch(win);
   switch (p) {
-    case 'y': wprintw(Msgw,"yes. "); break;
-    case 'n': wprintw(Msgw,"no. "); break;
+    case 'y': wprintw(win,"yes. "); break;
+    case 'n': wprintw(win,"no. "); break;
     
     case ESCAPE: p = 'q'; /* fall through to 'q' */
     case ' ': p = 'q';    /* fall through to 'q' */
-    case 'q': wprintw(Msgw,"quit. "); break;
+    case 'q': wprintw(win,"quit. "); break;
     default: assert( p == EOF );
     }
-  wrefresh(Msgw);
-  return(p);
+  wrefresh(win);
+  return p;
+}
+
+int ynq()
+{
+  return(ynq_helper(Msgw));
 }
 
 
 int ynq1()
 {
-  char p='*'; /* the user's choice; start with something impossible
-               * to prevent a loop. */
-  while ((p != 'n') && (p != 'y') && (p != 'q') && (p != ESCAPE) &&
-          (p != ' ') && (p != EOF))
-    p = wgetch(Msg1w);
-  switch (p) {
-    case 'y': wprintw(Msg1w,"yes. "); break;
-    case 'n': wprintw(Msg1w,"no. "); break;
-    
-    case ESCAPE: p = 'q'; /* fall through to 'q' */
-    case ' ': p = 'q';    /* fall through to 'q' */
-    case 'q': wprintw(Msg1w,"quit. "); break;
-    default: assert( p == EOF );
-    }
-  wrefresh(Msg1w);
-  return(p);
+  return(ynq_helper(Msg1w));
 }
 
 
 int ynq2()
 {
-  char p='*'; /* the user's choice; start with something impossible
-               * to prevent a loop. */
-  while ((p != 'n') && (p != 'y') && (p != 'q') && (p != ESCAPE) &&
-          (p != ' ') && (p != EOF))
-    p = wgetch(Msg2w);
-  switch (p) {
-    case 'y': wprintw(Msg2w,"yes. "); break;
-    case 'n': wprintw(Msg2w,"no. "); break;
-    
-    case ESCAPE: p = 'q'; /* fall through to 'q' */
-    case ' ': p = 'q';    /* fall through to 'q' */
-    case 'q': wprintw(Msg2w,"quit. "); break;
-    default: assert( p == EOF );
-    }
-  wrefresh(Msg2w);
-  return(p);
+  return(ynq_helper(Msg2w));
 }
     
 /* puts up a morewait to allow reading if anything in top two lines */
