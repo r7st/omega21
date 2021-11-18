@@ -211,7 +211,8 @@ int load_save_games(void)
     else if ((strcmp(d->d_name, "..")) == 0) { continue; }
     strcpy(savegames[n], d->d_name); 
     if (n++ >= max_saves) { break; }
-  }
+  } closedir(dir);
+
   printw("%s\n", "Please select a save or type (n) for new game:");
   if (n < 1) { return 0; }
   for (int i=0; i<n; i++) {

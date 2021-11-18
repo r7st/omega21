@@ -516,6 +516,8 @@ char *fromstring;
 void p_death(fromstring)
 char *fromstring;
 {
+  char savestr[84];
+
   Player.hp = -1;
   print3("You died!");
   morewait();
@@ -524,6 +526,13 @@ char *fromstring;
   kill_all_levels();
 #endif
   endgraf();
+
+  strcpy(savestr, SAVEDIR);
+  strcat(savestr, Player.name);
+  strcat(savestr, ".sav");
+  change_to_user_perms();
+  unlink(savestr);
+  change_to_game_perms(); // is this necessary?
   exit(0);
 }
 
