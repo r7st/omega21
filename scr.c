@@ -125,7 +125,7 @@ char lgetc()
 }
 
 
-int ynq_helper( win )
+static int ynq_helper( win )
 WINDOW *win;
 {
   char p='*'; /* the user's choice; start with something impossible
