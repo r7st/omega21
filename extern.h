@@ -10,6 +10,7 @@
 /* omega.c functions */
 
 int main ARGS((int,char *[]));
+int load_save_games ARGS((void));
 int game_restore ARGS((int,char *[]));
 void init_world ARGS((void));
 void inititem ARGS((int));
