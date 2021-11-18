@@ -7,7 +7,7 @@ PREFIX ?= .
 BINDIR = ${PREFIX}/bin
 LIBDIR = ${PREFIX}/share/omega
 # the value of SAVEDIR should be the same as SAVEDIR in defs.h
-SAVEDIR = "${LIBDIR}/saves"
+SAVEDIR = ${LIBDIR}/saves
 
 # One of these should be uncommented, as appropriate, unless your compiler
 # does it for you.  You can test this by simply trying to 'make' omega -
