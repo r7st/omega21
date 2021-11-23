@@ -974,7 +974,7 @@ int compress, force;
     ok = (ynq1() == 'y');
   }
   if (force || ok) {
-    gen_save_fname(fname)
+    gen_save_fname(fname);
 #ifdef MSDOS
     for (pos = 0; fname[pos] && isalnum(fname[pos]); pos++)
       ;
