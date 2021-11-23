@@ -201,7 +201,7 @@ int load_save_games(void)
   int ok; char response;
   char savestr[80];
 
-  int max_saves=10, pname_length=84; // max Player.name length + .sav
+  int max_saves=15, pname_length=84; // max Player.name length + .sav
   char *savegames[max_saves][pname_length];
 
   int n=0; struct dirent *d; DIR *dir;
@@ -351,7 +351,6 @@ char *argv[];
 
   /* game restore attempts to restore game if there is an argument */
   continuing = load_save_games();
-  //continuing = game_restore(argc,argv);
 
   /* monsters initialized in game_restore if game is being restored */  
   /* items initialized in game_restore if game is being restored */
