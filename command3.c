@@ -312,6 +312,7 @@ void fire()
 
 void quit()
 {
+  char fname[84];
   clearmsg();
   change_to_game_perms();
   mprint("Quit: Are you sure? [yn] ");
@@ -322,6 +323,10 @@ void quit()
     kill_all_levels();
 #endif
     endgraf();
+    gen_save_fname(fname);
+    change_to_user_perms();
+    unlink(fname);
+    change_to_game_perms();
     exit(0);
   }
   else resetgamestatus(SKIP_MONSTERS);
