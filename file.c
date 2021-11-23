@@ -554,7 +554,7 @@ int filecheck()
     }
     else if (badbutpossible) {
 	printf("\nFurther execution may cause anomalous behavior.");
-	printf("\nContinue anyhow? [yn] ");
+	printf("\nContinue anyhow? [YN] ");
 	if (getchar()=='y') return(-1);
 	else return(0);
     }

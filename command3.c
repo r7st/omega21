@@ -276,7 +276,7 @@ void quit()
 {
   clearmsg();
   change_to_game_perms();
-  mprint("Quit: Are you sure? [yn] ");
+  mprint("Quit: Are you sure? [YN] ");
   if (ynq()=='y') {
     if (Player.rank[ADEPT] == 0) display_quit();
     else display_bigwin();
@@ -472,7 +472,7 @@ void wizard()
   if (gamestatusp(CHEATED)) mprint("You're already in wizard mode!");
   else {
     clearmsg();
-    mprint("Really try to enter wizard mode? [yn] ");
+    mprint("Really try to enter wizard mode? [YN] ");
     if (ynq()=='y') {
        lname = getlogin();
 #ifndef MSDOS_SUPPORTED_ANTIQUE
@@ -981,7 +981,7 @@ void dismount_steed()
     print3("You're on foot already!");
   else if (Current_Environment == E_COUNTRYSIDE) {
     mprint("If you leave your steed here he will wander away!");
-    mprint("Do it anyway? [yn] ");
+    mprint("Do it anyway? [YN] ");
     if (ynq()=='y') resetgamestatus(MOUNTED);
   }
   else {

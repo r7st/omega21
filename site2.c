@@ -17,7 +17,7 @@ void l_condo()
     print2("Which are you interested in [r,p, or ESCAPE] ");
     response = mgetc();
     if (response == 'p') {
-      print2("Only 50,000Au. Buy it? [yn] ");
+      print2("Only 50,000Au. Buy it? [YN] ");
       if (ynq2()=='y') {
 	if (Player.cash < 50000) 
 	  print3("No mortgages, buddy.");
@@ -31,7 +31,7 @@ void l_condo()
       }
     }
     else if (response == 'r') {
-      print2("Weekly Rental, 1000Au. Pay for it? [yn] ");
+      print2("Weekly Rental, 1000Au. Pay for it? [YN] ");
       if (ynq2()=='y') {
 	if (Player.cash < 1000)
 	  print2("Hey, pay the rent or out you go....");
@@ -75,7 +75,7 @@ void l_condo()
 	while ((ol != NULL) && (! over)) {
 	  print1("Retrieve ");
 	  nprint1(itemid(ol->thing));
-	  nprint1(" [ynq] ");
+	  nprint1(" [YNQ] ");
 	  response = (char) mcigetc();
 	  if (response == 'y') {
 	    gain_item(ol->thing);
@@ -96,7 +96,7 @@ void l_condo()
       }
       else if (response == 'd') {
 	clearmsg();
-	print1("You sure you want to retire, now? [yn] ");
+	print1("You sure you want to retire, now? [YN] ");
 	if (ynq1() == 'y') {
 	  p_win();
 	}
@@ -337,7 +337,7 @@ void l_adept()
     morewait();
     clearmsg();
   }
-  print2("Enter the mystic portal? [yn] ");
+  print2("Enter the mystic portal? [YN] ");
   if (ynq2()!='y') {
     if (Player.level > 100) {
       print1("The Lords of Destiny spurn your cowardice....");
@@ -454,7 +454,7 @@ void l_vault()
     Level->site[12][56].locchar = WALL;
     morewait();
     clearmsg();
-    print1("Try to crack it? [yn] ");
+    print1("Try to crack it? [YN] ");
     if (ynq1()=='y') {
       if (random_range(100) < Player.rank[THIEVES]*Player.rank[THIEVES]) {
 	print2("The lock clicks open!!!");
@@ -485,7 +485,7 @@ void l_brothel()
   print2("A sign reads `The House of the Eclipse'");
   morewait();
   clearmsg();
-  print1("Try to enter? [yn] ");
+  print1("Try to enter? [YN] ");
   if (ynq1()=='y') {
     menuclear();
     menuprint("a:knock on the door.\n");
@@ -505,7 +505,7 @@ void l_brothel()
 	print2("There is no reponse.");
       else {
 	print1("A window opens in the door.");
-	print2("`500Au, buddy. For the night.' pay it? [yn] ");
+	print2("`500Au, buddy. For the night.' pay it? [YN] ");
 	if (ynq2()=='y') {
 	  if (Player.cash < 500) {
 	    print1("`What, no roll?!'");
@@ -809,7 +809,7 @@ void l_oracle()
   char response;
   if (gamestatusp(ATTACKED_ORACLE) && (! gamestatusp(COMPLETED_ASTRAL))) {
     print1("You come before a blue crystal dais. You see a broken mirror.");
-    print2("Look in the mirror? [yn] ");
+    print2("Look in the mirror? [YN] ");
     if (ynq2()=='y') {
       print1("A strange force rips you from your place....");
       Player.hp = 1;
@@ -829,7 +829,7 @@ void l_oracle()
       print2("You notice a robed figure in front of you....");
       morewait();
       print1("The oracle doffs her cowl. Her eyes glitter with blue fire!");
-      print2("Attack her? [yn] ");
+      print2("Attack her? [YN] ");
       if (ynq2() == 'y') {
 	setgamestatus(ATTACKED_ORACLE);
 	print1("The oracle deftly avoids your attack.");
@@ -852,7 +852,7 @@ void l_oracle()
 	else if (!gamestatusp(COMPLETED_ASTRAL)) {
 	  morewait();
 	  print1("'Journey to the Astral Plane and meet the Gods' servants.'");
-	  print2("The oracle holds out her hand. Do you take it? [yn] ");
+	  print2("The oracle holds out her hand. Do you take it? [YN] ");
 	  if (ynq2()=='y') {
 	    print1("'Beware: Only the Star Gem can escape the Astral Plane.'");
 	    print2("A magic portal opens behind the oracle. She leads you");
@@ -891,21 +891,21 @@ void l_oracle()
 
 void l_mansion()
 {
-  print1("Enter the mansion? [yn] ");
+  print1("Enter the mansion? [YN] ");
   if (ynq1()=='y')
     change_environment(E_MANSION);
 }
 
 void l_house()
 {
-  print1("Enter the house? [yn] ");
+  print1("Enter the house? [YN] ");
   if (ynq1()=='y')
     change_environment(E_HOUSE);
 }
 
 void l_hovel()
 {
-  print1("Enter the hovel? [yn] ");
+  print1("Enter the hovel? [YN] ");
   if (ynq1()=='y')
     change_environment(E_HOVEL);
 }
@@ -992,7 +992,7 @@ void l_cartographer()
 {
   int i,j,x,y;
   print1("Ye Olde Mappe Shoppe.");
-  print2("Map of the local area: 500Au. Buy it? [yn] ");
+  print2("Map of the local area: 500Au. Buy it? [YN] ");
   if (ynq2()=='y') {
     if (Player.cash < 500) 
       print3("Cursed be cheapskates! May you never find an aid station....");
@@ -1027,7 +1027,7 @@ void l_cartographer()
 void l_charity()
 {
   long donation;
-  print2("'Greetings, friend. Do you wish to make a donation?' [yn] ");
+  print2("'Greetings, friend. Do you wish to make a donation?' [YN] ");
   if (ynq2()!='y') 
     print3("'Pinchpurse!'");
   else {

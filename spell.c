@@ -261,7 +261,7 @@ void s_ritual()
 	  mprint("A storm of mana coaelesces around you.");
 	  mprint("You are buffeted by bursts of random magic.");
 	  p_damage(random_range(Player.pow),UNSTOPPABLE,"high magic");
-	  mprint("Continue ritual? Could be dangerous.... [yn] ");
+	  mprint("Continue ritual? Could be dangerous.... [YN] ");
 	  if (ynq()=='y') s_wish();
 	  else mprint("The mana fades away to nothingness.");
 	  x = Player.x;

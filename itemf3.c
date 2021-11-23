@@ -37,7 +37,7 @@ pob o;
   else {
     HiMagicUse = Date;
     print1("With a shriek of tearing aether, a magic portal appears!");
-    print2("Step through? [yn] ");
+    print2("Step through? [YN] ");
     if (ynq()=='y') change_environment(E_COURT);
     print1("The sceptre seems to subside. You hear a high whine, as of");
     print2("capacitors beginning to recharge.");

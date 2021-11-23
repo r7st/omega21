@@ -213,7 +213,7 @@ int base,numitems;
     clearmsg();
     print1("I can let you have it for ");
     mlongprint(2*true_item_value(newitem));
-    nprint1("Au. Buy it? [yn] ");
+    nprint1("Au. Buy it? [YN] ");
     if (ynq1() == 'y') {
       if (Player.cash < 2*true_item_value(newitem)) {
 	print2("Why not try again some time you have the cash?");
@@ -239,7 +239,7 @@ void l_club()
   if (! gamestatusp(CLUB_MEMBER)) {
     if (Player.level < 2) print3("Only reknowned adventurers need apply.");
     else {
-      print2("Dues are 100Au. Pay it? [yn] ");
+      print2("Dues are 100Au. Pay it? [YN] ");
       if (ynq2()=='y') {
 	if (Player.cash < 100)
 	  print3("Beat it, or we'll blackball you!");
@@ -603,7 +603,7 @@ void l_commandant()
   int num;
   pob food;
   print1("Commandant Sonder's Rampart-fried Lyzzard partes. Open 24 hrs.");
-  print2("Buy a bucket! Only 5 Au. Make a purchase? [yn] ");
+  print2("Buy a bucket! Only 5 Au. Make a purchase? [YN] ");
   if (ynq2()=='y') {
     clearmsg();
     print1("How many? ");
@@ -630,7 +630,7 @@ void l_commandant()
 void l_diner()
 {
   print1("The Rampart Diner. All you can eat, 25Au.");
-  print2("Place an order? [yn] ");
+  print2("Place an order? [YN] ");
   if (ynq2()=='y') {
     if (Player.cash < 25)
       mprint("TANSTAAFL! Now git!");
@@ -649,7 +649,7 @@ void l_crap()
   if ((hour() < 17) || (hour() > 23))
     print2 ("So sorry, we are closed 'til the morrow...");
   else {
-    print2("May I take your order? [yn] ");
+    print2("May I take your order? [YN] ");
     if (ynq2()=='y') {
       if (Player.cash < 1000)
 	print2("So sorry, you have not the funds for dinner.");
@@ -749,7 +749,7 @@ void l_tavern()
 	  break;
 	case 3:
 	  print1("Riley draws you a shot of his 'special reserve'");
-	  print2("Drink it [yn]?");
+	  print2("Drink it [YN]?");
 	  if (ynq2()=='y') {
 	    if (Player.con < random_range(20)) {
 	      print1("<cough> Quite a kick!");
@@ -830,7 +830,7 @@ void l_alchemist()
 	  clearmsg();
 	  print1("I'll give you ");
 	  mnumprint(obj->basevalue/3);
-	  nprint1("Au for it. Take it? [yn] ");
+	  nprint1("Au for it. Take it? [YN] ");
 	  if (ynq1()=='y') {
 	    Player.cash += (obj->basevalue/3);
 	    conform_lost_objects(1,obj);
@@ -852,7 +852,7 @@ void l_alchemist()
 	  mlevel = Monsters[obj->charge].level;
 	  print1("It'll cost you ");
 	  mnumprint(max(10,obj->basevalue*2));
-	  nprint1("Au for the transformation. Pay it? [yn] ");
+	  nprint1("Au for the transformation. Pay it? [YN] ");
 	  if (ynq1()=='y') {
 	    if (Player.cash < max(10,obj->basevalue*2))
 	      print2("You can't afford it!");
@@ -881,7 +881,7 @@ void l_dpw()
   if (Date - LastDay < 7)
     print2("G'wan! Get a job!");
   else if (Player.cash < 100) {
-    print2("Do you want to go on the dole? [yn] ");
+    print2("Do you want to go on the dole? [YN] ");
     if (ynq2()=='y') {
       print1("Well, ok, but spend it wisely.");
       morewait();
@@ -928,7 +928,7 @@ void l_library()
     }
     morewait();
     while(! done) {
-      print1("Pay the fee? [yn] ");
+      print1("Pay the fee? [YN] ");
       if (ynq1()=='y') {
 	if (Player.cash < fee) {
 	  print2("No payee, No studee.");
@@ -1084,7 +1084,7 @@ void l_pawn_shop()
 	    clearmsg();
 	    print1("The low, low, cost is: ");
 	    mlongprint(Pawnitems[i]->number*true_item_value(Pawnitems[i]));
-	    nprint1(" Buy it? [ynq] ");
+	    nprint1(" Buy it? [YNQ] ");
 	    if (ynq1() == 'y') {
 	      if (Player.cash < 
 		  Pawnitems[i]->number *
@@ -1121,7 +1121,7 @@ void l_pawn_shop()
 	    clearmsg();
 	    print1("You can get ");
 	    mlongprint(item_value(Player.possessions[i]) / 2);
-	    nprint1("Au each. Sell [yn]? ");
+	    nprint1("Au each. Sell [YN]? ");
 	    if (ynq1() == 'y') {
 	      number = getnumber(Player.possessions[i]->number);
 	      if ((number >= Player.possessions[i]->number) &&
@@ -1152,7 +1152,7 @@ void l_pawn_shop()
 	    nprint1(itemid(Player.pack[i]));
 	    nprint1(" for ");
 	    mlongprint(item_value(Player.pack[i])/2);
-	    nprint1("Au each? [yn] ");
+	    nprint1("Au each? [YN] ");
 	    if (ynq1()=='y') {
 	      number = getnumber(Player.pack[i]->number);
 	      if (number > 0) {
