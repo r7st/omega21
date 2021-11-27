@@ -90,7 +90,7 @@ int x,y;
       clearmsg1();
       print1("Pick up: ");
       nprint1(itemid(ol->thing));
-      nprint1(" [ynq]: ");
+      nprint1(" [YNQ]: ");
       response = ynq1();
       quit = (response == 'q');
     }
