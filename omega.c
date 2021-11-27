@@ -274,11 +274,8 @@ char *argv[];
   int count;
 
 
-  /* always catch ^c and hang-up signals */
+  /* always catch hang-up signal */
 
-#ifdef SIGINT
-  signal(SIGINT,(void *)quit);
-#endif
 #ifdef SIGHUP
   signal(SIGHUP,(void *)signalsave);
 #endif
