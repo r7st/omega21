@@ -688,7 +688,7 @@ void callitem()
       print1("Call it:");
       obj->objstr = salloc(msgscanstring());
       clearmsg();
-      print2("Also call all similar items by that name? [yn] ");
+      print2("Also call all similar items by that name? [YN] ");
       if (ynq2() == 'y') {
 	Objects[obj->id].objstr = obj->objstr;
       }
@@ -765,7 +765,7 @@ void bash_location()
       print1("Back Door WIZARD Mode!");
       print2("You will invalidate your score if you proceed.");
       morewait();
-      print1("Enable WIZARD Mode? [yn] ");
+      print1("Enable WIZARD Mode? [YN] ");
       if (ynq1()=='y') {
 	print2("You feel like a cheater.");
 	setgamestatus(CHEATED);
@@ -970,7 +970,7 @@ int compress, force;
     }
   }
   if (!force && ok) {
-    print1("Confirm Save? [yn] ");
+    print1("Confirm Save? [YN] ");
     ok = (ynq1() == 'y');
   }
   if (force || ok) {

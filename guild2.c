@@ -69,7 +69,7 @@ void l_thieves_guild()
 	  clearmsg();
 	  mprint("Dues are");
 	  mnumprint(dues);
-	  mprint(" Au. Pay it? [yn] ");
+	  mprint(" Au. Pay it? [YN] ");
 	  if (ynq1() =='y') {
 	    if (Player.cash < dues) {
 	      print1("You can't cheat the Thieves' Guild!");
@@ -185,7 +185,7 @@ void l_thieves_guild()
 	  clearmsg();
 	  print1("The fee will be: ");
 	  mnumprint(max(count*fee,fee));
-	  nprint1("Au. Pay it? [yn] ");
+	  nprint1("Au. Pay it? [YN] ");
 	  if (ynq1()=='y')
 	  if (Player.cash < max(count*fee,fee))
 	    print2("Try again when you have the cash.");
@@ -211,7 +211,7 @@ void l_thieves_guild()
 	      clearmsg();
 	      print1("I'll give you ");
 	      mlongprint(2 * item_value(Player.possessions[i]) / 3);
-	      nprint1("Au each. OK? [yn] ");
+	      nprint1("Au each. OK? [YN] ");
 	      if (ynq1() == 'y') {
 		number = getnumber(Player.possessions[i]->number);
 		if ((number >= Player.possessions[i]->number) &&
@@ -238,7 +238,7 @@ void l_thieves_guild()
 		nprint1(itemid(Player.pack[i]));
 		nprint1(" for ");
 		mlongprint(2*item_value(Player.pack[i])/3);
-		nprint1("Au each? [ynq] ");
+		nprint1("Au each? [YNQ] ");
 		if ((c=ynq1())=='y') {
 		  number = getnumber(Player.pack[i]->number);
 		  Player.cash += 2*number * item_value(Player.pack[i]) / 3;
@@ -317,7 +317,7 @@ void l_college()
 	  }
 	  else {
 	    print1("Tuition is 1000Au. ");
-	    nprint1("Pay it? [yn] ");
+	    nprint1("Pay it? [YN] ");
 	    if (ynq1() =='y') {
 	      if (Player.cash < 1000)
 		print2("You don't have the funds!");
@@ -424,7 +424,7 @@ void l_college()
 	}
 	if (Spellsleft < 1) {
 	  print1("Extracurricular Lab fee: 2000 Au. ");
-	  nprint1("Pay it? [yn] ");
+	  nprint1("Pay it? [YN] ");
 	  if (ynq1()=='y') {
 	    if (Player.cash < 2000) 
 	      print1("Try again when you have the cash.");
@@ -504,7 +504,7 @@ void l_sorcerors()
 	mprint("For you, there is an initiation fee of");
 	mnumprint(fee);
 	mprint(" Au.");
-	print2("Pay it? [yn] ");
+	print2("Pay it? [YN] ");
 	if (ynq2() =='y') {
 	  if (Player.cash < fee) 
 	    print3("Try again when you have the cash!");
@@ -605,7 +605,7 @@ void l_sorcerors()
       clearmsg();
       print1("That will be: ");
       mnumprint(fee);
-      nprint1("Au. Pay it? [yn] ");
+      nprint1("Au. Pay it? [YN] ");
       if (ynq1()=='y') {
 	if (Player.cash < fee) 
 	  print2("Begone, deadbeat, or face the wrath of the Circle!");
@@ -688,7 +688,7 @@ void l_order()
     else if (Player.rank[LEGION] != 0) 
       print1("Go back to your barracks, mercenary!");
     else {
-      print1("Dost thou wish to join our Order? [yn] ");
+      print1("Dost thou wish to join our Order? [YN] ");
       if (ynq1()=='y') {
 	print1("Justiciar ");
 	nprint1(Justiciar);

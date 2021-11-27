@@ -520,12 +520,12 @@ void l_fire_station()
     print2("You feel the terrible heat despite your immunity to fire!");
     morewait();
   }
-  print2("Enter the flames? [yn] ");
+  print2("Enter the flames? [YN] ");
   if (ynq2()=='y') {
     if (Player.hp == 1) p_death("total incineration");
     else Player.hp = 1;
     dataprint();
-    print1("You feel like you are being incinerated! Jump back? [yn] ");
+    print1("You feel like you are being incinerated! Jump back? [YN] ");
     if (ynq1()=='y')
       print2("Phew! That was close!");
     else {
@@ -562,7 +562,7 @@ void l_water_station()
     print2("The vapor burns despite your immunity to acid!");
     morewait();
   }
-  print1("Enter the fluid? [yn] ");
+  print1("Enter the fluid? [YN] ");
   if (ynq1()=='y') {
     if (Player.hp == 1) p_death("drowning in acid (ick, what a way to go)");
     else Player.hp = 1;
@@ -571,7 +571,7 @@ void l_water_station()
     morewait();
     nprint2("Your lungs burn....");
     morewait();
-    print2("Your body begins to disintegrate.... Leave the pool? [yn] ");
+    print2("Your body begins to disintegrate.... Leave the pool? [YN] ");
     if (ynq2()=='y')
       print2("Phew! That was close!");
     else {
@@ -603,13 +603,13 @@ void l_air_station()
   if (Player.immunity[ELECTRICITY])
     print2("You feel static cling despite your immunity to electricity!");
   morewait();
-  print1("Enter the storm? [yn] ");
+  print1("Enter the storm? [YN] ");
   if (ynq1()=='y') {
     if (Player.hp == 1) p_death("being torn apart and then electrocuted");
     else Player.hp = 1;
     dataprint();
     print1("You are buffeted and burnt by the storm....");
-    print2("You begin to lose consciousness.... Leave the storm? [yn] ");
+    print2("You begin to lose consciousness.... Leave the storm? [YN] ");
     if (ynq1()=='y')
       print2("Phew! That was close!");
     else {
@@ -640,13 +640,13 @@ void l_earth_station()
   if (find_item(&o,THINGID+6,-1))
     print2("A splash of salt water does nothing to dissuade the vines.");
   morewait();
-  print1("Enter the overgrown mire? [yn] ");
+  print1("Enter the overgrown mire? [YN] ");
   if (ynq1()=='y') {
     if (Player.hp == 1) p_death("being eaten alive");
     else Player.hp = 1;
     dataprint();
     print1("You are being dragged into the muck. Suckers bite you....");
-    print2("You're about to be entangled.... Leave the mud? [yn] ");
+    print2("You're about to be entangled.... Leave the mud? [YN] ");
     if (ynq2()=='y')
       print2("Phew! That was close!");
     else {
@@ -704,7 +704,7 @@ void stationcheck()
 void l_void_station()
 {
   int i,something=FALSE;
-  print1("You are at the brink of an endless void. Enter it? [yn] ");
+  print1("You are at the brink of an endless void. Enter it? [YN] ");
   if (ynq()=='y') {
     if (Level->mlist == NULL) {
       print2("You fall forever. Eventually you die of starvation.");
@@ -804,7 +804,7 @@ void l_whirlwind()
 void l_enter_circle()
 {
   print1("You see a translucent stairway before you, leading down.");
-  print2("Take it? [yn] ");
+  print2("Take it? [YN] ");
   if (ynq()=='y')
     change_environment(E_CIRCLE);
 }
@@ -859,7 +859,7 @@ void l_throne()
   pob o;
   int i;
   print1("You have come upon a huge ornately appointed throne!");
-  print2("Sit in it? [yn] ");
+  print2("Sit in it? [YN] ");
   if (ynq1()=='y') {
     if (! find_item(&o,ARTIFACTID+22,-1)) {
       print1("The throne emits an eerie violet-black radiance.");
@@ -954,7 +954,7 @@ void l_escalator()
   print1("You have found an extremely long stairway going straight up.");
   print2("The stairs are grilled steel and the bannister is rubber.");
   morewait();
-  print1("Take the stairway? [yn] ");
+  print1("Take the stairway? [YN] ");
   if (ynq1()=='y') {
     print1("The stairs suddenly start moving with a grind of gears!");
     print2("You are wafted to the surface....");
@@ -964,7 +964,7 @@ void l_escalator()
 
 void l_enter_court()
 {
-  print1("You have found a magical portal! Enter it? [yn] ");
+  print1("You have found a magical portal! Enter it? [YN] ");
   if (ynq1()=='y') {
     if (! gamestatusp(COMPLETED_CASTLE)) {
       if (! gamestatusp(ATTACKED_ORACLE)) {
@@ -988,7 +988,7 @@ void l_chaostone()
   else print2("You find it extremely difficult to approach the stone.");
   morewait();
   clearmsg();
-  print1("Touch it? [yn] ");
+  print1("Touch it? [YN] ");
   if (ynq1()=='y') {
     print1("A sudden flux of energy surrounds you!");
     morewait();
@@ -1008,7 +1008,7 @@ void l_balancestone()
   print2("You feel a sense of balance as you regard it.");
   morewait();
   clearmsg();
-  print1("Touch it? [yn] ");
+  print1("Touch it? [YN] ");
   if (ynq1()=='y') {
     print1("A vortex of mana spins about you!");
     if (abs(Player.alignment) > random_range(50)) {
@@ -1023,7 +1023,7 @@ void l_balancestone()
       drawvision(Player.x,Player.y);
     }
     else {
-      print2("You are being drained of experience! Step back? [yn] ");
+      print2("You are being drained of experience! Step back? [YN] ");
       if (ynq2()=='y') {
 	clearmsg();
 	print1("The vortex calms down, dimishes, and then disappears.");
@@ -1053,7 +1053,7 @@ void l_lawstone()
   else print2("You find the stone extremely distasteful to contemplate.");
   morewait();
   clearmsg();
-  print1("Touch it? [yn] ");
+  print1("Touch it? [YN] ");
   if (ynq()=='y') {
     print1("A matrix of power flows about you!");
     morewait();
@@ -1074,7 +1074,7 @@ void l_voidstone()
   print2("A feeling of nihility emanates from it.");
   morewait();
   clearmsg();
-  print1("Touch it? [yn] ");
+  print1("Touch it? [YN] ");
   if (ynq()=='y') {
     print1("You feel negated.");
     morewait();
@@ -1102,10 +1102,10 @@ void l_sacrificestone()
   print2("On the top surface is an indentation in human shape.");
   morewait();
   print1("You see old rust colored stains in the grain of the stone.");
-  print2("You sense something awakening. Touch the block? [yn] ");
+  print2("You sense something awakening. Touch the block? [YN] ");
   if (ynq2() == 'y') {
     print1("You sense great pain emanating from the ancient altar.");
-    print2("Climb on to the block? [yn] ");
+    print2("Climb on to the block? [YN] ");
     if (ynq2() == 'y') {
       print1("You are stuck fast to the block!");
       print2("You feel your life-force being sucked away!");
@@ -1158,7 +1158,7 @@ void l_mindstone()
   print2("Flashes of irridescent light glint from the object.");
   morewait();
   print1("You feel your attention being drawn by the intricate crystal.");
-  print2("Look away from the interesting phenomenon? [yn] ");
+  print2("Look away from the interesting phenomenon? [YN] ");
   if (ynq2()=='n') {
     print1("Your gaze focuses deeply on the gem....");
     print2("The crystal seems to open up and surround you!");

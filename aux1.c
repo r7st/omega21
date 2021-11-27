@@ -825,7 +825,7 @@ struct monster *m;
     if (m_statusp(m,HOSTILE))
       monster_talk(m);
     else {
-      print2("The guard (bored): Have you broken a law? [yn] ");
+      print2("The guard (bored): Have you broken a law? [YN] ");
       if (ynq2() == 'y') {
 	print2("The guard grabs you, and drags you to court.");
 	morewait();

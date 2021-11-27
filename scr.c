@@ -130,20 +130,20 @@ WINDOW *win;
 {
   char p='*'; /* the user's choice; start with something impossible
                * to prevent a loop. */
-  while ((p != 'n') && (p != 'y') && (p != 'q') && (p != ESCAPE) &&
+  while ((p != 'N') && (p != 'Y') && (p != 'Q') && (p != ESCAPE) &&
          (p != EOF) && (p != ' '))
     p = wgetch(win);
   switch (p) {
-    case 'y': wprintw(win,"yes. "); break;
-    case 'n': wprintw(win,"no. "); break;
+    case 'Y': wprintw(win,"yes. "); break;
+    case 'N': wprintw(win,"no. "); break;
     
-    case ESCAPE: p = 'q'; /* fall through to 'q' */
-    case ' ': p = 'q';    /* fall through to 'q' */
-    case 'q': wprintw(win,"quit. "); break;
+    case ESCAPE: p = 'Q'; /* fall through to 'q' */
+    case ' ': p = 'Q';    /* fall through to 'q' */
+    case 'Q': wprintw(win,"quit. "); break;
     default: assert( p == EOF );
     }
   wrefresh(win);
-  return p;
+  return tolower(p);
 }
 
 int ynq()

@@ -36,7 +36,7 @@ void l_altar()
       print1("This oaken altar is ornately engraved with leaves.");
       break;
   }
-  print2("Worship at this altar? [yn] ");
+  print2("Worship at this altar? [YN] ");
   if (ynq2() == 'y') {
     if (Player.rank[PRIESTHOOD] == 0)
       increase_priest_rank(deity);

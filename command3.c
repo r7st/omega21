@@ -159,53 +159,15 @@ void help()
   menuprint("k: Options Settings\n");
   menuprint("l: Dungeon/City/Other Command List\n");
   menuprint("m: Countryside Command List\n");
-#if !defined(MSDOS) && !defined(AMIGA)
-  menuprint("n: Everything\n");
-#endif
   menuprint("ESCAPE: Forget the whole thing.");
   showmenu();
   do 
     c = (char) mcigetc();
-#if defined(MSDOS) || defined(AMIGA)
   while ((c < 'a' || c > 'm') && c != ESCAPE);
   if (c != ESCAPE) {
     sprintf(filestr, "%shelp%d.txt", Omegalib, c+1-'a');
     displayfile(filestr);
   }
-#else
-  while ((c < 'a' || c > 'n') && c != ESCAPE);
-  if (c == 'n') {
-    print1("Trying to copy all help files to ./omega.doc ");
-    nprint1("Confirm [yn]");
-    if (ynq1()=='y') {
-      change_to_user_perms();
-      out = checkfopen("omega.doc", "w");
-      print2("Copying");
-      for (n = 1; n <= 13; n++)
-      {
-	nprint2(".");
-	sprintf(Str1, "%shelp%d.txt", Omegalib, n);
-	in = checkfopen(Str1, "r");
-	while (fgets(Str1, STRING_LEN, in))
-	  fputs(Str1, out);
-	fclose(in);
-      }
-      fclose(out);
-      change_to_game_perms();
-      nprint2(" Done.");
-    }
-  }
-  else if (c != ESCAPE) {
-    sprintf(filestr, "%shelp%d.txt", Omegalib, c+1-'a');
-    print1("Display help file, or Copy help file to file in wd. [dc] ");
-    do 
-      c = (char) mcigetc();
-    while ((c != 'd') && (c != 'c')&& (c!=ESCAPE));
-    if (c == 'd')
-      displayfile(filestr);
-    else if (c == 'c') copyfile(filestr);
-  }
-#endif
   xredraw();
 }
 
@@ -314,7 +276,7 @@ void quit()
 {
   clearmsg();
   change_to_game_perms();
-  mprint("Quit: Are you sure? [yn] ");
+  mprint("Quit: Are you sure? [YN] ");
   if (ynq()=='y') {
     if (Player.rank[ADEPT] == 0) display_quit();
     else display_bigwin();
@@ -510,7 +472,7 @@ void wizard()
   if (gamestatusp(CHEATED)) mprint("You're already in wizard mode!");
   else {
     clearmsg();
-    mprint("Really try to enter wizard mode? [yn] ");
+    mprint("Really try to enter wizard mode? [YN] ");
     if (ynq()=='y') {
        lname = getlogin();
 #ifndef MSDOS_SUPPORTED_ANTIQUE
@@ -1019,7 +981,7 @@ void dismount_steed()
     print3("You're on foot already!");
   else if (Current_Environment == E_COUNTRYSIDE) {
     mprint("If you leave your steed here he will wander away!");
-    mprint("Do it anyway? [yn] ");
+    mprint("Do it anyway? [YN] ");
     if (ynq()=='y') resetgamestatus(MOUNTED);
   }
   else {

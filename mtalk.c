@@ -31,7 +31,7 @@ struct monster *m;
 	}
       }
     }
-    mprint("Do you request a ritual of neutralization? [yn] ");
+    mprint("Do you request a ritual of neutralization? [YN] ");
     if (ynq() == 'y') {
       if (Phase/2 == 6 || Phase/2 == 0) {	/* full or new moon */
 	mprint("\"Unfortunately, I cannot perform a ritual of balance on");
@@ -78,7 +78,7 @@ struct monster *m;
     mprint("The ArchDruid looks at you and cries: 'Unclean! Unclean!'");
     disrupt(Player.x,Player.y,100);
     mprint("This seems to have satiated his desire for vengeance.");
-    mprint("'Have you learned your lesson?' The ArchDruid asks. [yn] ");
+    mprint("'Have you learned your lesson?' The ArchDruid asks. [YN] ");
     if (ynq()) {
       mprint("'I certainly hope so!' says the ArchDruid.");
       for (curr = Level->mlist; curr; curr = curr->next)
@@ -176,7 +176,7 @@ struct monster *m;
 {
   if (m_statusp(m,HOSTILE)) {
     print1("'Surrender in the name of the Law!'");
-    print2("Do it? [yn] ");
+    print2("Do it? [YN] ");
     if (ynq2()=='y') {
       Player.alignment++;
       if (Current_Environment == E_CITY) {
@@ -279,7 +279,7 @@ struct monster *m;
     mprint("for only");
     mlongprint(max(10,4*true_item_value(m->possessions->thing)));
     mprint("Au.");
-    mprint("Want it? [yn] ");
+    mprint("Want it? [YN] ");
     if (ynq()=='y') {
       if (Player.cash < (max(10,4*true_item_value(m->possessions->thing)))) {
 	if (Player.alignment > 10) {
@@ -498,7 +498,7 @@ struct monster *m;
   {
     strcat(Str2," beckons seductively...");
     mprint(Str2);
-    mprint("Flee? [yn] ");
+    mprint("Flee? [YN] ");
     if (ynq()=='y') {
       mprint("You feel stupid.");
     }
@@ -533,7 +533,7 @@ struct monster *m;
   {
     strcat(Str2," beckons seductively...");
     mprint(Str2);
-    mprint("Flee? [yn] ");
+    mprint("Flee? [YN] ");
     if (ynq()=='y') 
       mprint("You feel fortunate....");
     else {
@@ -585,7 +585,7 @@ struct monster *m;
   else if (Current_Environment == Current_Dungeon)
     mprint("The horse shies; maybe he doesn't like the dungeon air....");
   else {
-    mprint("The horse lets you pat his nose. Want to ride him? [yn] ");
+    mprint("The horse lets you pat his nose. Want to ride him? [YN] ");
     if (ynq()=='y') {
       m->hp = -1;
       Level->site[m->x][m->y].creature = NULL;
@@ -617,12 +617,12 @@ struct monster *m;
   if (m->id == SERV_LAW) {
     target = SERV_CHAOS;
     mprint("The Servant of Law pauses in thought for a moment.");
-    mprint("You are asked: Are there any Servants of Chaos hereabouts? [yn] ");
+    mprint("You are asked: Are there any Servants of Chaos hereabouts? [YN] ");
   }
   else {
     target = SERV_LAW;
     mprint("The Servant of Chaos grins mischievously at you.");
-    mprint("You are asked: Are there any Servants of Law hereabouts? [yn] ");
+    mprint("You are asked: Are there any Servants of Law hereabouts? [YN] ");
   }
   if (ynq()=='y') {
     print1("Show me.");
@@ -710,7 +710,7 @@ struct monster *m;
   if (! m_statusp(m,HOSTILE)) {
     if (Current_Environment == E_VILLAGE) {
       mprint("The merchant asks you if you want to buy a horse for 250GP.");
-      mprint("Pay the merchant? [yn] ");
+      mprint("Pay the merchant? [YN] ");
       if (ynq()=='y') {
 	if (Player.cash < 250) 
 	  mprint("The merchant says: 'Come back when you've got the cash!'");

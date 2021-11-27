@@ -31,7 +31,7 @@ void l_merc_guild()
     case 0:
       nprint2("and see the Recruiting Centurion.");
       morewait();
-      print2("Do you wish to join the Legion? [yn] ");
+      print2("Do you wish to join the Legion? [YN] ");
       if (ynq2()=='y') {
 	clearmsg();
 	if (Player.rank[ARENA]>0) {
@@ -207,7 +207,7 @@ void l_castle()
       clearmsg();
     }
     if (Player.rank[NOBILITY]==0) {
-      print1("Well, sirrah, wouldst embark on a quest? [yn] ");
+      print1("Well, sirrah, wouldst embark on a quest? [YN] ");
       if (ynq1() == 'y') {
 	print2("Splendid. Bring me the head of the Goblin King.");
 	Player.rank[NOBILITY]=COMMONER;
@@ -311,7 +311,7 @@ void l_arena()
     while ((response != 'e') && (response != 'r') && (response != ESCAPE));
   }
   else {
-    print2("Enter the games? [yn] ");
+    print2("Enter the games? [YN] ");
     response = ynq2();
     if (response == 'y') response = 'e';
     else response = ESCAPE;
