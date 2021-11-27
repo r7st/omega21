@@ -72,7 +72,7 @@ install: $(BINFILE)
 	mkdir -p $(LIBDIR)
 	mkdir -p $(SAVEDIR)
 	chown games:games $(BINFILE)
-	cp omega $(BINDIR)
+	cp $(BINFILE) $(BINDIR)
 	chmod 4711 $(BINDIR)/$(BINFILE)
 	- cp lib/* $(LIBDIR)
 	chmod 0644 $(LIBDIR)/help*.txt $(LIBDIR)/license.txt $(LIBDIR)/motd.txt $(LIBDIR)/thanks.txt $(LIBDIR)/update.txt
