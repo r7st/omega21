@@ -7,6 +7,9 @@ PREFIX ?= .
 BINDIR = ${PREFIX}/bin
 LIBDIR = ${PREFIX}/share/omega
 
+# Name of the generated binary
+BINFILE = omega21
+
 # One of these should be uncommented, as appropriate, unless your compiler
 # does it for you.  You can test this by simply trying to 'make' omega -
 # it will fail if none of them are defined.  If you do uncomment
@@ -58,23 +61,23 @@ OBJ = omega.o abyss.o aux1.o aux2.o aux3.o char.o city.o\
       save.o scr.o site1.o site2.o\
       spell.o time.o trap.o util.o village.o compress.o
 
-omega: $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(LIBS) -o omega
+$(BINFILE): $(OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(LIBS) -o $(BINFILE)
 
-install: omega
+install: $(BINFILE)
 	mkdir -p $(BINDIR)
 	mkdir -p $(LIBDIR)
-	chown games:games omega
-	cp omega $(BINDIR)
-	chmod 4711 $(BINDIR)/omega
+	chown games:games $(BINFILE)
+	cp $(BINFILE) $(BINDIR)
+	chmod 4711 $(BINDIR)/$(BINFILE)
 	- cp lib/* $(LIBDIR)
 	chmod 0644 $(LIBDIR)/help*.txt $(LIBDIR)/license.txt $(LIBDIR)/motd.txt $(LIBDIR)/thanks.txt $(LIBDIR)/update.txt
 	chmod 0600 $(LIBDIR)/abyss.txt $(LIBDIR)/scroll[1234].txt $(LIBDIR)/*.dat
 	chmod 0600 $(LIBDIR)/omega.hi $(LIBDIR)/omega.log $(LIBDIR)/omegahi.bak
 
-install_not_suid: omega $(BINDIR) $(LIBDIR)
-	cp omega $(BINDIR)
-	chmod 0711 $(BINDIR)/omega
+install_not_suid: $(BINFILE) $(BINDIR) $(LIBDIR)
+	cp $(BINFILE) $(BINDIR)
+	chmod 0711 $(BINDIR)/$(BINFILE)
 	- cp lib/* $(LIBDIR)
 	chmod 0644 $(LIBDIR)/help*.txt $(LIBDIR)/license.txt $(LIBDIR)/motd.txt $(LIBDIR)/thanks.txt $(LIBDIR)/update.txt
 	chmod 0644 $(LIBDIR)/abyss.txt $(LIBDIR)/scroll[1234].txt $(LIBDIR)/*.dat
@@ -83,7 +86,7 @@ install_not_suid: omega $(BINDIR) $(LIBDIR)
 
 clean:
 	rm -f $(OBJ) genclr genclr.o
-	rm -i omega
+	rm -i $(BINFILE)
 
 $(OBJ): clrgen.h defs.h extern.h glob.h
 
