@@ -9,6 +9,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <dirent.h>
 /* Note: in order to avoid a memory bug I've been told about, I'm
    explicitly initializing every global to something. */
 #endif
@@ -195,6 +196,43 @@ void initrand(int environment, int level)
   SRANDFUNCTION(seed);
 }
 
+int load_save_games(void)
+{
+  int ok; char response;
+  char savestr[80];
+
+  int max_saves=15, pname_length=84; // max Player.name length + .sav
+  char *savegames[max_saves][pname_length];
+
+  int n=0; struct dirent *d; DIR *dir;
+  if ((dir = opendir(SAVEDIR)) == NULL) { return 0; }
+  while ((d = readdir(dir)) != NULL) {
+    if ((strcmp(d->d_name, ".")) == 0) { continue; }
+    else if ((strcmp(d->d_name, "..")) == 0) { continue; }
+    strcpy(savegames[n], d->d_name); 
+    if (n++ >= max_saves) { break; }
+  } closedir(dir);
+
+  printw("%s\n", "Please select a save or type (n) for new game:");
+  if (n < 1) { return 0; }
+  for (int i=0; i<n; i++) {
+    printw("%c: %s\n", i+'a', savegames[i]);
+  }
+  refresh();
+
+  do response = (char) mcigetc(); while (((response < 'a') || (response >= 'a'+n)) && (response != 'n'));
+  clear_screen();
+  if (response == 'n') { return 0; }
+  strcpy(savestr, SAVEDIR);
+  strcat(savestr, savegames[response-'a']);
+  ok = restore_game(savestr);
+  if (! ok) {
+    endgraf();
+    printf("Try again with the right save file, luser!\n");
+    exit(0);
+  }
+  return ok;
+}
 
 int game_restore(argc,argv)
 int argc;
@@ -312,7 +350,7 @@ char *argv[];
   showscores();
 
   /* game restore attempts to restore game if there is an argument */
-  continuing = game_restore(argc,argv);
+  continuing = load_save_games();
 
   /* monsters initialized in game_restore if game is being restored */  
   /* items initialized in game_restore if game is being restored */

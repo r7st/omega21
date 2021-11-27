@@ -49,6 +49,12 @@ on save and restore. */
 #define OMEGALIB "./lib/"
 #endif
 
+/* SAVEDIR is where saves are kept. Format same as OMEGALIB */
+
+#ifndef SAVEDIR
+#define SAVEDIR "./saves/"
+#endif
+
 /* Comment the following line out if you want users to be able to override */
 /* the OMEGALIB define, above, by setting the environment variable OMEGALIB */
 /* (I recommend leaving this line uncommented, unless you're compiling */

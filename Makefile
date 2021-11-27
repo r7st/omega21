@@ -6,6 +6,8 @@ PREFIX ?= .
 # the value of LIBDIR should be the same as OMEGALIB in defs.h
 BINDIR = ${PREFIX}/bin
 LIBDIR = ${PREFIX}/share/omega
+# the value of SAVEDIR should be the same as SAVEDIR in defs.h
+SAVEDIR = ${LIBDIR}/saves
 
 # Name of the generated binary
 BINFILE = omega21
@@ -23,6 +25,7 @@ CFLAGS += \
   -fno-strict-aliasing  \
   -DBSD \
   -DOMEGALIB=\"${LIBDIR}/\"  \
+  -DSAVEDIR=\"${SAVEDIR}/\" \
   -Wl,-rpath=/usr/local/lib
 
 #CFLAGS = -DSYSV -O
@@ -67,8 +70,9 @@ $(BINFILE): $(OBJ)
 install: $(BINFILE)
 	mkdir -p $(BINDIR)
 	mkdir -p $(LIBDIR)
+	mkdir -p $(SAVEDIR)
 	chown games:games $(BINFILE)
-	cp $(BINFILE) $(BINDIR)
+	cp omega $(BINDIR)
 	chmod 4711 $(BINDIR)/$(BINFILE)
 	- cp lib/* $(LIBDIR)
 	chmod 0644 $(LIBDIR)/help*.txt $(LIBDIR)/license.txt $(LIBDIR)/motd.txt $(LIBDIR)/thanks.txt $(LIBDIR)/update.txt

@@ -512,10 +512,21 @@ char *fromstring;
   dataprint();
 }
 
+/* get save filename */
+void gen_save_fname(save_file)
+char *save_file;
+{
+  strcpy(save_file, SAVEDIR);
+  strcat(save_file, Player.name);
+  strcat(save_file, ".sav");
+}
+
 /* game over, you lose! */
 void p_death(fromstring)
 char *fromstring;
 {
+  char savestr[84];
+
   Player.hp = -1;
   print3("You died!");
   morewait();
@@ -524,6 +535,11 @@ char *fromstring;
   kill_all_levels();
 #endif
   endgraf();
+
+  gen_save_fname(savestr);
+  change_to_user_perms();
+  unlink(savestr);
+  change_to_game_perms(); // is this necessary?
   exit(0);
 }
 
