@@ -535,7 +535,8 @@ void l_brothel()
 	    print1("You are ushered into an opulently appointed hall.");
 	    print2("After an expensive dinner (takeout from Les Crapuleux)");
 	    morewait();
-            rand_choice=random_range(4);
+            if (Player.preference == 'y') { rand_choice=random_range(8); }
+            else { rand_choice=random_range(4); }
 	    if (Player.preference == 'n') {
               print1(activities[rand_choice]);
 	      print2("various employees of the House of the Eclipse.");
