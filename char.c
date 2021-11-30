@@ -534,10 +534,11 @@ void user_character_stats()
     morewait();
   }
   Player.pow = Player.maxpow = 3 + powpts/2;
-  print1("Are you sexually interested in males or females? [mf] ");
+  print1("Are you sexually interested in males/females/both/neither? [mfbn] ");
   do Player.preference = (char) mcigetc();
   while ((Player.preference != 'm') && (Player.preference != 'f') &&
-	(Player.preference != 'y') && (Player.preference != 'n')); /* :-) */
+	(Player.preference != 'b') && (Player.preference != 'n')); /* :-) */
+  if (Player.preference == 'b') { Player.preference = 'y'; }
 }
 
 
@@ -570,10 +571,11 @@ void omegan_character_stats()
   strcpy(Player.name,msgscanstring());
   if (Player.name[0] >= 'a' && Player.name[0] <= 'z')
     Player.name[0] += 'A'-'a'; /* capitalise 1st letter */
-  print1("Is your character sexually interested in males or females? [mf] ");
+  print1("Is your character sexually interested in males/females/both/neither? [mfbn] ");
   do Player.preference = (char) mcigetc();
   while ((Player.preference != 'm') && (Player.preference != 'f') &&
-	(Player.preference != 'y') && (Player.preference != 'n')); /* :-) */
+        (Player.preference != 'b') && (Player.preference != 'n')); /* :-) */
+  if (Player.preference == 'b') { Player.preference = 'y'; }
 
 }
 
