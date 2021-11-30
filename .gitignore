@@ -1,0 +1,9 @@
+*.o
+*.orig
+omega21
+clrgen.*
+genclr
+bin
+share
+ports
+tools
