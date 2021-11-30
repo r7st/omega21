@@ -304,6 +304,18 @@ static char rcs_ident[] = "$Header: /home/wtanksle/cvs/omega/compress.c,v 1.2 19
 #endif
 #include <unistd.h>
 #include <utime.h>
+#include <string.h>
+#include <stdlib.h>
+
+/* forward function declarations */
+void compress( void );
+void decompress( void );
+void copystat( char*, char* );
+void writeerr( void );
+void cl_hash( register count_int );
+void output( code_int );
+void cl_block( void );
+void prratio( FILE *, long int, long int );
 
 int n_bits;				/* number of bits/code */
 int maxbits = BITS;			/* user settable max # bits/code */
