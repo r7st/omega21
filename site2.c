@@ -481,6 +481,24 @@ void l_vault()
 void l_brothel()
 {
   char response;
+  char *consorts[8]={
+    "Skarn the Insatiable, a satyr.",
+    "Dryden the Defanged, an incubus.",
+    "Gorgar the Equipped, a centaur.",
+    "Hieronymus, the mendicant priest of Eros.",
+    "Noreen the Nymph (omaniac)",
+    "Angelface, a recanted succubus.",
+    "Corporal Sue of the City Guard (moonlighting).",
+    "Sheena the Queena the Jungle, a wereleopard."
+  };
+  char *activities[4]={
+    "you spend the evening playing German Whist with",
+    "you spend the evening discussing philosophy with",
+    "you spend the evening playing chess against",
+    "you spend the evening telling your adventures to"
+  };
+  int rand_choice=0;
+
   print1("You come to a heavily reinforced inner door.");
   print2("A sign reads `The House of the Eclipse'");
   morewait();
@@ -517,54 +535,16 @@ void l_brothel()
 	    print1("You are ushered into an opulently appointed hall.");
 	    print2("After an expensive dinner (takeout from Les Crapuleux)");
 	    morewait();
+            if (Player.preference == 'y') { rand_choice=random_range(8); }
+            else { rand_choice=random_range(4); }
 	    if (Player.preference == 'n') {
-	      switch(random_range(4)) {
-	      case 0:
-		print1("you spend the evening playing German Whist with");
-		break;
-	      case 1:
-		print1("you spend the evening discussing philosophy with");
-		break;
-	      case 2:
-		print1("you spend the evening playing chess against");
-		break;
-	      case 3:
-		print1("you spend the evening telling your adventures to");
-	      }
+	      print1(activities[rand_choice]);
 	      print2("various employees of the House of the Eclipse.");
 	    }
 	    else {
 	      print1("you spend an enjoyable and educational evening with");
-	      if (Player.preference == 'm' ||
-		  (Player.preference == 'y' && random_range(2)))
-		switch(random_range(4)) {
-		case 0: 
-		  print2("Skarn the Insatiable, a satyr.");
-		  break;
-		case 1: 
-		  print2("Dryden the Defanged, an incubus.");
-		  break;
-		case 2: 
-		  print2("Gorgar the Equipped, a centaur.");
-		  break;
-		case 3: 
-		  print2("Hieronymus, the mendicant priest of Eros.");
-		  break;
-		}	
-	      else switch(random_range(4)) {
-	      case 0: 
-		print2("Noreen the Nymph (omaniac)");
-		break;
-	      case 1: 
-		print2("Angelface, a recanted succubus.");
-		break;
-	      case 2: 
-		print2("Corporal Sue of the City Guard (moonlighting).");
-		break;
-	      case 3: 
-		print2("Sheena the Queena the Jungle, a wereleopard.");
-		break;
-	      }	
+	      if (Player.preference == 'f') rand_choice+=4;
+	        print2(consorts[rand_choice]);
 	    }
 	    morewait();
 	    if (hour() > 12) Time += ((24-hour())+8) * 60;
