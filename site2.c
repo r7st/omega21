@@ -481,7 +481,7 @@ void l_vault()
 void l_brothel()
 {
   char response;
-  char consorts[8][100]={
+  char *consorts[8]={
     "Skarn the Insatiable, a satyr.",
     "Dryden the Defanged, an incubus.",
     "Gorgar the Equipped, a centaur.",
@@ -491,7 +491,7 @@ void l_brothel()
     "Corporal Sue of the City Guard (moonlighting).",
     "Sheena the Queena the Jungle, a wereleopard."
   };
-  char activities[4][100]={
+  char *activities[4]={
     "you spend the evening playing German Whist with",
     "you spend the evening discussing philosophy with",
     "you spend the evening playing chess against",
@@ -538,13 +538,13 @@ void l_brothel()
             if (Player.preference == 'y') { rand_choice=random_range(8); }
             else { rand_choice=random_range(4); }
 	    if (Player.preference == 'n') {
-              print1(activities[rand_choice]);
+	      print1(activities[rand_choice]);
 	      print2("various employees of the House of the Eclipse.");
 	    }
 	    else {
 	      print1("you spend an enjoyable and educational evening with");
 	      if (Player.preference == 'f') rand_choice+=4;
-              print2(consorts[rand_choice]);
+	        print2(consorts[rand_choice]);
 	    }
 	    morewait();
 	    if (hour() > 12) Time += ((24-hour())+8) * 60;
