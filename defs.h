@@ -1612,3 +1612,6 @@ typedef oltype *pol;
 #ifdef SAVE_LEVELS
 plv msdos_changelevel();
 #endif
+
+#include <unistd.h>
+#include <time.h>

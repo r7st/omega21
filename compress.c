@@ -302,6 +302,8 @@ static char rcs_ident[] = "$Header: /home/wtanksle/cvs/omega/compress.c,v 1.2 19
 #ifdef notdef
 #include <sys/ioctl.h>
 #endif
+#include <unistd.h>
+#include <utime.h>
 
 int n_bits;				/* number of bits/code */
 int maxbits = BITS;			/* user settable max # bits/code */
