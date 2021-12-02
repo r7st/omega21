@@ -702,6 +702,7 @@ pob o;
 }
 
 int pack_item_cost(index)
+int index;
 {
   int cost;
   if (index > 20) {
