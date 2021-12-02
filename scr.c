@@ -26,6 +26,7 @@
 #endif
 
 #include "glob.h"
+#include <ctype.h>
 
 #ifdef EXCESSIVE_REDRAW
 #undef wclear
