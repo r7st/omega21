@@ -25,8 +25,7 @@ CFLAGS += \
   -fno-strict-aliasing  \
   -DBSD \
   -DOMEGALIB=\"${LIBDIR}/\"  \
-  -DSAVEDIR=\"${SAVEDIR}/\" \
-  -Wl,-rpath=/usr/local/lib
+  -DSAVEDIR=\"${SAVEDIR}/\"
 
 #CFLAGS = -DSYSV -O
 # I also had to define -cckr (K&R style C) for system V
