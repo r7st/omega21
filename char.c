@@ -30,8 +30,6 @@ void initplayer()
   }
 #endif
   strcpy(Player.name,lname);
-  if (Player.name[0] >= 'a' && Player.name[0] <= 'z')
-       Player.name[0] += 'A'-'a'; /* capitalise 1st letter */
   Player.itemweight = 0;
   Player.food = 36; 
   Player.packptr = 0;
@@ -67,8 +65,6 @@ void initplayer()
       fread((char *)&Searchnum,sizeof(int),1,fd);
       fread((char *)&Verbosity,sizeof(char),1,fd);
       strcpy(Player.name,lname);
-      if (Player.name[0] >= 'a' && Player.name[0] <= 'z')
-	   Player.name[0] += 'A'-'a'; /* capitalise 1st letter */
     }
     fclose(fd);
   }
@@ -569,8 +565,6 @@ void omegan_character_stats()
   clearmsg();
   print1("Please enter your character's name: ");
   strcpy(Player.name,msgscanstring());
-  if (Player.name[0] >= 'a' && Player.name[0] <= 'z')
-    Player.name[0] += 'A'-'a'; /* capitalise 1st letter */
   print1("Is your character sexually interested in males/females/both/neither? [mfbn] ");
   do Player.preference = (char) mcigetc();
   while ((Player.preference != 'm') && (Player.preference != 'f') &&
