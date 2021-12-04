@@ -4,7 +4,6 @@
 #define REGNUM 11
 #define LINE_COUNT 100
 
-void load_omegaopts ARGS((void));
 int read_opts_file ARGS((char[LINE_COUNT][STRING_LEN]));
 void gen_regex ARGS((regex_t[REGNUM]));
 int check_valid_opts ARGS((char[LINE_COUNT][STRING_LEN],int,char[LINE_COUNT][STRING_LEN],regex_t[REGNUM]));
