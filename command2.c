@@ -1008,7 +1008,6 @@ int compress, force;
     if (ok)
       if (save_game(compress,fname)) {
 	print3("Bye!");
-	sleep(2);
 	endgraf();
 	exit(0);
       }
