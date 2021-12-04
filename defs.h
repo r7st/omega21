@@ -1615,6 +1615,3 @@ plv msdos_changelevel();
 
 #include <unistd.h>
 #include <time.h>
-#include <regex.h>
-
-#define REGNUM 11
