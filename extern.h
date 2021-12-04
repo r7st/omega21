@@ -1093,3 +1093,7 @@ void make_horse ARGS((int,int));
 void make_merchant ARGS((int,int));
 void make_sheep ARGS((int,int));
 void special_village_site ARGS((int,int,int));
+
+/* opts.c functions */
+
+void load_omegaopts ARGS((void));
