@@ -419,7 +419,7 @@ void init_world()
     level_seed[env] = RANDFUNCTION();
   load_country();
   for(i=0;i<NUMCITYSITES;i++) 
-    CitySiteList[i][0] = FALSE;
+    CitySiteList[i][0] = TRUE;
   load_city(TRUE);
   WIDTH = 64;
   LENGTH = 64;
