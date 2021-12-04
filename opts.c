@@ -46,7 +46,7 @@ char fopts[LINE_COUNT][STRING_LEN];
   if ((fp=fopen(fname, "r")) == NULL) { return 0; }
 
   while ((linelen = getline(&Opt, &linecapp, fp)) != -1) {
-    Opt[linelen-1]='\0';
+    if (Opt[linelen-1] == '\n') { Opt[linelen-1]='\0'; }
     strcpy(fopts[i++], Opt);
   }
 
