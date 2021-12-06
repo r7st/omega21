@@ -532,6 +532,7 @@ int i,j,populate;
   case 'O':
     Level->site[i][j].locchar = OPEN_DOOR;
     Level->site[i][j].p_locf = L_ORACLE;
+    CitySiteList[L_ORACLE-CITYSITEBASE][0] = FALSE;
     CitySiteList[L_ORACLE-CITYSITEBASE][1] = i;
     CitySiteList[L_ORACLE-CITYSITEBASE][2] = j;
     break;
