@@ -303,9 +303,7 @@ int populate;
 void assign_city_function(x,y)
 int x,y;
 {
-  static int setup=0;
   static int next=0;
-  static int permutation[64]; /* number of x's in city map */
   int i,j,k,l;
 
   Level->site[x][y].aux = TRUE;
@@ -316,24 +314,12 @@ int x,y;
   lset(x,y-1,STOPS);
   lset(x,y,STOPS); /* FIXED! 12/30/98 */
 
-  if (setup == 0) {
-    setup = 1;
-    for(i=0;i<64;i++)
-      permutation[i] = i;
-    for(i=0;i<500;i++) {
-      j = random_range(64);
-      k = random_range(64);
-      l = permutation[j];
-      permutation[j] = permutation[k];
-      permutation[k] = l;
-    }
-  }
   if (next > 63) { /* in case someone changes the no. of x's */
     Level->site[x][y].locchar = CLOSED_DOOR;
     Level->site[x][y].p_locf = L_HOUSE;
     if(random_range(5)) Level->site[x][y].aux = LOCKED;
   }
-  else switch(permutation[next]) {
+  else switch(next) {
   case 0:
     Level->site[x][y].locchar = OPEN_DOOR;
     Level->site[x][y].p_locf = L_ARMORER;
