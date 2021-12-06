@@ -369,6 +369,8 @@ char *argv[];
   else
     terrain_check(FALSE);
   
+  load_omegaopts();
+
   if (optionp(SHOW_COLOUR))
     colour_on();
   else
