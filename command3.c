@@ -495,8 +495,6 @@ void wizard()
 	mprint("There is a shrieking sound, as of reality being distorted.");
 	strcpy(Str1,WIZARD);
 	strcat(Str1,", the Wizard of Omega appears before you....");
-	if (Str1[0] >= 'a' && Str1[0] <= 'z')
-	    Str1[0] += 'A'-'a'; /* capitalise 1st letter */
 	mprint(Str1);
 	mprint("'Do not meddle in the affairs of Wizards --");
 	if (random_range(2)) mprint("it makes them soggy and hard to light.'");

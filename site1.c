@@ -887,8 +887,6 @@ void l_dpw()
       morewait();
       print1("Please enter your name for our records:");
       strcpy(Str1, msgscanstring());
-      if (Str1[0] >= 'a' && Str1[0] <= 'z')
-	Str1[0] += 'A' - 'a';
       if (Str1[0] == '\0')
 	print1("Maybe you should come back when you've learned to write.");
       else if (strcmp(Player.name,Str1) != 0) {
