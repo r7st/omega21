@@ -76,7 +76,7 @@ install: $(BINFILE)
 	- cp lib/* $(LIBDIR)
 	chmod 0644 $(LIBDIR)/help*.txt $(LIBDIR)/license.txt $(LIBDIR)/motd.txt $(LIBDIR)/thanks.txt $(LIBDIR)/update.txt
 	chmod 0600 $(LIBDIR)/abyss.txt $(LIBDIR)/scroll[1234].txt $(LIBDIR)/*.dat
-	chmod 0600 $(LIBDIR)/omega.hi $(LIBDIR)/omega.log $(LIBDIR)/omegahi.bak
+	chmod 0600 $(LIBDIR)/omega.hi $(LIBDIR)/omega.log
 
 install_not_suid: $(BINFILE) $(BINDIR) $(LIBDIR)
 	cp $(BINFILE) $(BINDIR)
@@ -85,7 +85,6 @@ install_not_suid: $(BINFILE) $(BINDIR) $(LIBDIR)
 	chmod 0644 $(LIBDIR)/help*.txt $(LIBDIR)/license.txt $(LIBDIR)/motd.txt $(LIBDIR)/thanks.txt $(LIBDIR)/update.txt
 	chmod 0644 $(LIBDIR)/abyss.txt $(LIBDIR)/scroll[1234].txt $(LIBDIR)/*.dat
 	chmod 0666 $(LIBDIR)/omega.hi $(LIBDIR)/omega.log
-	chmod 0600 $(LIBDIR)/omegahi.bak
 
 clean:
 	rm -f $(OBJ) genclr genclr.o
