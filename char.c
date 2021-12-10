@@ -111,9 +111,11 @@ FILE *omegarc_check()
 void initstats()
 {
   char response;
-  print1("Do you want to run a character [c] or play yourself [p]?");
-  do response = (char) mcigetc(); while ((response!='c')&&(response != 'p'));
-  if (response == 'c') omegan_character_stats();
+//MINE
+  print1("Do you want to run a character [c], roll for stats [r], or play yourself [p]?");
+  do response = (char) mcigetc(); while ((response!='c')&&(response != 'r')&&(response != 'p'));
+  if (response == 'c') choose_class();
+  else if (response == 'r') omegan_character_stats();
   else {
     user_character_stats();
     user_intro();
