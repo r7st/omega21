@@ -92,4 +92,5 @@ void choose_class(void) {
     default: fprintf(stderr, "%s\n", "ERROR: INVALID PLAYER CLASS"); exit(1);
   };
   calc_melee();
+  get_name_pref();
 }

@@ -538,7 +538,17 @@ void user_character_stats()
   if (Player.preference == 'b') { Player.preference = 'y'; }
 }
 
-
+void get_name_pref()
+{
+  clearmsg();
+  print1("Please enter your character's name: ");
+  strcpy(Player.name,msgscanstring());
+  print1("Is your character sexually interested in males/females/both/neither? [mfbn] ");
+  do Player.preference = (char) mcigetc();
+  while ((Player.preference != 'm') && (Player.preference != 'f') &&
+        (Player.preference != 'b') && (Player.preference != 'n')); /* :-) */
+  if (Player.preference == 'b') { Player.preference = 'y'; };
+}
 
 void omegan_character_stats()
 {
@@ -563,14 +573,6 @@ void omegan_character_stats()
     calc_melee();
     dataprint();
   } while ((i < REROLLS) && (mgetc() == ESCAPE));
-  clearmsg();
-  print1("Please enter your character's name: ");
-  strcpy(Player.name,msgscanstring());
-  print1("Is your character sexually interested in males/females/both/neither? [mfbn] ");
-  do Player.preference = (char) mcigetc();
-  while ((Player.preference != 'm') && (Player.preference != 'f') &&
-        (Player.preference != 'b') && (Player.preference != 'n')); /* :-) */
-  if (Player.preference == 'b') { Player.preference = 'y'; }
-
+  get_name_pref();
 }
 

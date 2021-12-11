@@ -113,6 +113,7 @@ int competence_check ARGS((int));
 int fixnpc ARGS((int));
 void initplayer ARGS((void));
 void initstats ARGS((void));
+void get_name_pref ARGS((void));
 void omegan_character_stats ARGS((void));
 void save_omegarc ARGS((void));
 void user_character_stats ARGS((void));
