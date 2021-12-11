@@ -111,7 +111,6 @@ FILE *omegarc_check()
 void initstats()
 {
   char response;
-//MINE
   print1("Do you want to run a character [c], roll for stats [r], or play yourself [p]?");
   do response = (char) mcigetc(); while ((response!='c')&&(response != 'r')&&(response != 'p'));
   if (response == 'c') choose_class();

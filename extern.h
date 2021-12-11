@@ -1099,4 +1099,5 @@ void special_village_site ARGS((int,int,int));
 void load_omegaopts ARGS((void));
 
 /* class.c functions */
+
 void choose_class ARGS((void));
