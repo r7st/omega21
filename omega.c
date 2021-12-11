@@ -201,7 +201,7 @@ int load_save_games(void)
   int ok; char response;
   char savestr[80];
 
-  int max_saves=15, pname_length=84; // max Player.name length + .sav
+  int max_saves=26, pname_length=84; // max Player.name length + .sav
   char *savegames[max_saves][pname_length];
 
   int n=0; struct dirent *d; DIR *dir;
@@ -210,19 +210,19 @@ int load_save_games(void)
     if ((strcmp(d->d_name, ".")) == 0) { continue; }
     else if ((strcmp(d->d_name, "..")) == 0) { continue; }
     strcpy(savegames[n], d->d_name); 
-    if (n++ >= max_saves) { break; }
+    if (n++ >= max_saves-1) { break; }
   } closedir(dir);
 
-  printw("%s\n", "Please select a save or type (n) for new game:");
+  printw("%s\n", "Please select a save or type (N) for new game:");
   if (n < 1) { return 0; }
   for (int i=0; i<n; i++) {
     printw("%c: %s\n", i+'a', savegames[i]);
   }
   refresh();
 
-  do response = (char) mcigetc(); while (((response < 'a') || (response >= 'a'+n)) && (response != 'n'));
+  do response = (char) mgetc(); while (((response < 'a') || (response >= 'a'+n)) && (response != 'N'));
   clear_screen();
-  if (response == 'n') { return 0; }
+  if (response == 'N') { return 0; }
   strcpy(savestr, SAVEDIR);
   strcat(savestr, savegames[response-'a']);
   ok = restore_game(savestr);
