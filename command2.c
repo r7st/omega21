@@ -1007,9 +1007,12 @@ int compress, force;
 #endif
     if (ok)
       if (save_game(compress,fname)) {
-	print3("Bye!");
-	endgraf();
-	exit(0);
+	print1("Exit game? [YN] ");
+        if (ynq() == 'y') {
+	  print3("Bye!");
+	  endgraf();
+	  exit(0);
+	}
       }
       else
 	print1("Save Aborted.");
