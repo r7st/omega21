@@ -111,9 +111,10 @@ FILE *omegarc_check()
 void initstats()
 {
   char response;
-  print1("Do you want to run a character [c] or play yourself [p]?");
-  do response = (char) mcigetc(); while ((response!='c')&&(response != 'p'));
-  if (response == 'c') omegan_character_stats();
+  print1("Do you want to run a character [c], roll for stats [r], or play yourself [p]?");
+  do response = (char) mcigetc(); while ((response!='c')&&(response != 'r')&&(response != 'p'));
+  if (response == 'c') choose_class();
+  else if (response == 'r') omegan_character_stats();
   else {
     user_character_stats();
     user_intro();
@@ -537,7 +538,17 @@ void user_character_stats()
   if (Player.preference == 'b') { Player.preference = 'y'; }
 }
 
-
+void get_name_pref()
+{
+  clearmsg();
+  print1("Please enter your character's name: ");
+  strcpy(Player.name,msgscanstring());
+  print1("Is your character sexually interested in males/females/both/neither? [mfbn] ");
+  do Player.preference = (char) mcigetc();
+  while ((Player.preference != 'm') && (Player.preference != 'f') &&
+        (Player.preference != 'b') && (Player.preference != 'n')); /* :-) */
+  if (Player.preference == 'b') { Player.preference = 'y'; };
+}
 
 void omegan_character_stats()
 {
@@ -562,14 +573,6 @@ void omegan_character_stats()
     calc_melee();
     dataprint();
   } while ((i < REROLLS) && (mgetc() == ESCAPE));
-  clearmsg();
-  print1("Please enter your character's name: ");
-  strcpy(Player.name,msgscanstring());
-  print1("Is your character sexually interested in males/females/both/neither? [mfbn] ");
-  do Player.preference = (char) mcigetc();
-  while ((Player.preference != 'm') && (Player.preference != 'f') &&
-        (Player.preference != 'b') && (Player.preference != 'n')); /* :-) */
-  if (Player.preference == 'b') { Player.preference = 'y'; }
-
+  get_name_pref();
 }
 

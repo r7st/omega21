@@ -62,7 +62,7 @@ OBJ = omega.o abyss.o aux1.o aux2.o aux3.o char.o city.o\
       mstrike.o mtalk.o priest.o\
       save.o scr.o site1.o site2.o\
       spell.o time.o trap.o util.o village.o compress.o\
-      opts.o
+      opts.o class.o
 
 $(BINFILE): $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(LIBS) -o $(BINFILE)

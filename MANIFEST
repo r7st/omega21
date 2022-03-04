@@ -12,6 +12,7 @@ char.c	      env.c	    init.c	  movef.c	trap.c
 city.c	      etc.c	    inv.c	  mspec.c	util.c
 command1.c    extern.h	    item.c	  mstrike.c	village.c
 command2.c    file.c	    itemf1.c	  mtalk.c	opts.c
+class.c
 
 docs:
 compile.all  compile.dj	  omega.6      readme.1st   readme3
