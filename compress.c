@@ -1279,7 +1279,7 @@ char *ifname, *ofname;
 	chown(ofname, statbuf.st_uid, statbuf.st_gid);	/* Copy ownership */
 	timep[0] = statbuf.st_atime;
 	timep[1] = statbuf.st_mtime;
-	utime(ofname, timep);	/* Update last accessed and modified times */
+	utime(ofname, (const struct utimbuf *) timep);	/* Update last accessed and modified times */
 #if 0
 	if (unlink(ifname))	/* Remove input file */
 	    perror(ifname);

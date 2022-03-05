@@ -209,7 +209,7 @@ int load_save_games(void)
   while ((d = readdir(dir)) != NULL) {
     if ((strcmp(d->d_name, ".")) == 0) { continue; }
     else if ((strcmp(d->d_name, "..")) == 0) { continue; }
-    strcpy(savegames[n], d->d_name); 
+    strcpy( (char *) savegames[n], d->d_name);
     if (n++ >= max_saves-1) { break; }
   } closedir(dir);
 
@@ -224,7 +224,7 @@ int load_save_games(void)
   clear_screen();
   if (response == 'N') { return 0; }
   strcpy(savestr, SAVEDIR);
-  strcat(savestr, savegames[response-'a']);
+  strcat(savestr, (char *) savegames[response-'a']);
   ok = restore_game(savestr);
   if (! ok) {
     endgraf();
