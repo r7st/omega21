@@ -21,6 +21,7 @@ CFLAGS += \
   -O2 \
   -pipe \
   -Wno-return-type \
+  -Wno-knr-promoted-parameter \
   -fstack-protector-strong \
   -fno-strict-aliasing  \
   -DBSD \
