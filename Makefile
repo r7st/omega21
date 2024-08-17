@@ -25,7 +25,13 @@ CFLAGS += \
   -fno-strict-aliasing  \
   -DBSD \
   -DOMEGALIB=\"${LIBDIR}/\"  \
-  -DSAVEDIR=\"${SAVEDIR}/\"
+  -DSAVEDIR=\"${SAVEDIR}/\" \
+  -Wno-deprecated-non-prototype \
+  -Wno-dangling-else \
+  -Wno-incompatible-pointer-types \
+  -Wno-knr-promoted-parameter \
+  -Wno-parentheses \
+  -Wno-shift-count-overflow
 
 #CFLAGS = -DSYSV -O
 # I also had to define -cckr (K&R style C) for system V
@@ -88,7 +94,7 @@ install_not_suid: $(BINFILE) $(BINDIR) $(LIBDIR)
 
 clean:
 	rm -f $(OBJ) genclr genclr.o
-	rm -i $(BINFILE)
+	rm $(BINFILE)
 
 $(OBJ): clrgen.h defs.h extern.h glob.h
 
