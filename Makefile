@@ -25,7 +25,6 @@ CFLAGS += \
   -DBSD \
   -DOMEGALIB=\"${LIBDIR}/\"  \
   -DSAVEDIR=\"${SAVEDIR}/\" \
-  -Wno-deprecated-non-prototype \
   -Wno-dangling-else \
   -Wno-incompatible-pointer-types \
   -Wno-knr-promoted-parameter \
