@@ -26,8 +26,6 @@ void load_omegaopts(void)
   for (int i=0; i<REGNUM; i++) { regfree(&regex[i]); }
     
   parse_opts(vopts, voptsize);
-
-  return 0;
 }
 
 /* read file options from ~/.omegaopts. may contain invalid entries */

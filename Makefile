@@ -19,7 +19,6 @@ BINFILE = omega21
 CFLAGS += \
   -O2 \
   -pipe \
-  -Wno-return-type \
   -fstack-protector-strong \
   -fno-strict-aliasing  \
   -DBSD \
