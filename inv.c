@@ -1507,7 +1507,7 @@ int cursed(pob obj){
 /* returns true if item with id and charge is found in pack or in
    inventory slot. charge is used to differentiate
    corpses instead of aux, which is their food value. */
-int find_item(int id, int chargeval, pob *o){
+int find_item(pob *o, int id, int chargeval){
   int i,found=FALSE;
   *o=NULL;
   for(i=1;((i<MAXITEMS)&&(! found));i++)

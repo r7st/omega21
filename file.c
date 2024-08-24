@@ -25,8 +25,7 @@
 
 #include "glob.h"
 
-FILE *checkfopen(filestring,optionstring)
-char *filestring,*optionstring;
+FILE *checkfopen(char *filestring, char *optionstring)
 {
   FILE *fd;
   char response;

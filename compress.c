@@ -1237,7 +1237,7 @@ void writeerr()
     exit ( 1 );
 }
 
-void copystat(char *ifname, *ofname){
+void copystat(char *ifname, char *ofname){
     struct stat statbuf;
     int mode;
     time_t timep[2];
@@ -1399,7 +1399,7 @@ void cl_hash( register count_int hsize){
 		*--htab_p = m1;
 }
 
-void prratio(FILE *stream, long int num, den){
+void prratio(FILE *stream, long int num, long int den){
 	register int q;			/* Doesn't need to be long */
 
 	if(num > 214748L) {		/* 2147483647/10000 */

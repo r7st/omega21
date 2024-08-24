@@ -441,7 +441,7 @@ void drawplayer()
   lasty = Player.y;
 }
 
-void setlastxy(int new_x, new_y){
+void setlastxy(int new_x, int new_y){
     lastx = new_x;
     lasty = new_y;
 }
@@ -633,9 +633,7 @@ void erase_monster(struct monster *m){
 }
 
 /* find apt char to display at some location */
-Symbol getspot(x,y,showmonster)
-int x,y,showmonster;
-{
+Symbol getspot(int x, int y, int showmonster){
   if (loc_statusp(x,y,SECRET)) return(WALL);
   else switch (Level->site[x][y].locchar) {
   case WATER:

@@ -805,7 +805,7 @@ static int sitenums[] = {	/* the order matches sitenames[] */
  L_GYM, L_HEALER, L_CHARITY, L_CRAP, L_LIBRARY, L_MERC_GUILD, L_ORACLE,
  L_ORDER, L_PAWN_SHOP, L_SORCERORS, L_TAVERN, L_TEMPLE, L_THIEVES_GUILD };
 
-void showknownsites(int first, last){
+void showknownsites(int first, int last){
   int i,printed=FALSE;
 
   menuclear();

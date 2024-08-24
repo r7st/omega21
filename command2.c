@@ -932,7 +932,7 @@ void bash_item()
 
 /* guess what this does */
 /* if force is true, exiting due to some problem - don't bomb out */
-void save(int compress, force){
+void save(int compress, int force){
   char fname[100];
   int pos, ok = TRUE;
 

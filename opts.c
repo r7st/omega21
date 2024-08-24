@@ -1,4 +1,3 @@
-
 #include "glob.h"
 #include <regex.h>
 
@@ -79,7 +78,10 @@ void gen_regex(regex_t regex[REGNUM]){
 }
 
 /* filter out invalid opts from .omegaopts */
-int check_valid_opts(char fopts[LINE_COUNT][STRING_LEN]; // all options from .omegaopts file, int optsize, char vopts[LINE_COUNT][STRING_LEN]; // valid options parsed from fopts, regex_t regex[]){
+int check_valid_opts(char fopts[LINE_COUNT][STRING_LEN],
+                     int optsize,
+                     char vopts[LINE_COUNT][STRING_LEN],
+                     regex_t regex[]){
   int os=optsize>LINE_COUNT? LINE_COUNT : optsize;
   int val=0;
   int k=0;

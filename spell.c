@@ -739,7 +739,7 @@ S_REGENERATE, S_RESTORE, S_RETURN, S_RITUAL, S_SANCTIFY, S_SANCTUARY,
 S_KNOWLEDGE, S_SHADOWFORM, S_SLEEP, S_SUMMON, S_TELEPORT, S_WARP, S_TRUESIGHT,
 S_WISH };
 
-void showknownspells(int first, last){
+void showknownspells(int first, int last){
   int i,printed=FALSE;
 
   menuclear();
