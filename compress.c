@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 1985, 1986 The Regents of the University of California.
  * All rights reserved.
@@ -474,10 +475,7 @@ FILE *infile, *outfile;
  * procedure needs no input table, but tracks the way the table was built.
  */
 
-void do_compression( decomp, file )
-int decomp;
-char *file;
-{
+void do_compression(int decomp, char *file){
     int overwrite = 1;	/* Do not overwrite unless given -f flag */
     char tempname[100];
     char **fileptr;
@@ -819,9 +817,7 @@ char_type lmask[9] = {0xff, 0xfe, 0xfc, 0xf8, 0xf0, 0xe0, 0xc0, 0x80, 0x00};
 char_type rmask[9] = {0x00, 0x01, 0x03, 0x07, 0x0f, 0x1f, 0x3f, 0x7f, 0xff};
 #endif /* vax */
 
-void output( code )
-code_int  code;
-{
+void output(code_int code){
 #ifdef DEBUG
     static int col = 0;
 #endif /* DEBUG */
@@ -1241,9 +1237,7 @@ void writeerr()
     exit ( 1 );
 }
 
-void copystat(ifname, ofname)
-char *ifname, *ofname;
-{
+void copystat(char *ifname, *ofname){
     struct stat statbuf;
     int mode;
     time_t timep[2];
@@ -1355,9 +1349,7 @@ void cl_block ()		/* table clear for block compress */
     }
 }
 
-void cl_hash(hsize)		/* reset code table */
-	register count_int hsize;
-{
+void cl_hash( register count_int hsize){
 #ifndef XENIX_16	/* Normal machine */
 	register count_int *htab_p = htab+hsize;
 #else
@@ -1407,10 +1399,7 @@ void cl_hash(hsize)		/* reset code table */
 		*--htab_p = m1;
 }
 
-void prratio(stream, num, den)
-FILE *stream;
-long int num, den;
-{
+void prratio(FILE *stream, long int num, den){
 	register int q;			/* Doesn't need to be long */
 
 	if(num > 214748L) {		/* 2147483647/10000 */

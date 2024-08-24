@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* city.c */
 /* some functions to make the city level */
@@ -6,9 +7,7 @@
 
 
 /* loads the city level */
-void load_city(populate)
-int populate;
-{
+void load_city(int populate){
   int i,j;
   pml ml;
   char site;
@@ -300,9 +299,7 @@ int populate;
 }
 
 
-void assign_city_function(x,y)
-int x,y;
-{
+void assign_city_function(int x, int y){
   static int next=0;
   int i,j,k,l;
 
@@ -436,9 +433,7 @@ int x,y;
 
 
 /* makes a hiscore npc for mansions */
-void make_justiciar(i,j)
-int i,j;
-{
+void make_justiciar(int i, int j){
   pml ml = ((pml) checkmalloc(sizeof(mltype)));
   ml->m = ((pmt) checkmalloc(sizeof(montype)));
   *(ml->m) = Monsters[NPC];
@@ -490,9 +485,7 @@ void resurrect_guards()
 }
 
 
-void mazesite(i,j,populate)
-int i,j,populate;
-{
+void mazesite(int i, int j, int populate){
   static FILE *fd=NULL;
   static int k=0;
   static char site;
@@ -543,9 +536,7 @@ int i,j,populate;
   lreset(i,j,SEEN);
 }
 
-void randommazesite(i,j,populate)
-int i,j,populate;
-{
+void randommazesite(int i, int j, int populate){
   switch(random_range(7)) {
   case 0: case 1:
     Level->site[i][j].locchar = FLOOR;
@@ -568,9 +559,7 @@ int i,j,populate;
 
 
 /* undead are not hostile unless disturbed.... */
-void make_minor_undead(i,j)
-int i,j;
-{
+void make_minor_undead(int i, int j){
   int mid;
   if (random_range(2)) mid = GHOST;
   else mid = HAUNT;
@@ -580,9 +569,7 @@ int i,j;
 }    
 
 /* undead are not hostile unless disturbed.... */
-void make_major_undead(i,j)
-int i,j;
-{
+void make_major_undead(int i, int j){
   int mid;
   if (random_range(2)) mid = LICHE; /* lich */
   else mid = VAMP_LORD; /*vampire lord*/

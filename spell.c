@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* spell.c */
 /* functions having to do with spellcasting */
@@ -442,9 +443,7 @@ int getspell()
 }
 
 
-char *spellid(id)
-int id;
-{
+char *spellid(int id){
   switch(id) {
     case S_MON_DET:return("monster detection");
     case S_OBJ_DET:return("object detection");
@@ -630,9 +629,7 @@ void initspells()
 
 
 
-void cast_spell(spell)
-int spell;
-{
+void cast_spell(int spell){
   switch(spell) {
   case S_MON_DET:s_mondet();
     break;
@@ -742,9 +739,7 @@ S_REGENERATE, S_RESTORE, S_RETURN, S_RITUAL, S_SANCTIFY, S_SANCTUARY,
 S_KNOWLEDGE, S_SHADOWFORM, S_SLEEP, S_SUMMON, S_TELEPORT, S_WARP, S_TRUESIGHT,
 S_WISH };
 
-void showknownspells(first, last)
-int first, last;
-{
+void showknownspells(int first, last){
   int i,printed=FALSE;
 
   menuclear();

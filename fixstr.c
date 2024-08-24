@@ -1,3 +1,4 @@
+
 /* This utility program is not part of the sources to Omega.
    It was written by Nathan Glasser  nathan@brokaw.lcs.mit.edu	(internet)
 	   			     nathan@mit-eddie.uucp	(usenet).

@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* etc.c */
 /* grab bag of random functions used in random places */
@@ -117,9 +118,7 @@ void hint()
 }
 
 /* for when a deity teaches spells to a devotee */
-void learnclericalspells(deity,level)
-int deity,level;
-{
+void learnclericalspells(int deity, int level){
   mprint("With your new clerical rank comes knowledge of magic...");
   Player.pow+=level;
   Player.maxpow+=level;
@@ -226,9 +225,7 @@ int deity,level;
 }
 
 /* for the use of the casino slot machine */
-char *slotstr(num)
-int num;
-{
+char *slotstr(int num){
   switch(num) {
   case 0:
     return("<Slime Mold>");
@@ -304,9 +301,7 @@ char *nameprint()
 
 
 /* returns english string equivalent of number */
-char *wordnum(num)
-int num;
-{
+char *wordnum(int num){
   switch(num) {
   case 0: return("zero ");
   case 1: return("one ");

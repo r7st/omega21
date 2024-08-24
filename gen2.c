@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* gen2.c */
 /* level generator functions */
@@ -11,9 +12,7 @@ fromlevel determines whether the player is placed on the up or the down
 staircase. The aux value is currently unused elsewhere, but is set 
 to the destination level. */
 
-void make_stairs(fromlevel)
-int fromlevel;
-{
+void make_stairs(int fromlevel){
   int i,j;
   /* no stairway out of astral */
   if (Current_Environment != E_ASTRAL) {
@@ -45,9 +44,7 @@ int fromlevel;
 /* tactical map generating functions */
 
 
-void make_country_screen(terrain)
-Symbol terrain;
-{
+void make_country_screen(Symbol terrain){
   int i,j;
   TempLevel = Level;
   if (ok_to_free(TempLevel)) {
@@ -84,9 +81,7 @@ Symbol terrain;
   }
 }
 
-void make_general_map(terrain)
-char *terrain;
-{
+void make_general_map(char *terrain){
   int i, j;
   int size = strlen(terrain);
   char curr;
@@ -332,9 +327,7 @@ void room_level()
 
 /* goes from f to t unless it hits a site which is not a wall and doesn't
    have buildaux field == baux */
-void room_corridor(fx,fy,tx,ty,baux)
-int fx,fy,tx,ty,baux;
-{
+void room_corridor(int fx, int fy, int tx, int ty, int baux){
   int dx,dy,continuing = TRUE;
 
   dx = sign(tx-fx);
@@ -448,10 +441,7 @@ void maze_level()
 
 
 /* keep drawing corridors recursively for 2^5 endpoints */
-void maze_corridor(fx,fy,tx,ty,rsi,num)
-int fx,fy,tx,ty;
-char rsi,num;
-{
+void maze_corridor(int fx, int fy, int tx, int ty, char rsi, char num){
   if (num < 6) {
     straggle_corridor(fx,fy,tx,ty,FLOOR,rsi);
     maze_corridor(tx,ty,

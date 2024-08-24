@@ -1,3 +1,4 @@
+
 /* omega (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* scr.c */
 /* functions that use curses routines directly */
@@ -126,9 +127,7 @@ char lgetc()
 }
 
 
-static int ynq_helper( win )
-WINDOW *win;
-{
+static int ynq_helper(WINDOW *win){
   char p='*'; /* the user's choice; start with something impossible
                * to prevent a loop. */
   while ((p != 'N') && (p != 'Y') && (p != 'Q') && (p != ESCAPE) &&
@@ -214,9 +213,7 @@ void erase_level()
 }
 
 /* direct print to first msg line */
-void print1(s)
-char *s;
-{
+void print1(char *s){
   if (! gamestatusp(SUPPRESS_PRINTING)) {
     buffercycle(s);
     wclear(Msg1w);
@@ -226,9 +223,7 @@ char *s;
 }
 
 /* for run on-messages -- print1 clears first.... */
-void nprint1(s)
-char *s;
-{
+void nprint1(char *s){
   if (! gamestatusp(SUPPRESS_PRINTING)) {
     if (bufferappend(s)) {
       wprintw(Msg1w,s);
@@ -241,9 +236,7 @@ char *s;
 
 
 /* direct print to second msg line */
-void print2(s)
-char *s;
-{
+void print2(char *s){
   if (! gamestatusp(SUPPRESS_PRINTING)) {
     buffercycle(s);
     wclear(Msg2w);
@@ -253,9 +246,7 @@ char *s;
 }
 
 /* for run on-messages -- print2 clears first.... */
-void nprint2(s)
-char *s;
-{
+void nprint2(char *s){
   if (! gamestatusp(SUPPRESS_PRINTING)) {
     if (bufferappend(s)) {
       wprintw(Msg2w,s);
@@ -269,9 +260,7 @@ char *s;
 
 /* msg line 3 is not part of the region that mprint or printm can reach */
 /* typical use of print3 is for "you can't do that" type error messages */
-void print3(s)
-char *s;
-{
+void print3(char *s){
   if (! gamestatusp(SUPPRESS_PRINTING)) {
     buffercycle(s);
     wclear(Msg3w);
@@ -281,9 +270,7 @@ char *s;
 }
 
 /* for run on-messages -- print3 clears first.... */
-void nprint3(s)
-char *s;
-{
+void nprint3(char *s){
   if (! gamestatusp(SUPPRESS_PRINTING)) {
     if (bufferappend(s)) {
       wprintw(Msg3w,s);
@@ -296,9 +283,7 @@ char *s;
 
 /* prints wherever cursor is in window, but checks to see if
 it should morewait and clear window */
-void mprint(s)
-char *s;
-{
+void mprint(char *s){
   int x,y;
   if (! gamestatusp(SUPPRESS_PRINTING)) {
     getyx(Msgw,y,x);
@@ -343,9 +328,7 @@ void omega_title()
 
 
 /* blanks out ith line of Menuw or Levelw */
-void hide_line(i)
-int i;
-{
+void hide_line(int i){
   wclear(Showline[i]);
   touchwin(Showline[i]);
   wrefresh(Showline[i]);
@@ -458,24 +441,18 @@ void drawplayer()
   lasty = Player.y;
 }
 
-void setlastxy(new_x, new_y) /* used when changing environments */
-int new_x, new_y;
-{
+void setlastxy(int new_x, new_y){
     lastx = new_x;
     lasty = new_y;
 }
 
-int litroom(x,y)
-int x,y;
-{
+int litroom(int x, int y){
   if (Level->site[x][y].roomnumber < ROOMBASE) return(FALSE);
   else return(loc_statusp(x,y,LIT) ||
 	      Player.status[ILLUMINATION]);
 }
 
-void drawvision(x,y)
-int x,y;
-{
+void drawvision(int x, int y){
   static int oldx = -1,oldy = -1;
   int i,j,c;
 
@@ -527,9 +504,7 @@ int x,y;
 }
 
 
-void omshowcursor(x,y)
-int x,y;
-{
+void omshowcursor(int x, int y){
   if (! offscreen(y)) {
     wmove(Levelw,screenmod(y),x);
     wrefresh(Levelw);
@@ -543,9 +518,7 @@ void levelrefresh()
 
 
 /* draws a particular spot under if in line-of-sight */
-void drawspot(x,y)
-int x,y;
-{
+void drawspot(int x, int y){
   Symbol c;
   if (inbounds(x,y)) {
     c = getspot(x,y,FALSE);
@@ -561,9 +534,7 @@ int x,y;
 
 
 /* draws a particular spot regardless of line-of-sight */
-void dodrawspot(x,y)
-int x,y;
-{
+void dodrawspot(int x, int y){
   Symbol c;
   if (inbounds(x,y)) {
     c = getspot(x,y,FALSE);
@@ -576,9 +547,7 @@ int x,y;
 }
 
 /* write a blank to a spot if it is floor */
-void blankoutspot(i,j)
-int i,j;
-{
+void blankoutspot(int i, int j){
   if (inbounds(i,j)) {
     lreset(i,j,LIT);
     lset(i, j, CHANGED);
@@ -590,9 +559,7 @@ int i,j;
 }
 
 /* blank out a spot regardless */
-void blotspot(i,j)
-int i,j;
-{
+void blotspot(int i, int j){
   if (inbounds(i,j)) {
     lreset(i,j,SEEN);
     Level->site[i][j].showchar = SPACE;
@@ -606,9 +573,7 @@ int i,j;
 
 
 /* for displaying activity specifically at some point */
-void plotspot(x,y,showmonster)
-int x,y,showmonster;
-{
+void plotspot(int x, int y, int showmonster){
   if (loc_statusp(x,y,SEEN))
     putspot(x,y,getspot(x,y,showmonster));
   else 
@@ -617,10 +582,7 @@ int x,y,showmonster;
 
 
 /* Puts c at x,y on screen. No fuss, no bother. */
-void putspot(x,y,c)
-int x,y;
-Symbol c;
-{
+void putspot(int x, int y, Symbol c){
   if (! offscreen(y)) {
     wmove(Levelw,screenmod(y),x);
     if (optionp(SHOW_COLOUR))
@@ -631,9 +593,7 @@ Symbol c;
 
 
 /* regardless of line of sight, etc, draw a monster */
-void plotmon(m)
-struct monster *m;
-{
+void plotmon(struct monster *m){
   if (! offscreen(m->y)) {
     wmove(Levelw,screenmod(m->y),m->x);
     if (optionp(SHOW_COLOUR))
@@ -643,9 +603,7 @@ struct monster *m;
 }
   
 /* if display, displays monsters, otherwise erases them */
-void drawmonsters(display)
-int display;
-{
+void drawmonsters(int display){
   pml ml;
   for (ml=Level->mlist;ml!=NULL;ml=ml->next) {
     if (ml->m->hp > 0) {
@@ -668,9 +626,7 @@ int display;
 }
 
 /* replace monster with what would be displayed if monster weren't there */
-void erase_monster(m)
-struct monster *m;
-{
+void erase_monster(struct monster *m){
   if (loc_statusp(m->x,m->y,SEEN))
     putspot(m->x,m->y,getspot(m->x,m->y,FALSE));
   else blotspot(m->x,m->y);
@@ -805,9 +761,7 @@ void xredraw()
 
 
 
-void menuaddch(c)
-char c;
-{
+void menuaddch(char c){
   waddch(Menuw,c);
   wrefresh(Menuw);
 }
@@ -856,9 +810,7 @@ void menuclear()
   wrefresh(Menuw);
 }
 
-void menuspellprint(i)
-int i;
-{
+void menuspellprint(int i){
   int x,y;
   getyx(Menuw,y,x);
   if (y >= ScreenLength - 2) {
@@ -871,9 +823,7 @@ int i;
   wprintw(Menuw,"(%d)\n",Spells[i].powerdrain);
 }  
 
-void menuprint(s)
-char *s;
-{
+void menuprint(char *s){
   int x,y;
   getyx(Menuw,y,x);
   if (y >= ScreenLength - 2) {
@@ -900,10 +850,7 @@ void endgraf()
 }
 
 
-void plotchar(pyx,x,y)
-Symbol pyx;
-int x,y;
-{
+void plotchar(Symbol pyx, int x, int y){
   if (! offscreen(y)) {
     wmove(Levelw,screenmod(y),x);
     if (optionp(SHOW_COLOUR))
@@ -915,10 +862,7 @@ int x,y;
 
 
 
-void draw_explosion(pyx,x,y)
-Symbol pyx;
-int x,y;
-{
+void draw_explosion(Symbol pyx, int x, int y){
   int i,j;
   
   for(j=0;j<3;j++) {
@@ -962,9 +906,7 @@ char *msgscanstring()
 }
 
 
-void locprint(s)
-char *s;
-{
+void locprint(char *s){
   wclear(Locw);
   wprintw(Locw,s);
   wrefresh(Locw);
@@ -989,9 +931,7 @@ void drawscreen()
 
 /*selects a number up to range */
 
-int getnumber(range)
-int range;
-{
+int getnumber(int range){
   int done=FALSE,value=1;
   int atom;
 
@@ -1087,17 +1027,13 @@ long parsenum()
 
 
     
-void maddch(c)
-char c;
-{
+void maddch(char c){
   waddch(Msgw,c);
   wrefresh(Msgw);
 }
 
 
-void display_death(source)
-char *source;
-{
+void display_death(char *source){
   clear();
   touchwin(stdscr);
   printw("\n\n\n\n");
@@ -1184,9 +1120,7 @@ void display_bigwin()
 }
 
 
-void mnumprint(n)
-int n;
-{
+void mnumprint(int n){
   char numstr[20];
   sprintf(numstr,"%d",n);
   bufferappend(numstr);
@@ -1194,9 +1128,7 @@ int n;
   wrefresh(Msgw);
 }
 
-void mlongprint(n)
-long n;
-{
+void mlongprint(long n){
   char numstr[20];
   sprintf(numstr,"%ld",n);
   bufferappend(numstr);
@@ -1205,9 +1137,7 @@ long n;
 }
 
 
-void menunumprint(n)
-int n;
-{
+void menunumprint(int n){
   int x,y;
   getyx(Menuw,y,x);
   if (y >= ScreenLength - 2) {
@@ -1219,9 +1149,7 @@ int n;
   wprintw(Menuw,"%d",n);
 }
 
-void menulongprint(n)
-long n;
-{
+void menulongprint(long n){
   int x,y;
   getyx(Menuw,y,x);
   if (y >= ScreenLength - 2) {
@@ -1357,9 +1285,7 @@ void drawomega()
 /* ScreenOffset is the upper left hand corner of the current screen
    in absolute coordinates */
 
-void screencheck(y)
-int y;
-{
+void screencheck(int y){
   if (((y-ScreenOffset) < (ScreenLength/8)) ||
       ((y-ScreenOffset) > (7*ScreenLength/8))) {
     ScreenOffset = y - (ScreenLength/2);
@@ -1374,9 +1300,7 @@ int y;
 
 
 
-void spreadroomlight(x,y,roomno)
-int x,y,roomno;
-{
+void spreadroomlight(int x, int y, int roomno){
   if (inbounds(x,y) && !loc_statusp(x,y,LIT) &&
       Level->site[x][y].roomnumber == roomno) {
     lightspot(x,y);
@@ -1388,9 +1312,7 @@ int x,y,roomno;
 }
 
 /* illuminate one spot at x y */
-void lightspot(x,y)
-int x,y;
-{ 
+void lightspot(int x, int y){
   Symbol c;
   lset(x,y,LIT);
   lset(x,y,SEEN);
@@ -1402,9 +1324,7 @@ int x,y;
 
 
 
-void spreadroomdark(x,y,roomno)
-int x,y,roomno;
-{
+void spreadroomdark(int x, int y, int roomno){
   if (inbounds(x,y))
     if (loc_statusp(x,y,LIT) && (Level->site[x][y].roomnumber == roomno)) {
       blankoutspot(x,y);
@@ -1442,10 +1362,7 @@ void display_possessions()
 }
 
 
-void display_inventory_slot(slotnum,topline)
-int slotnum;
-int topline;
-{
+void display_inventory_slot(int slotnum, int topline){
   WINDOW *W;
   char usechar = ')', idchar = '-';
   if (Player.possessions[slotnum] != NULL)
@@ -1515,9 +1432,7 @@ int topline;
   wrefresh(W);
 }
 
-int move_slot(oldslot,newslot,maxslot)
-int oldslot,newslot,maxslot;
-{
+int move_slot(int oldslot, int newslot, int maxslot){
   if ((newslot >= 0) && (newslot < maxslot)){
     wmove(Showline[oldslot],0,0);
     waddstr(Showline[oldslot],"--");
@@ -1541,9 +1456,7 @@ void colour_off()
   wattrset(Levelw, CHARATTR(CLR(WHITE)));
 }
 
-void display_option_slot(slot)
-int slot;
-{
+void display_option_slot(int slot){
   hide_line(slot);
   wclear(Showline[slot]);
   switch(slot) {
@@ -1659,17 +1572,13 @@ void clear_if_necessary()
 
 int bufferpos = 0;
 
-void buffercycle(s)
-char *s;
-{
+void buffercycle(char *s){
   strcpy(Stringbuffer[bufferpos++],s);
   if (bufferpos >= STRING_BUFFER_SIZE)
     bufferpos = 0;
 }
 
-int bufferappend(s)
-char *s;
-{
+int bufferappend(char *s){
   int pos = bufferpos - 1;
 
   if (pos < 0)

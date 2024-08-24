@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* gen1.c */
 /* level generator functions */
@@ -27,9 +28,7 @@ void free_dungeon()
 
 
 /* erase the level w/o deallocating it*/
-void clear_level(dungeon_level)
-struct level *dungeon_level;
-{
+void clear_level(struct level *dungeon_level){
   int i,j;
   if (dungeon_level != NULL) {
     dungeon_level->generated = FALSE;
@@ -62,9 +61,7 @@ is FALSE, and the level has already been generated, nothing happens
 beyond Level being set correctly. Otherwise the level is recreated
 from scratch */
 
-void change_level(fromlevel,tolevel,rewrite_level)
-char fromlevel,tolevel,rewrite_level;
-{
+void change_level(char fromlevel, char tolevel, char rewrite_level){
   struct level *thislevel = NULL;
   Player.sx = -1; Player.sy = -1; /* sanctuary effect dispelled */
 #ifndef SAVE_LEVELS
@@ -137,10 +134,7 @@ char fromlevel,tolevel,rewrite_level;
 #ifndef SAVE_LEVELS
 /* tries to find the level of depth levelnum in dungeon; if can't find
    it returns NULL */
-plv findlevel(dungeon,levelnum)
-struct level *dungeon;
-char levelnum;
-{
+plv findlevel(struct level *dungeon, char levelnum){
   if (dungeon == NULL) return(NULL);
   else {
     while((dungeon->next != NULL) && (dungeon->depth != levelnum))
@@ -159,11 +153,7 @@ char levelnum;
 /* keep going in one orthogonal direction or another until we hit our */
 /* destination */
 
-void straggle_corridor(fx,fy,tx,ty,loc,rsi)
-int fx,fy,tx,ty;
-Symbol loc;
-char rsi;
-{
+void straggle_corridor(int fx, int fy, int tx, int ty, Symbol loc, char rsi){
   int dx,dy;
   while ((fx != tx) || (fy != ty)) {
     dx = tx - fx;
@@ -176,9 +166,7 @@ char rsi;
 
 
 
-void makedoor(x,y)
-int x,y;
-{
+void makedoor(int x, int y){
   if (random_range(20) <= Level->depth/10) {
     Level->site[x][y].locchar = FLOOR;
     lset(x,y,SECRET);
@@ -207,11 +195,7 @@ int x,y;
 }
 
 
-void corridor_crawl(fx,fy,sx,sy,n,loc,rsi)
-int *fx,*fy,sx,sy,n;
-Symbol loc;
-char rsi;
-{
+void corridor_crawl(int *fx, int *fy, int sx, int sy, int n, Symbol loc, char rsi){
   int i;
   for (i=0;i<n;i++) {
     *fx += sx;
@@ -237,9 +221,7 @@ char rsi;
 
 
 
-char *roomname(index)
-int index;
-{
+char *roomname(int index){
   switch(index) {
   case RS_ZORCH:strcpy(Str4,"A place zorched by powerful magic.");break;
   case RS_COURT:strcpy(Str4,"The Court of the ArchMage."); break;
@@ -320,10 +302,7 @@ int index;
 
 /* puts the player on the first set of stairs from the apt level */
 /* if can't find them, just drops player anywhere.... */
-void find_stairs(fromlevel,tolevel)
-char fromlevel;
-char tolevel;
-{
+void find_stairs(char fromlevel, char tolevel){
   int i,j,found=FALSE;
   Symbol sitechar;
   if (fromlevel > tolevel) sitechar = STAIRS_DOWN; else sitechar = STAIRS_UP;
@@ -361,11 +340,7 @@ void install_traps()
 
 /* x, y, is top left corner, l is length of side, rsi is room string index */
 /* baux is so all rooms will have a key field. */
-void build_square_room(x,y,l,rsi,baux)
-int x,y,l;
-char rsi;
-int baux;
-{
+void build_square_room(int x, int y, int l, char rsi, int baux){
   int i,j;
 
   for(i=x;i<=x+l;i++)
@@ -382,11 +357,7 @@ int baux;
 
 
 
-void build_room(x,y,l,rsi,baux)
-int x,y,l;
-char rsi;
-int baux;
-{
+void build_room(int x, int y, int l, char rsi, int baux){
   build_square_room(x,y,l,rsi,baux);
 }
 
@@ -496,10 +467,7 @@ void sewer_level()
 
 
 
-void sewer_corridor(x,y,dx,dy,locchar)
-int x,y,dx,dy;
-Symbol locchar;
-{
+void sewer_corridor(int x, int y, int dx, int dy, Symbol locchar){
   int continuing = TRUE;
   makedoor(x,y);
   x+=dx;

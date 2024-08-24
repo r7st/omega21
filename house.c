@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* house.c */
 /* some functions to make the house levels */
@@ -6,10 +7,7 @@
 
 
 /* loads the house level into Level*/
-void load_house(kind, populate)
-int kind;
-int populate;
-{
+void load_house(int kind, int populate){
   int i,j;
   char site;
   int stops;
@@ -182,9 +180,7 @@ int populate;
 
   
 /* makes a log npc for houses and hovels */
-void make_house_npc(i,j)
-int i,j;
-{
+void make_house_npc(int i, int j){
   pml ml = ((pml) checkmalloc(sizeof(mltype)));
   pob ob;
   ml->m = ((pmt) checkmalloc(sizeof(montype)));
@@ -215,9 +211,7 @@ int i,j;
 
 
 /* makes a hiscore npc for mansions */
-void make_mansion_npc(i,j)
-int i,j;
-{
+void make_mansion_npc(int i, int j){
   pml ml = ((pml) checkmalloc(sizeof(mltype)));
   ml->m = ((pmt) checkmalloc(sizeof(montype)));
   *(ml->m) = Monsters[NPC];

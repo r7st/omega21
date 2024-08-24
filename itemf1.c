@@ -1,3 +1,4 @@
+
 /* omega copyright (C) 1987,1988,1989 by Laurence Raphael Brothers */
 /* itemf1.c */
 
@@ -8,30 +9,22 @@
 
 /* general item functions */
 
-void i_no_op(o)
-pob o;
-{
+void i_no_op(pob o){
 }
 
-void i_nothing(o)
-pob o;
-{
+void i_nothing(pob o){
 }
 
 
 /*  scroll functions */
 
-void i_knowledge(o)
-pob o;
-{
+void i_knowledge(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   knowledge(o->blessing);
 }
 
-void i_jane_t(o)
-pob o;
-{
+void i_jane_t(pob o){
   int volume = random_range(6);
   int i,j,k;
   char v;
@@ -65,9 +58,7 @@ pob o;
 }
 
    
-void i_flux(o)
-pob o;
-{
+void i_flux(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   flux(o->blessing);
@@ -75,18 +66,14 @@ pob o;
 
 
 /* enchantment */
-void i_enchant(o)
-pob o;
-{
+void i_enchant(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   enchant(o->blessing < 0 ? -1-o->plus : o->plus+1);
 }
 
 /* scroll of clairvoyance */
-void i_clairvoyance(o)
-struct object *o;
-{
+void i_clairvoyance(struct object *o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   if (o->blessing < 0)
@@ -96,9 +83,7 @@ struct object *o;
 
 
 
-void i_acquire(o)
-pob o;
-{
+void i_acquire(pob o){
   int blessing;
 
   if (o->blessing > -1)
@@ -108,18 +93,14 @@ pob o;
   acquire(blessing);
 }
 
-void i_teleport(o)
-pob o;
-{
+void i_teleport(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   p_teleport(o->blessing);
 }
 
 
-void i_spells(o)
-pob o;
-{
+void i_spells(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   mprint("A scroll of spells.");
@@ -130,17 +111,13 @@ pob o;
 
 
 /* scroll of blessing */
-void i_bless(o)
-pob o;
-{
+void i_bless(pob o){
   Objects[o->id].known = 1;
   bless(o->blessing);
 }
 
 /* scroll of wishing */
-void i_wish(o)
-pob o;
-{
+void i_wish(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   wish(o->blessing);
@@ -148,9 +125,7 @@ pob o;
 }
 
 /* scroll of displacement */
-void i_displace(o)
-pob o;
-{
+void i_displace(pob o){
   if (o->blessing > -1) 
       Objects[o->id].known = 1;
   displace(o->blessing);
@@ -158,18 +133,14 @@ pob o;
 
 
 /* scroll of deflection */
-void i_deflect(o)
-pob o;
-{
+void i_deflect(pob o){
   if (o->blessing > -1) 
     Objects[o->id].known = 1;
   deflection(o->blessing);
 }
 
 /* scroll of identification */
-void i_id(o)
-pob o;
-{
+void i_id(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   identify(o->blessing);
@@ -178,9 +149,7 @@ pob o;
 /* potion functions */
 
 /* potion of healing */
-void i_heal(o)
-pob o;
-{
+void i_heal(pob o){
   if (o->blessing > -1) {
     Objects[o->id].known = 1;
     heal(1+o->plus);
@@ -189,9 +158,7 @@ pob o;
 }
 
 /* potion of monster detection */
-void i_mondet(o)
-pob o;
-{
+void i_mondet(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   mondet(o->blessing);
@@ -199,9 +166,7 @@ pob o;
 
 
 /* potion of object detection */
-void i_objdet(o)
-pob o;
-{
+void i_objdet(pob o){
 
   if (o->blessing > -1)
     Objects[o->id].known = 1;
@@ -209,9 +174,7 @@ pob o;
 }
 
 /* potion of neutralize poison */
-void i_neutralize_poison(o)
-pob o;
-{
+void i_neutralize_poison(pob o){
   if (o->blessing > -1) {
     Objects[o->id].known = 1;
     mprint("You feel vital!");
@@ -222,9 +185,7 @@ pob o;
 
 
 /* potion of sleep */
-void i_sleep_self(o)
-pob o;
-{
+void i_sleep_self(pob o){
   sleep_player(6);
   Objects[o->id].known = 1;
 }
@@ -233,9 +194,7 @@ pob o;
 
 
 /* potion of speed */
-void i_speed(o)
-pob o;
-{
+void i_speed(pob o){
   if (o->blessing > -1) 
     Objects[o->id].known = 1;
   haste(o->blessing);
@@ -243,25 +202,19 @@ pob o;
 
 
 /* potion of restoration */
-void i_restore(o)
-pob o;
-{
+void i_restore(pob o){
   if (o->blessing > -1) 
     Objects[o->id].known = 1;
   recover_stat(o->blessing);
 }
 
-void i_augment(o)
-pob o;
-{
+void i_augment(pob o){
   if (o->blessing > -1) 
     Objects[o->id].known = 1;
   augment(o->blessing);
 }  
 
-void i_azoth(o)
-pob o;
-{
+void i_azoth(pob o){
   if (o->plus < 0) {
     mprint("The mercury was poisonous!");
     p_poison(25);
@@ -293,9 +246,7 @@ pob o;
   }
 }
 
-void i_regenerate(o)
-pob o;
-{
+void i_regenerate(pob o){
   regenerate(o->blessing);
 }
 
@@ -304,9 +255,7 @@ pob o;
 
 
 /* boots functions */
-void i_perm_speed(o)
-pob o;
-{
+void i_perm_speed(pob o){
   if (o->blessing > -1) {
     if (o->used) {
       o->known = 2;
@@ -340,9 +289,7 @@ pob o;
 }
 
 /* cloak functions */
-void i_perm_displace(o)
-pob o;
-{
+void i_perm_displace(pob o){
   if (o->blessing > -1) {
     if (o->used) {
       mprint("You feel dislocated.");
@@ -371,9 +318,7 @@ pob o;
   }
 }
 
-void i_perm_negimmune(o)
-pob o;
-{
+void i_perm_negimmune(pob o){
   if (o->blessing > -1) {
     if (o->used) {
       Player.immunity[NEGENERGY]++;
@@ -387,9 +332,7 @@ pob o;
 /* food functions */
 
 
-void i_food(o)
-pob o;
-{
+void i_food(pob o){
   switch(random_range(5)) {
     case 0: mprint("That tasted horrible!"); break;
     case 1: mprint("Yum!"); break;
@@ -399,9 +342,7 @@ pob o;
   }
 }
 
-void i_stim(o)
-pob o;
-{
+void i_stim(pob o){
   mprint("You feel Hyper!");
   i_speed(o);
   Player.str +=3;
@@ -409,23 +350,17 @@ pob o;
   calc_melee();
 }
 
-void i_pow(o)
-pob o;
-{
+void i_pow(pob o){
   mprint("You feel a surge of mystic power!");
   Player.mana = 2 * calcmana();
 }
 
-void i_poison_food(o)
-pob o;
-{
+void i_poison_food(pob o){
   mprint("This food was contaminated with cyanide!");
   p_poison(random_range(20)+5);
 }
 
-void i_pepper_food(o)
-pob o;
-{
+void i_pepper_food(pob o){
   mprint("You innocently start to chew the szechuan pepper.....");
   morewait();
   mprint("hot.");
@@ -443,24 +378,18 @@ pob o;
   Player.immunity[SLEEP]++;
 }
 
-void i_lembas(o)
-pob o;
-{
+void i_lembas(pob o){
   heal(10);
   cleanse(0);
   Player.food = 40;
 }
 
 
-void i_cure(o)
-pob o;
-{
+void i_cure(pob o){
   cure(o->blessing);
 }
 
-void i_immune(o)
-pob o;
-{
+void i_immune(pob o){
   if (o->blessing > 0) {
     mprint("You feel a sense of innoculation");
     Player.immunity[INFECTION]++;
@@ -470,9 +399,7 @@ pob o;
 
 
 
-void i_breathing(o)
-pob o;
-{
+void i_breathing(pob o){
   
   if (o->blessing > -1)
     Objects[o->id].known = 1;
@@ -480,18 +407,14 @@ pob o;
 }
 
       
-void i_invisible(o)
-pob o;
-{
+void i_invisible(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   invisible(o->blessing);
 }
 
 
-void i_perm_invisible(o)
-pob o;
-{
+void i_perm_invisible(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   if (o->used) {
@@ -523,27 +446,21 @@ pob o;
 }
 
 
-void i_warp(o)
-pob o;
-{
+void i_warp(pob o){
   if (o->blessing > -1)
     Objects[o->id].known = 1;
   warp(o->blessing);
 }
 
 
-void i_alert(o)
-pob o;
-{
+void i_alert(pob o){
   if (o->blessing > -1) {
     Objects[o->id].known = 1;
     alert(o->blessing);
   }
 }
 
-void i_charge(o)
-pob o;
-{
+void i_charge(pob o){
   int i;
   if (o->blessing > -1)
     Objects[o->id].known = 1;
@@ -565,9 +482,7 @@ pob o;
 }
 
 
-void i_fear_resist(o)
-pob o;
-{
+void i_fear_resist(pob o){
   if (o->blessing > -1) {
     Objects[o->id].known = 1;
     if (Player.status[AFRAID] > 0) {
@@ -584,9 +499,7 @@ pob o;
 
 
 /* use a thieves pick */
-void i_pick(o)
-pob o;
-{
+void i_pick(pob o){
   int dir;
   int ox,oy;
   o->used = FALSE;
@@ -625,9 +538,7 @@ pob o;
 }
 
 /* use a magic key*/
-void i_key(o)
-pob o;
-{
+void i_key(pob o){
   int dir;
   int ox,oy;
   o->used = FALSE;
@@ -659,9 +570,7 @@ pob o;
   }
 }
 
-void i_corpse(o)
-pob o;
-{
+void i_corpse(pob o){
   /* WDT HACK: there are some comments in this function which need
    * to be backed up with assert(). */
   /* object's charge holds the former monster id */
@@ -747,17 +656,13 @@ pob o;
   }
 }
 
-void i_accuracy(o)
-pob o;
-{
+void i_accuracy(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   accuracy(o->blessing);
 }
 
-void i_perm_accuracy(o)
-pob o;
-{
+void i_perm_accuracy(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   if ((o->used) && (o->blessing > -1)) {
@@ -774,17 +679,13 @@ pob o;
   }
 }
 
-void i_hero(o)
-pob o;
-{
+void i_hero(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   hero(o->blessing);
 }
 
-void i_perm_hero(o)
-pob o;
-{
+void i_perm_hero(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   if (o->used){
@@ -821,17 +722,13 @@ pob o;
   } 
 }
 
-void i_levitate(o)
-pob o;
-{
+void i_levitate(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   levitate(o->blessing);
 }
 
-void i_perm_levitate(o)
-pob o;
-{
+void i_perm_levitate(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   if (o->blessing > -1) {
@@ -851,9 +748,7 @@ pob o;
   else i_perm_burden(o);
 }
 
-void i_perm_protection(o)
-pob o;
-{
+void i_perm_protection(pob o){
   if (o->used){
     if (o->blessing > -1)
       Player.status[PROTECTION] += abs(o->plus)+1;
@@ -869,9 +764,7 @@ pob o;
   calc_melee();
 }
 
-void i_perm_agility(o)
-pob o;
-{
+void i_perm_agility(pob o){
   o->known = 2;
   Objects[o->id].known = 1;
   if (o->used){
@@ -889,17 +782,13 @@ pob o;
   calc_melee();
 }
 
-void i_truesight(o)
-pob o;
-{
+void i_truesight(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   truesight(o->blessing);
 }
 
-void i_perm_truesight(o)
-pob o;
-{
+void i_perm_truesight(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   if (o->used){
@@ -930,17 +819,13 @@ pob o;
   } 
 }
 
-void i_illuminate(o)
-pob o;
-{
+void i_illuminate(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   illuminate(o->blessing);
 }
 
-void i_perm_illuminate(o)
-pob o;
-{
+void i_perm_illuminate(pob o){
   o->known = 1;
   Objects[o->id].known = 1;
   if (o->used) 
@@ -952,9 +837,7 @@ pob o;
 
 
 
-void i_trap(o)
-pob o;
-{
+void i_trap(pob o){
   Objects[o->id].known = 1;
   
   if ((Level->site[Player.x][Player.y].locchar != FLOOR) ||
@@ -973,9 +856,7 @@ pob o;
 }
 
 
-void i_raise_portcullis(o)
-pob o;
-{
+void i_raise_portcullis(pob o){
   l_raise_portcullis();
   mprint("The box beeps once and explodes in your hands!");
   conform_lost_objects(1,o);

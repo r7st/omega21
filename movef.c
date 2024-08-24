@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* movef.c */
 /* the movefunctions switch functions, for player and monster*/
@@ -6,9 +7,7 @@
 
 
 
-void p_movefunction(movef)
-int movef;
-{
+void p_movefunction(int movef){
   /* loc functs above traps should be activated whether levitating or not */
   drawvision(Player.x,Player.y);
   sign_print(Player.x,Player.y,FALSE);
@@ -163,10 +162,7 @@ int movef;
 
 
 /* execute some move function for a monster */
-void m_movefunction(m,movef)
-struct monster *m;
-int movef;
-{
+void m_movefunction(struct monster *m, int movef){
   /* loc functs above traps should be activated whether levitating or not */
   if (! m_statusp(m,FLYING) && ! m_statusp(m, INTANGIBLE))
     switch(movef) {
@@ -199,9 +195,7 @@ int movef;
 #ifdef MSDOS_SUPPORTED_ANTIQUE
 /* ****Moved here from another file**** */
 /* if signp is true, always print message, otherwise do so only sometimes */
-void sign_print(x,y,signp)
-int x,y,signp;
-{
+void sign_print(int x, int y, int signp){
   if ((Level->site[x][y].p_locf >= CITYSITEBASE) &&
       (Level->site[x][y].p_locf < CITYSITEBASE+NUMCITYSITES))
     CitySiteList[Level->site[x][y].p_locf - CITYSITEBASE][0] = TRUE;

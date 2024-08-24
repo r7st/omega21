@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* mmove.c */
 /* monster move functions */
@@ -6,24 +7,18 @@
 
 
 /* like m_normal_move, but can open doors */
-void m_smart_move(m)
-struct monster *m;
-{
+void m_smart_move(struct monster *m){
   m_simple_move(m);
 }
 
 /* not very smart, but not altogether stupid movement */
-void m_normal_move(m)
-struct monster *m;
-{
+void m_normal_move(struct monster *m){
   m_simple_move(m);
 }
 
 
 /* used by both m_normal_move and m_smart_move */
-void m_simple_move(m)
-struct monster *m;
-{
+void m_simple_move(struct monster *m){
   int dx = sign(Player.x - m->x);
   int dy = sign(Player.y - m->y);
 
@@ -76,9 +71,7 @@ struct monster *m;
 
 
 
-void m_move_animal(m)
-struct monster *m;
-{
+void m_move_animal(struct monster *m){
   if (m_statusp(m,HOSTILE))
     m_normal_move(m);
   else m_scaredy_move(m);
@@ -88,9 +81,7 @@ struct monster *m;
 
 
 /* same as simple move except run in opposite direction */
-void m_scaredy_move(m)
-struct monster *m;
-{
+void m_scaredy_move(struct monster *m){
   int dx = -sign(Player.x - m->x);
   int dy = -sign(Player.y - m->y);
   erase_monster(m);
@@ -128,9 +119,7 @@ struct monster *m;
 
 /* for spirits (and earth creatures) who can ignore blockages because
    either they are noncorporeal or they can move through stone */
-void m_spirit_move(m)
-struct monster *m;
-{
+void m_spirit_move(struct monster *m){
   int dx = sign(Player.x - m->x);
   int dy = sign(Player.y - m->y);
   erase_monster(m);
@@ -148,9 +137,7 @@ struct monster *m;
 
   
 /* fluttery dumb movement */
-void m_flutter_move(m)
-struct monster *m;
-{
+void m_flutter_move(struct monster *m){
   int trange,range = distance(m->x,m->y,Player.x,Player.y);
   int i,tx,ty,nx=m->x,ny=m->y;
   erase_monster(m);
@@ -178,9 +165,7 @@ struct monster *m;
 }
 
 
-void m_follow_move(m)
-struct monster *m;
-{
+void m_follow_move(struct monster *m){
   if (! m_statusp(m,HOSTILE))
     m_normal_move(m);
   else m_scaredy_move(m);
@@ -189,9 +174,7 @@ struct monster *m;
 
 
 /* allows monsters to fall into pools, revealed traps, etc */
-void m_confused_move(m)
-struct monster *m;
-{
+void m_confused_move(struct monster *m){
   int i,nx,ny,done=FALSE;
   erase_monster(m);
   for (i=0;((i<8)&&(! done));i++) {
@@ -206,9 +189,7 @@ struct monster *m;
   }
 }
 
-void m_random_move(m)
-struct monster *m;
-{
+void m_random_move(struct monster *m){
   int i,nx,ny,done=FALSE;
   erase_monster(m);
   for (i=0;((i<8)&&(! done));i++) {
@@ -225,9 +206,7 @@ struct monster *m;
 
     
 /* monster removed from play */
-void m_vanish(m)
-struct monster *m;
-{
+void m_vanish(struct monster *m){
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
     strcat(Str2,m->monstring);
@@ -241,9 +220,7 @@ struct monster *m;
 }
 
 /* monster still in play */
-void m_teleport(m)
-struct monster *m;
-{
+void m_teleport(struct monster *m){
   erase_monster(m);
   if (m_statusp(m,AWAKE)) {
     Level->site[m->x][m->y].creature = NULL;
@@ -253,9 +230,7 @@ struct monster *m;
   }
 }
 
-void m_move_leash(m)
-struct monster *m;
-{
+void m_move_leash(struct monster *m){
   m_simple_move(m);
   if (m->aux1 == 0) {
     m->aux1 = m->x;

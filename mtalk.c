@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* mtalk.c */
 /* monster talk functions */
@@ -6,9 +7,7 @@
 
 
 /* The druid's altar is in the northern forest */
-void m_talk_druid(m)
-struct monster *m;
-{
+void m_talk_druid(struct monster *m){
   int i;
   pml curr;
 
@@ -93,9 +92,7 @@ struct monster *m;
 }
 
 
-void m_talk_silent(m)
-struct monster *m;
-{
+void m_talk_silent(struct monster *m){
 
   int reply = random_range(4);
   
@@ -113,9 +110,7 @@ struct monster *m;
   mprint(Str2);
 }
 
-void m_talk_stupid(m)
-struct monster *m;
-{
+void m_talk_stupid(struct monster *m){
 
   int reply = random_range(4);
   if (m->uniqueness == COMMON) {
@@ -132,9 +127,7 @@ struct monster *m;
   mprint(Str2);
 }
 
-void m_talk_greedy(m)
-struct monster *m;
-{
+void m_talk_greedy(struct monster *m){
 
   int reply = random_range(4);
   if (m->uniqueness == COMMON) {
@@ -151,9 +144,7 @@ struct monster *m;
   mprint(Str2);
 }
 
-void m_talk_hungry(m)
-struct monster *m;
-{
+void m_talk_hungry(struct monster *m){
 
   int reply = random_range(4);
   if (m->uniqueness == COMMON) {
@@ -171,9 +162,7 @@ struct monster *m;
 }
 
 
-void m_talk_guard(m)
-struct monster *m;
-{
+void m_talk_guard(struct monster *m){
   if (m_statusp(m,HOSTILE)) {
     print1("'Surrender in the name of the Law!'");
     print2("Do it? [YN] ");
@@ -204,16 +193,12 @@ struct monster *m;
 }
 
 
-void m_talk_mp(m)
-struct monster *m;
-{
+void m_talk_mp(struct monster *m){
   mprint("The mendicant priest asks you to spare some treasure for the needy");
 }
 
 
-void m_talk_titter(m)
-struct monster *m;
-{
+void m_talk_titter(struct monster *m){
 
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
@@ -225,9 +210,7 @@ struct monster *m;
 }
 
 
-void m_talk_ninja(m)
-struct monster *m;
-{
+void m_talk_ninja(struct monster *m){
   mprint("The black-garbed figure says apologetically:");
   mprint("'Situree simasita, wakarimasen.'");
 }
@@ -235,9 +218,7 @@ struct monster *m;
 
 
 
-void m_talk_thief(m)
-struct monster *m;
-{
+void m_talk_thief(struct monster *m){
   if (Player.rank[THIEVES]) {
     if (m->level == 2) 
       m->monstring = "sneak thief";
@@ -254,18 +235,14 @@ struct monster *m;
 
 
 
-void m_talk_assassin(m)
-struct monster *m;
-{
+void m_talk_assassin(struct monster *m){
   m->monstring = "master assassin";
   print1("The ominous figure does not reply, but hands you an embossed card:");
   print2("'Guild of Assassins Ops are forbidden to converse with targets.'");
 }
     
 
-void m_talk_im(m)
-struct monster *m;
-{
+void m_talk_im(struct monster *m){
   if (strcmp(m->monstring,"itinerant merchant") != 0) {
     m->monstring = "itinerant merchant";
   }
@@ -303,9 +280,7 @@ struct monster *m;
 }
 
 
-void m_talk_man(m)
-struct monster *m;
-{
+void m_talk_man(struct monster *m){
 
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
@@ -323,9 +298,7 @@ struct monster *m;
 }
 
 
-void m_talk_evil(m)
-struct monster *m;
-{
+void m_talk_evil(struct monster *m){
 
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
@@ -353,9 +326,7 @@ struct monster *m;
 }
 
 
-void m_talk_robot(m)
-struct monster *m;
-{
+void m_talk_robot(struct monster *m){
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
     strcat(Str2,m->monstring);
@@ -374,24 +345,18 @@ struct monster *m;
   mprint(Str2);
 }
 
-void m_talk_slithy(m)
-struct monster *m;
-{
+void m_talk_slithy(struct monster *m){
   mprint("It can't talk -- it's too slithy!");
 }
 
 
-void m_talk_mimsy(m)
-struct monster *m;
-{
+void m_talk_mimsy(struct monster *m){
   mprint("It can't talk -- it's too mimsy!");
 }
 
 
 
-void m_talk_burble(m)
-struct monster *m;
-{
+void m_talk_burble(struct monster *m){
 
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
@@ -405,9 +370,7 @@ struct monster *m;
 
 
 
-void m_talk_beg(m)
-struct monster *m;
-{
+void m_talk_beg(struct monster *m){
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
     strcat(Str2,m->monstring);
@@ -418,9 +381,7 @@ struct monster *m;
 }
 
 
-void m_talk_hint(m)
-struct monster *m;
-{
+void m_talk_hint(struct monster *m){
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
     strcat(Str2,m->monstring);
@@ -438,9 +399,7 @@ struct monster *m;
   }
 }
 
-void m_talk_gf(m)
-struct monster *m;
-{
+void m_talk_gf(struct monster *m){
   mprint("The good fairy glints: Would you like a wish?");
   if (ynq()=='y') {
     mprint("The good fairy glows: Are you sure?");
@@ -463,9 +422,7 @@ struct monster *m;
   m_vanish(m);
 }
 
-void m_talk_ef(m)
-struct monster *m;
-{
+void m_talk_ef(struct monster *m){
   mprint("The evil fairy roils: Eat my pixie dust!");
   mprint("She waves her black-glowing wand, which screams thinly....");
   m->movef=M_MOVE_SMART;
@@ -481,9 +438,7 @@ struct monster *m;
 }
 
 
-void m_talk_seductor(m)
-struct monster *m;
-{
+void m_talk_seductor(struct monster *m){
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
     strcat(Str2,m->monstring);
@@ -515,9 +470,7 @@ struct monster *m;
 }
 
 
-void m_talk_demonlover(m)
-struct monster *m;
-{
+void m_talk_demonlover(struct monster *m){
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
     strcat(Str2,m->monstring);
@@ -573,9 +526,7 @@ struct monster *m;
 }
 
 
-void m_talk_horse(m)
-struct monster *m;
-{
+void m_talk_horse(struct monster *m){
   if (m_statusp(m,HOSTILE)) 
     mprint("The horse neighs angrily at you.");
   else if (m_statusp(m,HUNGRY))
@@ -597,22 +548,16 @@ struct monster *m;
   }
 }
 
-void m_talk_hyena(m)
-struct monster *m;
-{
+void m_talk_hyena(struct monster *m){
   mprint("The hyena only laughs at you...");
 }
 
-void m_talk_parrot(m)
-struct monster *m;
-{
+void m_talk_parrot(struct monster *m){
   mprint("Polly wanna cracker?");
 }
 
 
-void m_talk_servant(m)
-struct monster *m;
-{
+void m_talk_servant(struct monster *m){
   int target,x=Player.x,y=Player.y;
   if (m->id == SERV_LAW) {
     target = SERV_CHAOS;
@@ -649,9 +594,7 @@ struct monster *m;
 }
 
 
-void m_talk_animal(m)
-struct monster *m;
-{
+void m_talk_animal(struct monster *m){
   if (m->uniqueness == COMMON) {
     strcpy(Str2,"The ");
     strcat(Str2,m->monstring);
@@ -665,9 +608,7 @@ struct monster *m;
 }
 
 
-void m_talk_scream(m)
-struct monster *m;
-{
+void m_talk_scream(struct monster *m){
   mprint("A thinly echoing scream reaches your ears....");
   morewait();
   mprint("You feel doomed....");
@@ -678,9 +619,7 @@ struct monster *m;
 }
 
 
-void m_talk_archmage(m)
-struct monster *m;
-{
+void m_talk_archmage(struct monster *m){
   if (m_statusp(m,HOSTILE)) {
     mprint("The Archmage ignores your attempt at conversation");
     mprint("and concentrates on his spellcasting....");
@@ -704,9 +643,7 @@ struct monster *m;
 }
 
 
-void m_talk_merchant(m)
-struct monster *m;
-{
+void m_talk_merchant(struct monster *m){
   if (! m_statusp(m,HOSTILE)) {
     if (Current_Environment == E_VILLAGE) {
       mprint("The merchant asks you if you want to buy a horse for 250GP.");
@@ -738,9 +675,7 @@ struct monster *m;
 }
   
 
-void m_talk_prime(m)
-struct monster *m;
-{
+void m_talk_prime(struct monster *m){
   if (!m_statusp(m,HOSTILE)) {
     if (Current_Environment == E_CIRCLE) {
       print1("The Prime nods brusquely at you, removes a gem from his");

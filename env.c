@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* env.c */
 /* some load_* routines for special environments */
@@ -77,9 +78,7 @@ void load_arena()
 }
 
 /* loads the sorcereror's circle into Level*/
-void load_circle(populate)
-int populate;
-{
+void load_circle(int populate){
   int i,j;
   int safe = (Player.rank[CIRCLE] > 0);
   char site;
@@ -193,9 +192,7 @@ int populate;
 }
 
 /* make the prime sorceror */
-void make_prime(i,j)
-int i,j;
-{
+void make_prime(int i, int j){
   pml ml = ((pml) checkmalloc(sizeof(mltype)));
   pmt m = ((pmt) checkmalloc(sizeof(montype)));
   pol ol;
@@ -224,9 +221,7 @@ int i,j;
 
 
 /* loads the court of the archmage into Level*/
-void load_court(populate)
-int populate;
-{
+void load_court(int populate){
   int i,j;
   char site;
   FILE *fd;
@@ -320,9 +315,7 @@ int populate;
 
 
 /* make the archmage */
-void make_archmage(i,j)
-int i,j;
-{
+void make_archmage(int i, int j){
   pml ml = ((pml) checkmalloc(sizeof(mltype)));
   pmt m = ((pmt) checkmalloc(sizeof(montype)));
   make_hiscore_npc(m,9); /* 9 is index for archmage */

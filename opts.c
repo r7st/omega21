@@ -1,3 +1,4 @@
+
 #include "glob.h"
 #include <regex.h>
 
@@ -31,9 +32,7 @@ void load_omegaopts(void)
 }
 
 /* read file options from ~/.omegaopts. may contain invalid entries */
-int read_opts_file(fopts)
-char fopts[LINE_COUNT][STRING_LEN];
-{
+int read_opts_file(char fopts[LINE_COUNT][STRING_LEN]){
   FILE *fp;
   char *Opt=NULL;
   size_t linecapp=0;
@@ -55,9 +54,7 @@ char fopts[LINE_COUNT][STRING_LEN];
 }
 
 /* compile regex array for parsing options */
-void gen_regex(regex)
-regex_t regex[REGNUM];
-{
+void gen_regex(regex_t regex[REGNUM]){
   char TF[]="((T(RUE)?)|(F(ALSE)?))$";
   char OPS[][STRING_LEN]={
     "^BELLICOSE=",
@@ -82,12 +79,7 @@ regex_t regex[REGNUM];
 }
 
 /* filter out invalid opts from .omegaopts */
-int check_valid_opts(fopts, optsize, vopts, regex)
-char fopts[LINE_COUNT][STRING_LEN]; // all options from .omegaopts file
-int optsize;
-char vopts[LINE_COUNT][STRING_LEN]; // valid options parsed from fopts
-regex_t regex[];
-{
+int check_valid_opts(char fopts[LINE_COUNT][STRING_LEN]; // all options from .omegaopts file, int optsize, char vopts[LINE_COUNT][STRING_LEN]; // valid options parsed from fopts, regex_t regex[]){
   int os=optsize>LINE_COUNT? LINE_COUNT : optsize;
   int val=0;
   int k=0;
@@ -102,10 +94,7 @@ regex_t regex[];
   return k;
 }
 
-void set_option(tf, option) 
-char tf;
-int option;
-{
+void set_option(char tf, int option){
   switch (tf) {
     case 'T': optionset(option); break;
     case 'F': optionreset(option);
@@ -113,10 +102,7 @@ int option;
 }
 
 /* parse omegaopts and set options game options */
-void parse_opts(opts, voptsize)
-char opts[LINE_COUNT][STRING_LEN];
-int voptsize;
-{
+void parse_opts(char opts[LINE_COUNT][STRING_LEN], int voptsize){
   char *opt, *val, c;
   for(int i=0; i<voptsize; i++) {
     opt=strtok(opts[i], "=");

@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* site2.c */
 /* 2nd half of site functions and aux functions to them */
@@ -132,9 +133,7 @@ void l_condo()
 
 
 
-void gymtrain(maxstat,stat)
-int *maxstat,*stat;
-{
+void gymtrain(int *maxstat, int *stat){
   if (Gymcredit + Player.cash < 2000)
     print2("You can't afford our training!");
   else {
@@ -615,9 +614,7 @@ void l_brothel()
 
 #ifndef MSDOS_SUPPORTED_ANTIQUE
 /* if signp is true, always print message, otherwise do so only sometimes */
-void sign_print(x,y,signp)
-int x,y,signp;
-{
+void sign_print(int x, int y, int signp){
   if ((Level->site[x][y].p_locf >= CITYSITEBASE) &&
       (Level->site[x][y].p_locf < CITYSITEBASE+NUMCITYSITES))
     CitySiteList[Level->site[x][y].p_locf - CITYSITEBASE][0] = TRUE;

@@ -1,8 +1,7 @@
+
 #include <stdio.h>
 
-int key_to_index(key)
-char key;
-{
+int key_to_index(char key){
   if ( key >= '0' && key <= '9' )
       return (int)(key - '0');
   else if ( key >= 'a' && key <= 'c' )
@@ -12,9 +11,7 @@ char key;
   else return -100;
 }
 
-char index_to_key(index)
-int index;
-{
+char index_to_key(int index){
   if ( index >= 0 && index <= 9 )
       return (char)(index + '0');
   else if ( index >= 10 && index <= 12 )

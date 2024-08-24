@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* mmelee */
 /* various functions to do with monster melee */
@@ -5,10 +6,7 @@
 #include "glob.h"
 
 
-void m_hit(m,dtype)
-struct monster *m;
-int dtype;
-{
+void m_hit(struct monster *m, int dtype){
   if (m->uniqueness == COMMON) {
     strcpy(Str3,"a ");
     strcat(Str3,m->monstring);
@@ -22,9 +20,7 @@ int dtype;
 
 
 /* execute monster attacks versus player */
-void tacmonster(m)
-struct monster *m;
-{
+void tacmonster(struct monster *m){
   int i=0;
   drawvision(Player.x,Player.y);
   transcribe_monster_actions(m);
@@ -52,11 +48,7 @@ struct monster *m;
 
 
 
-void monster_melee(m,hitloc,bonus)
-struct monster *m;
-char hitloc;
-int bonus;
-{
+void monster_melee(struct monster *m, char hitloc, int bonus){
   if (player_on_sanctuary())
     print1("The aegis of your deity protects you!");
   else {
@@ -186,11 +178,7 @@ int bonus;
 
 
 /* checks to see if player hits with hitmod vs. monster m at location hitloc */
-int monster_hit(m,hitloc,bonus)
-struct monster *m;
-char hitloc;
-int bonus;
-{
+int monster_hit(struct monster *m, char hitloc, int bonus){
   int i=0,blocks=FALSE,goodblocks=0,hit,riposte=FALSE;
   while (i<strlen(Player.meleestr)) {
     if ((Player.meleestr[i] == 'B') || (Player.meleestr[i] == 'R')) {
@@ -224,9 +212,7 @@ int bonus;
 /* if monster is skilled, it can try see the player's attacks coming and
    try to block appropriately. */
 
-void transcribe_monster_actions(m)
-struct monster *m;
-{
+void transcribe_monster_actions(struct monster *m){
   int i;
   char attack_loc,block_loc;
   static char mmstr[80];

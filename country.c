@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* country.c */
 /* load_country(), and all load_ functions for places which are */
@@ -120,10 +121,7 @@ void load_country()
 
 
 /* loads the dragon's lair into Level*/
-void load_dlair(empty, populate)
-int empty;
-int populate;
-{
+void load_dlair(int empty, int populate){
   int i,j;
   char site;
   
@@ -249,10 +247,7 @@ int populate;
 
 
 /* loads the star peak into Level*/
-void load_speak(empty, populate)
-int empty;
-int populate;
-{
+void load_speak(int empty, int populate){
   int i,j,safe = Player.alignment > 0;
   char site;
   
@@ -374,10 +369,7 @@ int populate;
 
 
 /* loads the magic isle into Level*/
-void load_misle(empty, populate)
-int empty;
-int populate;
-{
+void load_misle(int empty, int populate){
   int i,j;
   char site;
   
@@ -470,10 +462,7 @@ int populate;
 
 
 /* loads a temple into Level*/
-void load_temple(deity, populate)
-int deity;
-int populate;
-{
+void load_temple(int deity, int populate){
   int i,j;
   char site;
   pml ml;
@@ -595,9 +584,7 @@ int populate;
 /*  initrand(-2, 0); */ /* FIXED! 12/30/98 */
 }
 
-void random_temple_site(i,j,deity,populate)
-int i,j,deity,populate;
-{
+void random_temple_site(int i, int j, int deity, int populate){
   switch(random_range(12)) {
   case 0:
     if (populate)
@@ -625,9 +612,7 @@ int i,j,deity,populate;
   }
 }
 
-void make_high_priest(i,j,deity)
-int i,j,deity;
-{
+void make_high_priest(int i, int j, int deity){
   pml ml = ((pml) checkmalloc(sizeof(mltype)));
   pmt m = ((pmt) checkmalloc(sizeof(montype)));
   make_hiscore_npc(m,deity);

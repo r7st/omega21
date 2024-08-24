@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* effect2.c */
 
@@ -5,9 +6,7 @@
 
 
 
-void knowledge(blessing)
-int blessing;
-{
+void knowledge(int blessing){
   if (blessing < 0)
     mprint("You feel ignorant.");
   else {
@@ -336,9 +335,7 @@ int blessing;
 
 
 /* Recreates the current level */
-void flux(blessing)
-int blessing;
-{
+void flux(int blessing){
   mprint("The universe warps around you!");
   if (Current_Environment == E_CITY) {
     mprint("Sensing dangerous high order magic, the Collegium Magii");
@@ -359,9 +356,7 @@ int blessing;
 }
 
 /*Turns on displacement status for the player */
-void displace(blessing)
-int blessing;
-{
+void displace(int blessing){
   if (blessing > -1) {
       mprint("You feel a sense of dislocation.");
       Player.status[DISPLACED] = blessing + random_range(6);
@@ -374,9 +369,7 @@ int blessing;
 
   
 	
-void invisible(blessing)
-int blessing;
-{  
+void invisible(int blessing){
   if (blessing > -1) {
     mprint("You feel transparent!");
     Player.status[INVISIBLE]+= 2+5*blessing;
@@ -389,9 +382,7 @@ int blessing;
 }
 
 
-void warp(blessing)
-int blessing;
-{
+void warp(int blessing){
   int newlevel;
   if (Current_Environment != Current_Dungeon) 
     mprint("How strange! No effect....");
@@ -408,9 +399,7 @@ int blessing;
   roomcheck();
 }
 
-void alert(blessing)
- int blessing;
-{
+void alert( int blessing){
   if (blessing > -1) {
     mprint("You feel on-the-ball.");
     Player.status[ALERT]+= 4+(5*blessing);
@@ -418,9 +407,7 @@ void alert(blessing)
   else sleep_player(abs(blessing)+3);
 }
 
-void regenerate(blessing)
-int blessing;
-{
+void regenerate(int blessing){
   if (blessing < 0)
     heal(blessing * 10);
   else {
@@ -429,9 +416,7 @@ int blessing;
   }
 }
 
-void haste(blessing)
-int blessing;
-{
+void haste(int blessing){
   if (blessing > -1) {
     if (! Player.status[HASTED]) 
       mprint("The world slows down!"); 
@@ -448,9 +433,7 @@ int blessing;
 }
 
 
-void recover_stat(blessing)
-int blessing;
-{
+void recover_stat(int blessing){
   if (blessing < 0) {
     mprint("You feel a cold surge!");
     switch(random_range(6)) {
@@ -474,9 +457,7 @@ int blessing;
   calc_melee();
 }
 
-void augment(blessing)
-int blessing;
-{
+void augment(int blessing){
   if (blessing < 0) {
     mprint("You feel a cold surge!");
     switch(random_range(6)) {
@@ -511,9 +492,7 @@ int blessing;
   calc_melee();
 }
 
-void breathe(blessing)
-int blessing;
-{
+void breathe(int blessing){
   if (blessing > -1) {
       mprint("Your breath is energized!");
       Player.status[BREATHING] += 6+blessing;
@@ -525,9 +504,7 @@ int blessing;
 }
 
 
-void i_chaos(o)
-pob o;
-{
+void i_chaos(pob o){
   if (Player.alignment < 0) {
     Player.alignment -= random_range(20);
     mprint("You feel deliciously chaotic!");
@@ -539,9 +516,7 @@ pob o;
   }
 }
 
-void i_law(o)
-pob o;
-{
+void i_law(pob o){
   if (Player.alignment > 0) {
     Player.alignment += random_range(20);
     mprint("You feel wonderfully lawful!");
@@ -553,9 +528,7 @@ pob o;
   }
 }
 
-void sanctify(blessing)
-int blessing;
-{
+void sanctify(int blessing){
   if (blessing > -1) {
     if (Level->environment == E_TEMPLE) 
       mprint("Odd, the spell has no effect. I wonder why.");
@@ -618,9 +591,7 @@ int blessing;
   }
 }
 
-void accuracy(blessing)
-int blessing;
-{
+void accuracy(int blessing){
   if (blessing > -1) {
       mprint("Everything seems covered in bullseyes!");
       Player.status[ACCURACY] += random_range(5)+1+blessing*5;

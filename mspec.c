@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* mspec.c */
 /* monster special functions */
@@ -5,9 +6,7 @@
 #include "glob.h"
 
 
-void m_sp_mp(m)
-struct monster *m;
-{
+void m_sp_mp(struct monster *m){
   if (m->attacked && (random_range(3) == 1)) {
     mprint("You feel cursed!");
     p_damage(10,UNSTOPPABLE,"a mendicant priest's curse");
@@ -25,9 +24,7 @@ struct monster *m;
 
 
 
-void m_sp_ng(m)
-struct monster *m;
-{
+void m_sp_ng(struct monster *m){
   if (distance(m->x,m->y,Player.x,Player.y) < 2)
     if ((random_range(5) == 1) || (Player.status[VULNERABLE]>0)) {
       mprint("The night gaunt grabs you and carries you off!");
@@ -42,9 +39,7 @@ struct monster *m;
 
 
 
-void m_sp_poison_cloud(m)
-struct monster *m;
-{
+void m_sp_poison_cloud(struct monster *m){
   if (distance(m->x,m->y,Player.x,Player.y) < 3) {
     mprint("A cloud of poison gas surrounds you!");
     if (Player.status[BREATHING] > 0)
@@ -54,9 +49,7 @@ struct monster *m;
 }
 
 
-void m_sp_explode(m)
-struct monster *m;
-{
+void m_sp_explode(struct monster *m){
   if ((distance(Player.x,Player.y,m->x,m->y)<2) &&
       (m-> hp > 0) && 
       (m->hp < Monsters[m->id].hp))
@@ -65,9 +58,7 @@ struct monster *m;
 
 
 
-void m_sp_demon(m)
-struct monster *m;
-{
+void m_sp_demon(struct monster *m){
   int mid;
 
   if (random_range(2)) {
@@ -99,26 +90,20 @@ struct monster *m;
 }
 
 
-void m_sp_acid_cloud(m)
-struct monster *m;
-{
+void m_sp_acid_cloud(struct monster *m){
   if (m_statusp(m,HOSTILE) &&
       (distance(m->x,m->y,Player.x,Player.y) < 3))
     acid_cloud();
 }
 
 	  
-void m_sp_escape(m)
-struct monster *m;
-{
+void m_sp_escape(struct monster *m){
   if (m_statusp(m,HOSTILE))
     m_vanish(m);
 }
 
 
-void m_sp_ghost(m)
-struct monster *m;
-{
+void m_sp_ghost(struct monster *m){
   if (m_statusp(m,HOSTILE)) {
     mprint("The ghost moans horribly....");
     p_damage(1,FEAR,"a ghost-inspired heart attack");
@@ -132,9 +117,7 @@ struct monster *m;
 
 
 /* random spell cast by monster */
-void m_sp_spell(m)
-struct monster *m;
-{
+void m_sp_spell(struct monster *m){
   char action[80];
   if (m_statusp(m,HOSTILE) && los_p(Player.x,Player.y,m->x,m->y)) {
     if (m->uniqueness == COMMON) strcpy(action,"The ");
@@ -217,9 +200,7 @@ struct monster *m;
 
 /* monsters with this have some way to hide, camouflage, etc until they 
    attack */
-void m_sp_surprise(m)
-struct monster *m;
-{
+void m_sp_surprise(struct monster *m){
   if (m->attacked) {
     if (m_statusp(m,HOSTILE) && 
 	(! Player.status[TRUESIGHT]) &&
@@ -252,9 +233,7 @@ struct monster *m;
   }
 }
 
-void m_sp_whistleblower(m)
-struct monster *m;
-{
+void m_sp_whistleblower(struct monster *m){
   if (m_statusp(m,HOSTILE)) {
     alert_guards();
     m->specialf = M_MELEE_NORMAL;
@@ -262,9 +241,7 @@ struct monster *m;
 }
 
 
-void m_sp_seductor(m)
-struct monster *m;
-{
+void m_sp_seductor(struct monster *m){
   if (m_statusp(m,HOSTILE)) {
     if (m->uniqueness == COMMON) {
       strcpy(Str2,"The ");
@@ -284,16 +261,12 @@ struct monster *m;
 }
 
 
-void m_sp_demonlover(m)
-struct monster *m;
-{
+void m_sp_demonlover(struct monster *m){
   if (distance(Player.x,Player.y,m->x,m->y) < 2) 
     m_talk_demonlover(m);
 }
 
-void m_sp_eater(m)
-struct monster *m;
-{
+void m_sp_eater(struct monster *m){
   int i;
   if (Player.rank[COLLEGE]) m_status_set(m,HOSTILE);
   if (m_statusp(m,HOSTILE))
@@ -313,9 +286,7 @@ struct monster *m;
 }
 
 
-void m_sp_dragonlord(m)
-struct monster *m;
-{
+void m_sp_dragonlord(struct monster *m){
   if (m_statusp(m,HOSTILE)) {
     if (distance(m->x,m->y,Player.x,Player.y)<2) {
       if (! Player.status[IMMOBILE]) {
@@ -361,9 +332,7 @@ struct monster *m;
 }
 
 
-void m_sp_blackout(m)
-struct monster *m;
-{
+void m_sp_blackout(struct monster *m){
   if ((distance(m->x,m->y,Player.x,Player.y) < 4) &&
       (Player.status[BLINDED] == 0)) {
     mprint("The fungus emits a burst of black spores. You've been blinded!");
@@ -381,9 +350,7 @@ struct monster *m;
 }
 
 
-void m_sp_bogthing(m)
-struct monster *m;
-{
+void m_sp_bogthing(struct monster *m){
   if (Player.status[IMMOBILE] && 
       (distance(Player.x,Player.y,m->x,m->y) < 2)) {
     if (! Player.status[AFRAID]) {
@@ -404,9 +371,7 @@ struct monster *m;
 }
 
 
-void m_sp_were(m)
-struct monster *m;
-{
+void m_sp_were(struct monster *m){
   int mid;
   if (m_statusp(m,HOSTILE) || (Phase == 6)) {
     do mid = random_range(ML9-NML_0)+ML1;
@@ -445,9 +410,7 @@ struct monster *m;
 }    
 
 
-void m_sp_servant(m)
-struct monster *m;
-{
+void m_sp_servant(struct monster *m){
   if ((m->id == SERV_LAW) && (Player.alignment < 0))
     m_status_set(m,HOSTILE);
   else if ((m->id == SERV_CHAOS) && (Player.alignment > 0))
@@ -455,9 +418,7 @@ struct monster *m;
 }
 
 
-void m_sp_av(m)
-struct monster *m;
-{
+void m_sp_av(struct monster *m){
   if (Player.mana > 0) {
     mprint("You feel a sudden loss of mana!");
     Player.mana -= (max(0,10-distance(m->x,m->y,Player.x,Player.y)));
@@ -465,9 +426,7 @@ struct monster *m;
   }
 }
 
-void m_sp_lw(m)
-struct monster *m;
-{
+void m_sp_lw(struct monster *m){
   if (random_range(2)) {
     if (Level->site[m->x][m->y].locchar == FLOOR) {
       Level->site[m->x][m->y].locchar = LAVA;
@@ -483,9 +442,7 @@ struct monster *m;
 }
 
 
-void m_sp_angel(m)
-struct monster *m;
-{
+void m_sp_angel(struct monster *m){
   int mid,hostile = FALSE;
   switch(m->aux1) {
   case ATHENA:
@@ -520,9 +477,7 @@ struct monster *m;
 
 
 /* Could completely fill up level */
-void m_sp_swarm(m)
-struct monster *m;
-{
+void m_sp_swarm(struct monster *m){
   if (random_range(5)==1) {
     if (view_los_p(m->x,m->y,Player.x,Player.y))
       mprint("The swarm expands!");
@@ -535,9 +490,7 @@ struct monster *m;
 
 
 /* raise nearby corpses from the dead.... */
-void m_sp_raise(m)
-struct monster *m;
-{
+void m_sp_raise(struct monster *m){
   int x,y;
   pol t;
   for(x=m->x-2;x<=m->x+2;x++)
@@ -556,9 +509,7 @@ struct monster *m;
 
 
 
-void m_sp_mb(m)
-struct monster *m;
-{
+void m_sp_mb(struct monster *m){
   if (distance(m->x,m->y,Player.x,Player.y)==1) {
     mprint("The manaburst explodes!");
     if (m_statusp(m,HOSTILE)) {
@@ -584,9 +535,7 @@ struct monster *m;
 }
 
 
-void m_sp_mirror(m)
-struct monster *m;
-{
+void m_sp_mirror(struct monster *m){
   int i,x,y;
   if (view_los_p(m->x,m->y,Player.x,Player.y)) {
     if (random_range(20)+6 < m->level) {
@@ -606,9 +555,7 @@ struct monster *m;
 
 
 
-void m_illusion(m)
-struct monster *m;
-{
+void m_illusion(struct monster *m){
   int i = random_range(NUMMONSTERS);
   if (i==NPC || i==HISCORE_NPC || i==ZERO_NPC) i = m->id; /* can't imitate NPC */
   if (Player.status[TRUESIGHT]) {
@@ -624,9 +571,7 @@ struct monster *m;
 
 
 
-void m_huge_sounds(m)
-struct monster *m;
-{
+void m_huge_sounds(struct monster *m){
   if (m_statusp(m,AWAKE) &&
       (! los_p(m->x,m->y,Player.x,Player.y)) &&
       (random_range(10) == 1))
@@ -635,9 +580,7 @@ struct monster *m;
 
 
 
-void m_thief_f(m)
-struct monster *m;
-{
+void m_thief_f(struct monster *m){
   int i = random_item();
   if (random_range(3) == 1) {
     if (distance(Player.x,Player.y,m->x,m->y) < 2) {
@@ -672,9 +615,7 @@ struct monster *m;
 }
 
 
-void m_summon(m)
-struct monster *m;
-{
+void m_summon(struct monster *m){
   if ((distance(Player.x,Player.y,m->x,m->y) < 2) &&
       (random_range(3) == 1)) {
 	summon(0,-1);
@@ -683,9 +624,7 @@ struct monster *m;
 }	  
 
 
-void m_aggravate(m)
-struct monster *m;
-{
+void m_aggravate(struct monster *m){
 
   if (m_statusp(m,HOSTILE)) {
     if (m->uniqueness == COMMON) {
@@ -702,9 +641,7 @@ struct monster *m;
 
 
 
-void m_sp_merchant(m)
-struct monster *m;
-{
+void m_sp_merchant(struct monster *m){
   pml ml;
   if (m_statusp(m,HOSTILE))
     if (Current_Environment == E_VILLAGE) {
@@ -720,9 +657,7 @@ struct monster *m;
 
 /* The special function of the various people in the court of the archmage */
 /* and the sorcerors' circle */
-void m_sp_court(m)
-struct monster *m;
-{
+void m_sp_court(struct monster *m){
   pml ml;
   if (m_statusp(m,HOSTILE)) {
     mprint("A storm of spells hits you!");
@@ -737,9 +672,7 @@ struct monster *m;
 
 
 /* The special function of the dragons in the dragons' lair */
-void m_sp_lair(m)
-struct monster *m;
-{
+void m_sp_lair(struct monster *m){
   pml ml;
   if (m_statusp(m,HOSTILE)) {
     mprint("You notice a number of dragons waking up....");
@@ -758,9 +691,7 @@ struct monster *m;
 }
 
 
-void m_sp_prime(m)
-struct monster *m;
-{
+void m_sp_prime(struct monster *m){
   if (m_statusp(m,HOSTILE)) {
     mprint("The prime sorceror gestures and a pentacular gate opens!");
     mprint("You are surrounded by demons!");

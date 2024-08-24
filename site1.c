@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* site1.c */
 /* 1st half of site functions and aux functions to them */
@@ -184,9 +185,7 @@ void l_armorer()
 }
 
 
-void buyfromstock(base,numitems)
-int base,numitems;  
-{
+void buyfromstock(int base, int numitems){
   int i;
   char item;
   pob newitem;
@@ -352,9 +351,7 @@ void l_healer()
 }
 
 
-void statue_random(x,y)
-int x,y;
-{
+void statue_random(int x, int y){
   pob item;
   int i,j;
   switch(random_range(difficulty()+3)-1) {
@@ -441,9 +438,7 @@ void l_statue_wake()
     wake_statue(x+Dirs[0][i],y+Dirs[1][i],TRUE);
 }
 
-void wake_statue(x,y,first)
-int x,y,first;
-{
+void wake_statue(int x, int y, int first){
   int i;
   pml tml;
   if (Level->site[x][y].locchar == STATUE) {

@@ -1,3 +1,4 @@
+
 /* omega copyright (C) 1987,1988,1989 by Laurence Raphael Brothers */
 /* itemf3.c */
 
@@ -6,9 +7,7 @@
 #include "glob.h"
 
 /* amulet of the planes */
-void i_planes(o)
-pob o;
-{
+void i_planes(pob o){
   if (Player.mana < 1) print1("The amulet spits some multicolored sparks.");
   else {
     print1("You focus mana into the amulet....");
@@ -21,9 +20,7 @@ pob o;
 
 
 /* the sceptre of high magic */
-void i_sceptre(o)
-pob o;
-{
+void i_sceptre(pob o){
   if (HiMagicUse == Date) 
     print1("The Sceptre makes a sort of dull 'thut' noise.");
   else if (Current_Environment == E_CIRCLE || Current_Environment == E_ASTRAL)
@@ -47,9 +44,7 @@ pob o;
 
 
 /* the star gem */
-void i_stargem(o)
-pob o;
-{
+void i_stargem(pob o){
   if (StarGemUse == Date) {
     print1("The Star Gem glints weakly as if to say:");
     print2("'You have used me overmuch.'");
@@ -92,9 +87,7 @@ pob o;
 
 
 /* wand of fear */
-void i_fear(o)
-pob o;
-{
+void i_fear(pob o){
   int x=Player.x,y=Player.y;
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
@@ -108,9 +101,7 @@ pob o;
 
 	
 
-void i_juggernaut(o)
-pob o;
-{
+void i_juggernaut(pob o){
   int d,x=Player.x,y=Player.y;
   int seen = 1, not_seen = 0;
   int tunneled = 0;
@@ -173,9 +164,7 @@ pob o;
 }
 
 
-void i_symbol(o)
-pob o;
-{
+void i_symbol(pob o){
   int i;
   if (! o->known)
     print1("Nothing seems to happen.");
@@ -213,9 +202,7 @@ pob o;
 
 
 
-void i_crystal(o)
-pob o;
-{
+void i_crystal(pob o){
   if (!o->known) print1("You can't figure out how to activate this orb.");
   else {
     print1("You gaze into your crystal ball.");
@@ -239,9 +226,7 @@ pob o;
   }
 }
     
-void i_antioch(o)
-pob o;
-{
+void i_antioch(pob o){
   int x=Player.x,y=Player.y;
   int count;
   if (!o->known){
@@ -289,9 +274,7 @@ pob o;
   dispose_lost_objects(1,o);
 }
 
-void i_kolwynia(o)
-pob o;
-{
+void i_kolwynia(pob o){
   int i;
   if (! o->known) {
     print1("You destroy youself with a mana storm. How sad.");
@@ -307,9 +290,7 @@ pob o;
   dispose_lost_objects(1,o);
 }
 
-void i_enchantment(o)
-pob o;
-{
+void i_enchantment(pob o){
   char response;
   if (ZapHour == hour()) 
     print1("The staff doesn't seem to have recharged yet.");
@@ -329,9 +310,7 @@ pob o;
   }
 }
 
-void i_helm(o)
-pob o;
-{
+void i_helm(pob o){
   if (HelmHour == hour()) 
     print1("The helm doesn't seem to have recharged yet.");
   else if (! o->known) {
@@ -347,17 +326,13 @@ pob o;
 }
  
 
-void i_death(o)
-pob o;
-{
+void i_death(pob o){
   clearmsg();
   print1("Bad move...");
   p_death("the Potion of Death");
 }
 
-void i_life(o)
-pob o;
-{
+void i_life(pob o){
   clearmsg();
   print1("Good move.");
   Player.hp = Player.maxhp = 2 * Player.maxhp;
@@ -367,9 +342,7 @@ pob o;
 
 
 /* f = fire, w = water, e = earth, a = air, m = mastery */
-int orbcheck(element)
-char element;
-{
+int orbcheck(char element){
   char response;
   print1("The orb begins to glow with increasing intensity!");
   print2("You have the feeling you need to do something more....");
@@ -393,9 +366,7 @@ char element;
 }
 
 /* orb functions */
-void i_orbfire(o)
-pob o;
-{
+void i_orbfire(pob o){
   if (! orbcheck('f')) {
     print1("Bad choice!");
     print2("The Orb of Fire blasts you!");
@@ -416,9 +387,7 @@ pob o;
 }
 
 
-void i_orbwater(o)
-pob o;
-{
+void i_orbwater(pob o){
   if (! orbcheck('w')) {
     print1("A serious mistake!");
     print2("The Orb of Water blasts you!");
@@ -443,9 +412,7 @@ pob o;
 
 
 
-void i_orbearth(o)
-pob o;
-{
+void i_orbearth(pob o){
   int i;
   if (! orbcheck('e')) {
     print1("What a maroon!");
@@ -482,9 +449,7 @@ pob o;
 }
 
 
-void i_orbair(o)
-pob o;
-{
+void i_orbair(pob o){
   if (! orbcheck('a')) {
     print1("You lose!");
     print2("The Orb of Air blasts you!");
@@ -506,9 +471,7 @@ pob o;
 }
 
 
-void i_orbmastery(o)
-pob o;
-{
+void i_orbmastery(pob o){
 
   if (! orbcheck('m')) {
     print1("A fatal error!");
@@ -547,9 +510,7 @@ pob o;
 }
 
 
-void i_orbdead(o)
-pob o;
-{
+void i_orbdead(pob o){
   int i;
   print1("The burnt-out orb drains all your energy!");
   for(i=0;i<NUMSPELLS;i++)
@@ -570,9 +531,7 @@ pob o;
 
 
 
-void i_dispel(o)
-pob o;
-{
+void i_dispel(pob o){
   dispel((o->blessing > -1) ? o->blessing+random_range(3): o->blessing);
 }
 
@@ -581,18 +540,14 @@ pob o;
 
 
 /* wand of apportation */
-void i_apport(o)
-pob o;
-{
+void i_apport(pob o){
   o->known = max(1,o->known);
   Objects[o->id].known = 1;
   apport(o->blessing);
 }
 
 /* staff of firebolts */
-void i_firebolt(o)
-pob o;
-{
+void i_firebolt(pob o){
   int x=Player.x,y=Player.y;
   o->known = max(1,o->known);
   Objects[o->id].known = 1;
@@ -605,9 +560,7 @@ pob o;
 }
 
 
-void i_disintegrate(o)
-pob o;
-{
+void i_disintegrate(pob o){
   int x=Player.x,y=Player.y;
   o->known = max(1,o->known);
   Objects[o->id].known = 1;
@@ -619,9 +572,7 @@ pob o;
   disintegrate(x,y);
 }
 
-void i_disrupt(o)
-pob o;
-{
+void i_disrupt(pob o){
   int x=Player.x,y=Player.y;
   o->known = max(1,o->known);
   Objects[o->id].known = 1;
@@ -635,9 +586,7 @@ pob o;
 
 
 /* staff of lightning bolts */
-void i_lbolt(o)
-pob o;
-{
+void i_lbolt(pob o){
   int x=Player.x,y=Player.y;
   o->known = max(1,o->known);
   Objects[o->id].known = 1;
@@ -650,9 +599,7 @@ pob o;
 }
 
 /* wand of magic missiles */
-void i_missile(o)
-pob o;
-{
+void i_missile(pob o){
   int x=Player.x,y=Player.y;
   o->known = max(1,o->known);
   Objects[o->id].known = 1;
@@ -665,9 +612,7 @@ pob o;
 }
 
 /* wand of fire balls */
-void i_fireball(o)
-pob o;
-{
+void i_fireball(pob o){
   int x=Player.x,y=Player.y;
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
@@ -681,9 +626,7 @@ pob o;
 
 
 /* wand of snowballs */
-void i_snowball(o)
-pob o;
-{
+void i_snowball(pob o){
   int x=Player.x,y=Player.y;
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
@@ -696,9 +639,7 @@ pob o;
 }
 
 /* wand of lightning balls */
-void i_lball(o)
-pob o;
-{
+void i_lball(pob o){
   int x=Player.x,y=Player.y;
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
@@ -711,9 +652,7 @@ pob o;
 }
 
 /* staff of sleep */
-void i_sleep_other(o)
-pob o;
-{
+void i_sleep_other(pob o){
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
   sleep_monster(o->blessing);
@@ -721,17 +660,13 @@ pob o;
 
 /* rod of summoning */
 /* rod of summoning now always summons as if cursed */
-void i_summon(o)
-pob o;
-{
+void i_summon(pob o){
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
   summon(-1,-1);
 }
 
-void i_hide(o)
-pob o;
-{
+void i_hide(pob o){
   int x=Player.x,y=Player.y;
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
@@ -739,9 +674,7 @@ pob o;
   hide(x,y);
 }
 
-void i_polymorph(o)
-pob o;
-{
+void i_polymorph(pob o){
   Objects[o->id].known = 1;
   o->known = max(1,o->known);
   polymorph(o->blessing);
