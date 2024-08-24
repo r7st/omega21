@@ -1,3 +1,4 @@
+
 /*
  * Generate C code to initialize and support Omega colors on UNIX.
  *

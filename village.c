@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* village.c */
 /* some functions to make the village levels */
@@ -6,10 +7,7 @@
 
 
 /* loads the village level into Level*/
-void load_village(villagenum, populate)
-int villagenum;
-int populate;
-{
+void load_village(int villagenum, int populate){
   int i,j;
   char site;
   
@@ -147,9 +145,7 @@ int populate;
   initrand(E_RESTORE, 0);
 }
 
-void make_guard(i,j)
-int i,j;
-{
+void make_guard(int i, int j){
   pml tml = ((pml) (checkmalloc(sizeof(mltype))));
   tml->m = (Level->site[i][j].creature = make_creature(GUARD));
   tml->m->x = i;
@@ -158,9 +154,7 @@ int i,j;
   Level->mlist = tml;
 }
 
-void make_sheep(i,j)
-int i,j;
-{
+void make_sheep(int i, int j){
   pml tml = ((pml) (checkmalloc(sizeof(mltype))));
   tml->m = (Level->site[i][j].creature = make_creature(SHEEP));
   tml->m->x = i;
@@ -169,9 +163,7 @@ int i,j;
   Level->mlist = tml;
 }
 
-void make_food_bin(i,j)
-int i,j;
-{ 
+void make_food_bin(int i, int j){
   pol tol;
   int k;
 
@@ -184,9 +176,7 @@ int i,j;
   }
 }
 
-void make_horse(i,j)
-int i,j;
-{
+void make_horse(int i, int j){
   pml tml = ((pml) (checkmalloc(sizeof(mltype))));
   tml->m = (Level->site[i][j].creature = make_creature(HORSE));
   tml->m->x = i;
@@ -196,9 +186,7 @@ int i,j;
 }
 
 
-void make_merchant(i,j)
-int i,j;
-{
+void make_merchant(int i, int j){
   pml tml = ((pml) (checkmalloc(sizeof(mltype))));
   tml->m = (Level->site[i][j].creature = make_creature(MERCHANT));
   tml->m->x = i;
@@ -208,9 +196,7 @@ int i,j;
 }
 
 
-void assign_village_function(x,y,setup)
-int x,y,setup;
-{
+void assign_village_function(int x, int y, int setup){
   static int next=0;
   static int permutation[24]; /* number of x's in village map */
   int i,j,k;
@@ -270,9 +256,7 @@ int x,y,setup;
 }  
   
 
-void special_village_site(i,j,villagenum)
-int i,j,villagenum;
-{
+void special_village_site(int i, int j, int villagenum){
   if (villagenum == 1) {
     Level->site[i][j].locchar = ALTAR;
     Level->site[i][j].p_locf = L_LAWSTONE;

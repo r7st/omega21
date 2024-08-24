@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* aux3.c */
 /* some functions called by com.c, also see aux1.c, aux2.c */ 
@@ -392,9 +393,7 @@ char getlocation()
 
 /* chance for player to resist magic somehow */
 /* hostile_magic ranges in power from 0 (weak) to 10 (strong) */
-int magic_resist(hostile_magic)
-int hostile_magic;
-{
+int magic_resist(int hostile_magic){
   if ((Player.rank[COLLEGE]+Player.rank[CIRCLE] > 0) &&
       (Player.level/2 + random_range(20) >
        hostile_magic + random_range(20))) {
@@ -414,9 +413,7 @@ int hostile_magic;
 }
 
 
-void terrain_check(takestime)
-int takestime;
-{
+void terrain_check(int takestime){
   int faster = 0;
 
   if (Player.patron == DRUID) {
@@ -726,9 +723,7 @@ void countrysearch()
       }
 }
 
-char *countryid(terrain)
-Symbol terrain;
-{
+char *countryid(Symbol terrain){
   switch(terrain&0xff) {
   case MOUNTAINS&0xff:
     strcpy(Str1,"Almost impassable mountains");
@@ -810,9 +805,7 @@ static int sitenums[] = {	/* the order matches sitenames[] */
  L_GYM, L_HEALER, L_CHARITY, L_CRAP, L_LIBRARY, L_MERC_GUILD, L_ORACLE,
  L_ORDER, L_PAWN_SHOP, L_SORCERORS, L_TAVERN, L_TEMPLE, L_THIEVES_GUILD };
 
-void showknownsites(first, last)
-int first, last;
-{
+void showknownsites(int first, int last){
   int i,printed=FALSE;
 
   menuclear();
@@ -927,9 +920,7 @@ int hostilemonstersnear()
 
 /* random effects from some of stones in villages */  
 /* if alignment of stone is alignment of player, gets done sooner */
-int stonecheck(alignment)
-int alignment;
-{
+int stonecheck(int alignment){
   int *stone,match=FALSE,cycle=FALSE,i;
 
   if (alignment == 1) {

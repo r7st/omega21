@@ -1,3 +1,4 @@
+
 #include "glob.h"
 
 #define NUM_CLASSES 8
@@ -16,17 +17,13 @@ void init_leper ARGS((void));
 int show_classes ARGS((void));
 
 
-void calc_mod(player_class) 
-int *player_class;
-{
+void calc_mod(int *player_class){
   for (int i=0; i<NUM_CLASSES; i++) {
     player_class[i]+=BASE_STAT;
   }
 }
 
-void init_stats(player_class) 
-int *player_class;
-{
+void init_stats(int *player_class){
   calc_mod(player_class);
   Player.str=Player.maxstr=player_class[STRENGTH];
   Player.con=Player.maxcon=player_class[CONSTITUTION];

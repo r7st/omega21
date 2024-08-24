@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* aux1.c */
 /* auxiliary functions for those in com.c, also see aux2.c and aux3.c */ 
@@ -51,9 +52,7 @@ void tunnelcheck()
 }
 
 /* displays a room's name */
-void showroom(i)
-int i;
-{
+void showroom(int i){
   strcpy(Str1,"");
   strcpy(Str2,"");
   switch(Current_Environment) {
@@ -143,9 +142,7 @@ int player_on_sanctuary()
 
 /* check a move attempt, maybe attack something, return TRUE if ok to move. */
 /* x y is the proposed place to move to */
-int p_moveable(x,y)
-int x,y;
-{
+int p_moveable(int x, int y){
   setgamestatus(SKIP_MONSTERS);
   if (! inbounds(x,y)) return (FALSE);
   else if (Player.status[SHADOWFORM]) {
@@ -225,9 +222,7 @@ int x,y;
 
 
 /* check a move attempt in the countryside */
-int p_country_moveable(x,y)
-int x,y;
-{
+int p_country_moveable(int x, int y){
   if (! inbounds(x,y)) return (FALSE);
   else if (optionp(CONFIRM)) {
     if ((Country[x][y].current_terrain_type == CHAOS_SEA) ||
@@ -243,9 +238,7 @@ int x,y;
 
 
 /* search once particular spot */
-void searchat(x,y)
-int x,y;
-{
+void searchat(int x, int y){
   int i;
   if (inbounds(x,y) && (random_range(3) || Player.status[ALERT])) {
     if (loc_statusp(x,y,SECRET)) {
@@ -351,9 +344,7 @@ void calc_melee()
 
 
 /* player attacks monster m */
-void fight_monster(m)
-struct monster *m;
-{
+void fight_monster(struct monster *m){
   int hitmod = 0;
   int reallyfight = TRUE;
 
@@ -394,9 +385,7 @@ struct monster *m;
 
 
 /* Attempt to break an object o */
-int damage_item(o)
-pob o;     
-{
+int damage_item(pob o){
   int i;
   /* special case -- break star gem */
   if (o->id == ARTIFACTID+21) {
@@ -495,10 +484,7 @@ pob o;
 
 
 /* do dmg points of damage of type dtype, from source fromstring */
-void p_damage(dmg,dtype,fromstring)
-int dmg,dtype;
-char *fromstring;
-{
+void p_damage(int dmg, int dtype, char *fromstring){
   if (! p_immune(dtype)) {
     if (gamestatusp(FAST_MOVE)) {
       drawvision(Player.x,Player.y);
@@ -513,18 +499,14 @@ char *fromstring;
 }
 
 /* get save filename */
-void gen_save_fname(save_file)
-char *save_file;
-{
+void gen_save_fname(char *save_file){
   strcpy(save_file, SAVEDIR);
   strcat(save_file, Player.name);
   strcat(save_file, ".sav");
 }
 
 /* game over, you lose! */
-void p_death(fromstring)
-char *fromstring;
-{
+void p_death(char *fromstring){
   char savestr[84];
 
   Player.hp = -1;
@@ -545,9 +527,7 @@ char *fromstring;
 
 
 /* move the cursor around, like for firing a wand, sets x and y to target */
-void setspot(x,y)
-int *x,*y;
-{
+void setspot(int *x, int *y){
   char c = ' ';
   mprint("Targeting.... ? for help");
   omshowcursor(*x,*y);
@@ -613,9 +593,7 @@ int getdir()
 
 
 /* functions describes monster m's state for examine function */      
-char *mstatus_string(m)
-struct monster *m;
-{
+char *mstatus_string(struct monster *m){
   if (m_statusp(m, M_INVISIBLE) && !Player.status[TRUESIGHT])
     strcpy(Str2, "Some invisible creature");
   else if (m->uniqueness == COMMON) {
@@ -672,9 +650,7 @@ void describe_player()
 
 /* access to player experience... */
 /* share out experience among guild memberships */
-void gain_experience(amount)
-int amount;
-{
+void gain_experience(int amount){
   int i,count=0,share;
   Player.xp += (long) amount;
   gain_level(); /* actually, check to see if should gain level */
@@ -706,9 +682,7 @@ int goberserk()
 }
 
 /* identifies a trap for examine() by its aux value */
-char *trapid(trapno)
-int trapno;
-{
+char *trapid(int trapno){
   switch (trapno) {
   case L_TRAP_SIREN:return("A siren trap");
   case L_TRAP_DART:return("A dart trap");
@@ -809,9 +783,7 @@ void roomcheck()
 
 
 /* ask for mercy */
-void surrender(m)
-struct monster *m;
-{
+void surrender(struct monster *m){
   int i;
   long bestitem,bestvalue;
 
@@ -888,9 +860,7 @@ struct monster *m;
 
 
 /* threaten a monster */
-void threaten(m)
-struct monster *m;
-{
+void threaten(struct monster *m){
   char response;
   switch(random_range(4)) {
   case 0:mprint("You demand that your opponent surrender!"); break;
@@ -950,9 +920,7 @@ struct monster *m;
 }
 
 /* name of the player's experience level */
-char *levelname(level)
-int level;
-{
+char *levelname(int level){
   switch(level) {
   case 0:strcpy(Str3,"neophyte");break;
   case 1:strcpy(Str3,"beginner");break;

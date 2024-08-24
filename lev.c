@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* lev.c */
 
@@ -8,9 +9,7 @@ level structure generation */
 
 
 /* monsters for tactical encounters */
-void make_country_monsters(terrain)
-Symbol terrain;
-{
+void make_country_monsters(Symbol terrain){
   pml tml,ml=NULL;
   static int plains[10] = 
     {BUNNY,BUNNY,HORNET,QUAIL,HAWK,DEER,WOLF,LION,BRIGAND,RANDOM};
@@ -75,9 +74,7 @@ Symbol terrain;
 /* The caves and sewers get harder as you penetrate them; the castle
 is completely random, but also gets harder as it is explored;
 the astral and the volcano just stay hard... */
-void populate_level(monstertype)
-int monstertype;
-{
+void populate_level(int monstertype){
   pml head,tml;
   int i,j,k,monsterid,nummonsters=(random_range(difficulty()/3)+1)*3+8;
 
@@ -259,9 +256,7 @@ void wandercheck()
 
 
 /* call make_creature and place created monster on Level->mlist and Level */
-void make_site_monster(i,j,mid)
-int i,j,mid;
-{
+void make_site_monster(int i, int j, int mid){
   pml ml = ((pml) checkmalloc(sizeof(mltype)));
   pmt m;
   if (mid > -1)  Level->site[i][j].creature = (m = make_creature(mid));
@@ -277,9 +272,7 @@ int i,j,mid;
 /* make and return an appropriate monster for the level and depth*/
 /* called by populate_level, doesn't actually add to mlist for some reason*/
 /* eventually to be more intelligent */
-pmt m_create(x,y,kind,level)
-int x,y,kind,level;
-{
+pmt m_create(int x, int y, int kind, int level){
   pmt newmonster;
   int monster_range;
   int mid;
@@ -314,9 +307,7 @@ int x,y,kind,level;
 
 /* make creature # mid, totally random if mid == -1 */
 /* make creature allocates space for the creature */
-pmt make_creature(mid)
-int mid;
-{
+pmt make_creature(int mid){
   pmt newmonster = ((pmt) checkmalloc(sizeof(montype)));
   pob ob;
   int i,treasures;
@@ -437,9 +428,7 @@ void stock_level()
 
 
 /* make a new object (of at most level itemlevel) at site i,j on level*/
-void make_site_treasure(i,j,itemlevel)
-int i,j,itemlevel;
-{
+void make_site_treasure(int i, int j, int itemlevel){
   pol tmp = ((pol) checkmalloc(sizeof(oltype)));
   tmp->thing = ((pob) create_object(itemlevel));
   tmp->next = Level->site[i][j].things;
@@ -447,9 +436,7 @@ int i,j,itemlevel;
 }
 
 /* make a specific new object at site i,j on level*/
-void make_specific_treasure(i,j,itemid)
-int i,j,itemid;
-{
+void make_specific_treasure(int i, int j, int itemid){
   pol tmp;
   if (Objects[itemid].uniqueness == UNIQUE_TAKEN)
     return;

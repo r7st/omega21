@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* priest.c */
 /* functions for clerics. */
@@ -121,9 +122,7 @@ void l_altar()
 
 
 
-int check_sacrilege(deity)
-int deity;
-{
+int check_sacrilege(int deity){
   int i,sacrilege=FALSE;
   if ((Player.patron != deity) && (Player.patron > 0)) {
     sacrilege=TRUE;
@@ -239,9 +238,7 @@ int deity;
   return(sacrilege);
 }
 
-int increase_priest_rank(deity)
-int deity;
-{
+int increase_priest_rank(int deity){
   if (Player.rank[PRIESTHOOD] == 0) switch(deity) {
   default:
     print2("Some nameless god blesses you....");
@@ -473,9 +470,7 @@ void hp_req_print()
   }
 }
 
-void make_hp(o)
-pob o;
-{
+void make_hp(pob o){
   print1("A full-scale heavenly choir chants 'Hallelujah' all around you!");
   print2("You notice a change in the symbol you carry....");
   switch(Player.patron) {

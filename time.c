@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* time.c */
 
@@ -10,9 +11,7 @@ random events. Each tick is a second. There are therefore 60 ticks to
 the minute and 60 minutes to the hour.
 */
 
-void time_clock(reset)
-int reset;
-{
+void time_clock(int reset){
   int env;
   pml ml, *prev;
 
@@ -77,9 +76,7 @@ int reset;
 
 
 /* remedies occasional defective monsters */
-void fix_phantom(m)
-struct monster *m;
-{
+void fix_phantom(struct monster *m){
   if (Level->site[m->x][m->y].creature == NULL) {
     mprint("You hear a sound like a sigh of relief....");
     Level->site[m->x][m->y].creature = m;

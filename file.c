@@ -1,3 +1,4 @@
+
 /* omega (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* file.c */
 /* functions with file access in them. Also some direct calls to
@@ -24,8 +25,7 @@
 
 #include "glob.h"
 
-FILE *checkfopen(filestring,optionstring)
-char *filestring,*optionstring;
+FILE *checkfopen(char *filestring, char *optionstring)
 {
   FILE *fd;
   char response;
@@ -276,9 +276,7 @@ void showscores()
 
 /* Writes a new high-score file, with the nominated npc as whatever it is */
 /* in this particular game, but the others as they appear in the file. */
-void save_hiscore_npc(npc)
-int npc;
-{
+void save_hiscore_npc(int npc){
   FILE *infile, *outfile;
   char buffer[80];
   int i;
@@ -367,10 +365,7 @@ int npc;
   unlock_score_file();
 }
 
-void checkhigh(descrip,behavior)
-char *descrip;
-int behavior;
-{
+void checkhigh(char *descrip, int behavior){
   long points;
 
   if (FixedPoints > 0) points = FixedPoints;
@@ -407,10 +402,7 @@ int behavior;
   }
 }
 
-void extendlog(descrip,lifestatus)
-char *descrip;
-int lifestatus;
-{
+void extendlog(char *descrip, int lifestatus){
   FILE *fd;
   int npcbehavior;
 
@@ -434,10 +426,7 @@ int lifestatus;
 #ifndef MSDOS
 /* reads a string from a file. If it is a line with more than 80 char's,
    then remainder of line to \n is consumed */
-void filescanstring(fd,fstr)
-FILE *fd;
-char *fstr;
-{
+void filescanstring(FILE *fd, char *fstr){
   int i= -1;
   int byte='x';
   while ((i<80) && (byte != '\n') && (byte != EOF)) {
@@ -453,10 +442,7 @@ char *fstr;
 #endif
 
 #ifdef MSDOS
-int test_file_access(file_name, mode)
-char *file_name;
-char mode;
-{
+int test_file_access(char *file_name, char mode){
     FILE *fd;
 
     if (mode == 'r')
@@ -469,10 +455,7 @@ char mode;
     return 1;
 }
 #else
-int test_file_access(file_name, mode)
-char *file_name;
-char mode;
-{
+int test_file_access(char *file_name, char mode){
     int fd;
 
     if (mode == 'r')
@@ -562,9 +545,7 @@ int filecheck()
 }
 
 /* display a file given a string name of file */
-void displayfile(filestr)
-char *filestr;
-{
+void displayfile(char *filestr){
   FILE *fd = checkfopen(filestr,"r");
   int c,d=' ';
   int x,y;
@@ -597,9 +578,7 @@ char *filestr;
 }    
 
 /* display a file given a string name of file */
-void displaycryptfile(filestr)
-char *filestr;
-{
+void displaycryptfile(char *filestr){
   FILE *fd = checkfopen(filestr,"rb");
   int c,d=' ';
   int x,y;
@@ -635,9 +614,7 @@ char *filestr;
 }    
 
 /* copy a file given a string name of file */
-void copyfile(srcstr)
-char *srcstr;
-{
+void copyfile(char *srcstr){
   char deststr[80];
   char buffer[STRING_LEN];
   FILE *in, *out;

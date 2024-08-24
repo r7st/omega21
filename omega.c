@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 
 /* this file includes main() and some top-level functions */
@@ -234,10 +235,7 @@ int load_save_games(void)
   return ok;
 }
 
-int game_restore(argc,argv)
-int argc;
-char *argv[];
-{
+int game_restore(int argc, char *argv[]){
   char savestr[80];
   int ok;
 #ifdef DEBUG
@@ -266,10 +264,7 @@ char *argv[];
 }
 
 
-int main(argc,argv)
-int argc;
-char *argv[];
-{
+int main(int argc, char *argv[]){
   int continuing;
   int count;
 
@@ -433,9 +428,7 @@ void init_world()
 }
 
 /* set variable item names */
-void inititem(reset)
-int reset;
-{
+void inititem(int reset){
   int i;
 
   if (reset) {

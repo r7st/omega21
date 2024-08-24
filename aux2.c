@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* aux2.c */
 /* some functions called by ocom.c, also see aux1.c and aux3.c*/ 
@@ -9,19 +10,13 @@
 
 /* Player stats like str, agi, etc give modifications to various abilities
    chances to do things, etc. Positive is good, negative bad. */
-int statmod(stat)
-int stat;
-{
+int statmod(int stat){
   return((stat-10)/2);
 }
 
 
 /* effects of hitting */
-void p_hit (m,dmg,dtype)
-struct monster *m;
-int dmg;
-int dtype;
-{
+void p_hit (struct monster *m, int dmg, int dtype){
   int dmult;
 
   /* chance for critical hit..., 3/10 */
@@ -65,10 +60,7 @@ int dtype;
 }
 
 /* and effects of missing */
-void player_miss(m,dtype)
-struct monster *m;
-int dtype;
-{
+void player_miss(struct monster *m, int dtype){
   if (random_range(30)==1) /* fumble 1 in 30 */
     p_fumble(dtype);
   else {
@@ -91,9 +83,7 @@ int dtype;
 }
 
 /* oh nooooo, a fumble.... */
-void p_fumble(dtype)
-int dtype;
-{
+void p_fumble(int dtype){
   mprint("Ooops! You fumbled....");
   switch(random_range(10)) {
     case 0:
@@ -155,10 +145,7 @@ void p_win()
 
 /* handle a h,j,k,l, etc., to change x and y by dx and dy */
 /* for targeting in dungeon */
-void movecursor(x,y,dx,dy)
-int *x,*y;
-int dx,dy;
-{
+void movecursor(int *x, int *y, int dx, int dy){
   if (inbounds(*x+dx,*y+dy)) {
     *x += dx;
     *y += dy;
@@ -169,9 +156,7 @@ int dx,dy;
 
 
 /* is Player immune to damage type dtype */
-int p_immune(dtype)
-int dtype;
-{
+int p_immune(int dtype){
   return(Player.immunity[dtype]>0);
 }
 
@@ -483,9 +468,7 @@ void gain_level()
 }
 
 /* experience requirements */
-long expval(plevel)
-int plevel;
-{
+long expval(int plevel){
   switch(plevel) {
     case 0:return(0L);
     case 1:return(20L);
@@ -503,9 +486,7 @@ int plevel;
 }
 
 /* If an item is unidentified, it isn't worth much to those who would buy it */
-long item_value(item)
-pob item;
-{
+long item_value(pob item){
   if (item->known == 0) {
     if (item->objchar == THING) return(1);
     else return(true_item_value(item) / 10);
@@ -519,9 +500,7 @@ pob item;
 
 
 /* figures value based on item base-value, charge, plus, and blessing */
-long true_item_value(item)
-pob item;
-{
+long true_item_value(pob item){
  long value = item->basevalue;
   
   if (item->objchar == THING) return(item->basevalue);
@@ -591,11 +570,7 @@ void p_drown()
 
 
 /* the effect of some weapon on monster m, with dmgmod a bonus to damage */
-void weapon_use(dmgmod,weapon,m)
-int dmgmod;
-pob weapon;
-struct monster *m;
-{
+void weapon_use(int dmgmod, pob weapon, struct monster *m){
   int aux = (weapon==NULL ? -2 : weapon->aux); /* bare hands */
   switch(aux) {
     case -2: weapon_bare_hands(dmgmod,m); break;
@@ -619,9 +594,7 @@ struct monster *m;
 
 
 /* for printing actions in printactions above */
-char *actionlocstr(dir)
-char dir;
-{
+char *actionlocstr(char dir){
   switch(dir) {
   case 'L': strcpy(Str3,"low."); break;
   case 'C': strcpy(Str3,"center."); break;
@@ -633,9 +606,7 @@ char dir;
 
 
 /* execute player combat actions versus monster m */
-void tacplayer(m)
-struct monster *m;
-{
+void tacplayer(struct monster *m){
   int i=0;
 
   while (i < strlen(Player.meleestr)) {
@@ -685,11 +656,7 @@ struct monster *m;
 
 
 /* checks to see if player hits with hitmod vs. monster m at location hitloc */
-int player_hit(hitmod,hitloc,m)
-int hitmod;
-char hitloc;
-struct monster *m;
-{
+int player_hit(int hitmod, char hitloc, struct monster *m){
   int i=0,blocks=FALSE,goodblocks=0,hit;
   if (m->hp < 1) {
     mprint("Unfortunately, your opponent is already dead!");
@@ -734,9 +701,7 @@ struct monster *m;
 always be used in pairs with on being TRUE and FALSE, and may cause
 anomalous stats and item-usage if used indiscriminately */
 
-void toggle_item_use(on)
-int on;
-{
+void toggle_item_use(int on){
   static int used[MAXITEMS];
   int i;
   setgamestatus(SUPPRESS_PRINTING);
@@ -765,9 +730,7 @@ int on;
 }
 
 
-void enter_site(site)
-Symbol site;
-{
+void enter_site(Symbol site){
   switch(site) {
   case CITY: change_environment(E_CITY); break;
   case VILLAGE: change_environment(E_VILLAGE); break;
@@ -785,9 +748,7 @@ Symbol site;
 
 
 /* Switches context dungeon/countryside/city, etc */
-void change_environment(new_environment)
-char new_environment;
-{
+void change_environment(char new_environment){
   int i,emerging = FALSE;
 
   Player.sx = -1; Player.sy = -1; /* reset sanctuary if there was one */

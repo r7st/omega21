@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* effect1.c */
 
@@ -5,9 +6,7 @@
 
 
 /* enchant */
-void enchant(delta)
-int delta;
-{
+void enchant(int delta){
   int i,used = FALSE;
   long change_cash;
 
@@ -115,9 +114,7 @@ int delta;
 }
 
 /* bless */
-void bless(blessing)
-int blessing;
-{
+void bless(int blessing){
   int index,used;
 
   if (blessing < 0) {
@@ -200,9 +197,7 @@ int blessing;
 
 
 
-void heal(amount)
-int amount;
-{
+void heal(int amount){
   if (amount > -1) {
       mprint("You feel better.");
     if (Player.hp < Player.maxhp + amount)
@@ -223,36 +218,26 @@ int amount;
 }
 
 
-void fbolt(fx,fy,tx,ty,hit,dmg)
-int fx,fy,tx,ty,hit,dmg;
-{
+void fbolt(int fx, int fy, int tx, int ty, int hit, int dmg){
   bolt(fx,fy,tx,ty,hit,dmg,FLAME);
 }
 
-void lbolt(fx,fy,tx,ty,hit,dmg)
-int fx,fy,tx,ty,hit,dmg;
-{
+void lbolt(int fx, int fy, int tx, int ty, int hit, int dmg){
   bolt(fx,fy,tx,ty,hit,dmg,ELECTRICITY);
 }
 
 /* Added 12/30/98 DG */
-void icebolt(fx,fy,tx,ty,hit,dmg)
-int fx,fy,tx,ty,hit,dmg;
-{
+void icebolt(int fx, int fy, int tx, int ty, int hit, int dmg){
   bolt(fx,fy,tx,ty,hit,dmg,COLD);
 }
 
-void nbolt(fx,fy,tx,ty,hit,dmg)
-int fx,fy,tx,ty,hit,dmg;
-{
+void nbolt(int fx, int fy, int tx, int ty, int hit, int dmg){
   bolt(fx,fy,tx,ty,hit,dmg,NORMAL_DAMAGE);
 }
 
 
 /* from f to t */
-void bolt(fx,fy,tx,ty,hit,dmg,dtype)
-int fx,fy,tx,ty,hit,dmg,dtype;
-{
+void bolt(int fx, int fy, int tx, int ty, int hit, int dmg, int dtype){
   int xx,yy;
   struct monster *target;
   Symbol boltchar;
@@ -349,35 +334,25 @@ int fx,fy,tx,ty,hit,dmg,dtype;
 }
 
 
-void lball(fx,fy,tx,ty,dmg)
-int fx,fy,tx,ty,dmg;
-{
+void lball(int fx, int fy, int tx, int ty, int dmg){
   ball(fx,fy,tx,ty,dmg,ELECTRICITY);
 }
 
-void manastorm(x,y,dmg)
-int x,y,dmg;
-{
+void manastorm(int x, int y, int dmg){
   ball(x,y,x,y,dmg,UNSTOPPABLE);
 }
 
-void snowball(fx,fy,tx,ty,dmg)
-int fx,fy,tx,ty,dmg;
-{
+void snowball(int fx, int fy, int tx, int ty, int dmg){
   ball(fx,fy,tx,ty,dmg,COLD);
 }
 
-void fball(fx,fy,tx,ty,dmg)
-int fx,fy,tx,ty,dmg;
-{
+void fball(int fx, int fy, int tx, int ty, int dmg){
   ball(fx,fy,tx,ty,dmg,FLAME);
 }
 
 
 /* from f to t */
-void ball(fx,fy,tx,ty,dmg,dtype)
-int fx,fy,tx,ty,dmg,dtype;
-{
+void ball(int fx, int fy, int tx, int ty, int dmg, int dtype){
   int xx,yy,ex,ey,i;
   struct monster *target;
   Symbol expchar=('@' | CLR(LIGHT_PURPLE));
@@ -456,9 +431,7 @@ int fx,fy,tx,ty,dmg,dtype;
 
 
 
-void mondet(blessing)
-int blessing;    
-{
+void mondet(int blessing){
   pml ml;
   for (ml=Level->mlist;ml!=NULL;ml=ml->next) 
     if (ml->m->hp > 0) /* FIXED 12/30/98 DG */
@@ -473,9 +446,7 @@ int blessing;
 }
 
 
-void objdet(blessing)
-int blessing;     
-{
+void objdet(int blessing){
   int i,j;
   for (i=0;i<WIDTH;i++)
     for (j=0;j<LENGTH;j++) 
@@ -491,9 +462,7 @@ int blessing;
   show_screen();
 }
 
-void identify(blessing)
-int blessing;
-{
+void identify(int blessing){
   int index;
 
   clearmsg();
@@ -567,9 +536,7 @@ int random_item()
 
   
 /* various kinds of wishes */
-void wish(blessing)
-int blessing;
-{
+void wish(int blessing){
   int i;
   char wishstr[80];
   clearmsg();
@@ -644,9 +611,7 @@ int blessing;
 }
 
 /* gain for an item */
-void acquire(blessing)
-int blessing;
-{
+void acquire(int blessing){
   char otype;
   int index,id = ABORT;
   pob newthing;

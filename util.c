@@ -1,3 +1,4 @@
+
 /* copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* utils.c */
 
@@ -14,32 +15,24 @@
 #include "glob.h"
 
 /* x and y on level? */
-int inbounds(x,y)
-int x,y;
-{
+int inbounds(int x, int y){
   return((x>=0)&&(y>=0)&&(x<WIDTH)&&(y<LENGTH));
 }
 
 /* RANDFUNCTION is defined in odefs.h */
-int random_range(k)
-int k;
-{
+int random_range(int k){
   /*return( k==0 ? 0 : (int) RANDFUNCTION() % k ) ;*/
   return( k==0 ? 0 : (int) ((RANDFUNCTION()%10000)*k)/10000);
 }
 
 
 /* modify absolute y coord relative to which part of level we are on */
-int screenmod(y)
-int y;
-{
+int screenmod(int y){
   return(y-ScreenOffset);
 }
 
 
-int offscreen(y)
-int y;
-{
+int offscreen(int y){
   return((y<0)||
 	 (y<ScreenOffset) ||
 	 (y>ScreenOffset+ScreenLength-1) ||
@@ -48,9 +41,7 @@ int y;
 
 
 /* always hit on a natural 0; never hit on a natural 19 */
-int hitp(hit,ac)
-int hit,ac;
-{
+int hitp(int hit, int ac){
   int roll = random_range(20);
   if (roll == 0) return(TRUE);
   else if (roll == 19) return(FALSE);
@@ -61,17 +52,13 @@ int hit,ac;
 
 
 /* number of moves from x1,y1 to x2,y2 */
-int distance(x1,y1,x2,y2)
-int x1,y1,x2,y2;
-{
+int distance(int x1, int y1, int x2, int y2){
   return(max(abs(x2-x1),abs(y2-y1)));
 }
 
 
 /* can you shoot, or move monsters through a spot? */
-int unblocked(x,y)
-int x,y;
-{
+int unblocked(int x, int y){
   if ((! inbounds(x,y)) ||
       (Level->site[x][y].creature != NULL) ||
       (Level->site[x][y].locchar == WALL) ||
@@ -88,10 +75,7 @@ int x,y;
 
 
 /* do monsters want to move through a spot */
-int m_unblocked(m,x,y)
-struct monster *m;
-int x,y;
-{
+int m_unblocked(struct monster *m, int x, int y){
   if ((! inbounds(x,y)) || ((x==Player.x) && (y==Player.y)))
     return(FALSE);
   else if ((Level->site[x][y].creature != NULL) ||
@@ -161,9 +145,7 @@ int x,y;
 
 
 /* can you see through a spot? */
-int view_unblocked(x,y)
-int x,y;
-{
+int view_unblocked(int x, int y){
   if (! inbounds(x,y)) return(FALSE);
   else if ((Level->site[x][y].locchar == WALL) ||
 	   (Level->site[x][y].locchar == STATUE) ||
@@ -209,10 +191,7 @@ void initdirs()
 /* do_los moves pyx along a lineofsight from x1 to x2 */
 /* x1 and x2 are pointers because as a side effect they are changed */
 /* to the final location of the pyx */
-void do_los(pyx,x1,y1,x2,y2)
-Symbol pyx;
-int *x1,*y1,x2,y2;
-{
+void do_los(Symbol pyx, int *x1, int *y1, int x2, int y2){
   int dx,dy,ox,oy;
   int major, minor;
   int error, delta, step;
@@ -268,10 +247,7 @@ int *x1,*y1,x2,y2;
 
 /* This is the same as do_los, except we stop before hitting nonliving
 obstructions */
-void do_object_los(pyx,x1,y1,x2,y2)
-Symbol pyx;
-int *x1,*y1,x2,y2;
-{
+void do_object_los(Symbol pyx, int *x1, int *y1, int x2, int y2){
   int dx,dy,ox,oy;
   int major, minor;
   int error, delta, step;
@@ -332,9 +308,7 @@ int *x1,*y1,x2,y2;
 
 
 /* los_p checks to see whether there is an unblocked los from x1,y1 to x2,y2 */
-int los_p(x1,y1,x2,y2)
-int x1,y1,x2,y2;
-{
+int los_p(int x1, int y1, int x2, int y2){
   int dx,dy;
   int major, minor;
   int error, delta, step;
@@ -383,9 +357,7 @@ int x1,y1,x2,y2;
 
 
 /* view_los_p sees through monsters */
-int view_los_p(x1,y1,x2,y2)
-int x1,y1,x2,y2;
-{
+int view_los_p(int x1, int y1, int x2, int y2){
   int dx,dy;
   int major, minor;
   int error, delta, step;
@@ -434,9 +406,7 @@ int x1,y1,x2,y2;
 
 #ifndef MSDOS_SUPPORTED_ANTIQUE
 /* returns the command direction from the index into Dirs */
-char inversedir(dirindex)
-int dirindex;	  
-{
+char inversedir(int dirindex){
   switch (dirindex) {
     case 0:return('n');
     case 1:return('u');
@@ -521,9 +491,7 @@ int nighttime()
   return((hour() > 20) || (hour() < 7));
 }
 
-char *getarticle(str)
-char *str;
-{
+char *getarticle(char *str){
   if ((str[0]=='a') || (str[0]=='A') ||
       (str[0]=='e') || (str[0]=='E') ||
       (str[0]=='i') || (str[0]=='I') ||
@@ -540,9 +508,7 @@ int day()
   return ((Date % 30) + 1);
 }
 
-char *ordinal(number)
-int number;
-{
+char *ordinal(int number){
   if ((number == 11) || (number == 12) || (number == 13)) return("th");
   else  switch(number % 10) {
     case 1:return("st");
@@ -635,9 +601,7 @@ void findspace( int *x, int *y, int baux )
 }
 
 /* is prefix a prefix of s? */
-int strprefix(prefix,s)
-char *prefix,*s;
-{
+int strprefix(char *prefix, char *s){
   int i=0,matched=TRUE;
   if (strlen(prefix) > strlen(s)) return(FALSE);
   else {
@@ -662,10 +626,7 @@ int confirmation()
 
 
 /* is character c a member of string s */
-int strmem(c,s)
-char c;
-char *s;
-{
+int strmem(char c, char *s){
   int i,found=FALSE;
   for(i=0;((i<strlen(s)) && (! found));i++)
     found = (s[i] == c);
@@ -693,18 +654,14 @@ void calc_weight()
 }
 
 /* returns true if its ok to get rid of a level */
-int ok_to_free(level)
-plv level;
-{
+int ok_to_free(plv level){
   if (level == NULL) return(FALSE);
   else return((level->environment != E_CITY) &&
 	      (level->environment != E_VILLAGE) &&
 	      (level->environment != Current_Dungeon));
 }
 
-void free_objlist(pobjlist)
-pol pobjlist;
-{
+void free_objlist(pol pobjlist){
   pol tmp;
 
   while (pobjlist) {
@@ -714,9 +671,7 @@ pol pobjlist;
   }
 }
 
-void free_mons_and_objs(mlist)
-pml mlist;
-{
+void free_mons_and_objs(pml mlist){
   pml tmp;
 
   while (mlist) {
@@ -728,9 +683,7 @@ pml mlist;
 }
 
 /* Free up monsters and items on a level*/
-void free_level(level)
-plv level;
-{
+void free_level(plv level){
   int i,j;
 
   free_mons_and_objs(level->mlist);
@@ -777,9 +730,7 @@ void *checkmalloc(unsigned int bytes)
 }
 
 /* alloc just enough string space for str, strcpy, and return pointer */
-char *salloc(str)
-char *str;
-{
+char *salloc(char *str){
   char *s=checkmalloc((unsigned)(strlen(str)+1));
   strcpy(s,str);
   return(s);
@@ -789,10 +740,7 @@ char *str;
 /* ****Moved here from another file**** */
 /* reads a string from a file. If it is a line with more than 80 char's,
    then remainder of line to \n is consumed */
-void filescanstring(fd,fstr)
-FILE *fd;
-char *fstr;
-{
+void filescanstring(FILE *fd, char *fstr){
   int i= -1;
   int byte='x';
   while ((i<80) && (byte != '\n') && (byte != EOF)) {
@@ -842,9 +790,7 @@ int difficulty()
 }
 #endif
 
-char cryptkey(fname)
-char *fname;
-{
+char cryptkey(char *fname){
     int pos, key = 0;
 
     for (pos = 0; fname[pos]; pos++)

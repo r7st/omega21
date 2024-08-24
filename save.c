@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* save.c */
 
@@ -23,10 +24,7 @@ void do_compression(int, char *);
    The player, the city level, and the current dungeon level are saved.
 */
 
-int save_game(compress,savestr)
-int compress;
-char *savestr;
-{
+int save_game(int compress, char *savestr){
   FILE *fd;
   int slashpos;
 #ifdef SAVE_LEVELS
@@ -168,9 +166,7 @@ void signalsave()
 
 /* also saves some globals like Level->depth... */
 
-int save_player(fd)
-FILE *fd;
-{
+int save_player(FILE *fd){
   int i;
   int ok = 1;
 
@@ -264,10 +260,7 @@ FILE *fd;
 
 
 /* Save whatever is pointed to by level */
-int save_level(fd,level)
-FILE *fd;
-plv level;
-{
+int save_level(FILE *fd, plv level){
   int i, j, run;
   unsigned long int mask;
   int ok = 1;
@@ -321,10 +314,7 @@ plv level;
 }
 
 
-int save_monsters(fd,ml)
-FILE *fd;
-pml ml;
-{
+int save_monsters(FILE *fd, pml ml){
   pml tml;
   int nummonsters=0;
   int ok = 1;
@@ -366,10 +356,7 @@ pml ml;
 
 /* Save o unless it's null, then save a special flag byte instead */
 /* Use other values of flag byte to indicate what strings are saved */
-int save_item(fd,o)
-FILE *fd;
-pob o;
-{
+int save_item(FILE *fd, pob o){
   int ok = 1;
   unsigned char type;
 
@@ -397,10 +384,7 @@ pob o;
   return ok;
 }
 
-int save_itemlist(fd,ol)
-FILE *fd;
-pol ol;
-{
+int save_itemlist(FILE *fd, pol ol){
   int numitems = 0;
   pol tol;
   int ok = 1;
@@ -413,9 +397,7 @@ pol ol;
 }
 
 
-int save_country(fd)
-FILE *fd;
-{
+int save_country(FILE *fd){
   int i, j;
   int ok = 1;
   int run;
@@ -452,9 +434,7 @@ FILE *fd;
 
 
 /* returns TRUE if the given version can be restored by this version */
-int ok_outdated(version)
-int version;
-{
+int ok_outdated(int version){
   switch (version) {
     case 80:
       print1("Converting version 0.80 savefile to current.");
@@ -477,9 +457,7 @@ int version;
    check on validity of save file, etc.
    return TRUE if game restored, FALSE otherwise */
 
-int restore_game(savestr)
-char *savestr;
-{
+int restore_game(char *savestr){
   int i,version; 
   char temp[200];
   FILE *fd;
@@ -592,10 +570,7 @@ char *savestr;
   }
 }
 
-void restore_player(fd, version)
-FILE *fd;
-int version;
-{
+void restore_player(FILE *fd, int version){
   int i;
   fread((char *)&Player,sizeof(Player),1,fd);
   filescanstring(fd,Password);
@@ -696,10 +671,7 @@ int version;
 
 /* Restore an item, the first byte tells us if it's NULL, and what strings */
 /* have been saved as different from the typical */
-pob restore_item(fd, version)
-FILE *fd;
-int version;
-{
+pob restore_item(FILE *fd, int version){
   char tempstr[80];
   unsigned char type;
   pob obj = NULL;
@@ -730,10 +702,7 @@ int version;
   return obj;
 }
 
-pol restore_itemlist(fd, version)
-FILE *fd;
-int version;
-{
+pol restore_itemlist(FILE *fd, int version){
   pol ol=NULL,cur=NULL,new=NULL;
   int i,numitems,firsttime=TRUE;
   fread((char *)&numitems,sizeof(int),1,fd);
@@ -754,10 +723,7 @@ int version;
 }
 
 
-void restore_level(fd, version)
-FILE *fd;
-int version;
-{
+void restore_level(FILE *fd, int version){
   int i, j, run;
   unsigned long int mask;
   int temp_env;
@@ -877,10 +843,7 @@ int version;
 }
 
 
-void restore_hiscore_npc(npc, npcid)
-pmt npc;
-int npcid;
-{
+void restore_hiscore_npc(pmt npc, int npcid){
   pob ob;
   int level, behavior;
   long status;
@@ -954,11 +917,7 @@ int npcid;
 }
 
 
-void restore_monsters(fd,level, version)
-FILE *fd;
-plv level;
-int version;
-{
+void restore_monsters(FILE *fd, plv level, int version){
   pml ml=NULL;
   int i,nummonsters;
   char tempstr[80];
@@ -1015,10 +974,7 @@ int version;
 
 
 
-void restore_country(fd, version)
-FILE *fd;
-int version;
-{
+void restore_country(FILE *fd, int version){
   int i, j;
   int run;
   unsigned long int mask;

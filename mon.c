@@ -1,3 +1,4 @@
+
 /* omega copyright (c) 1987,1988,1989 by Laurence Raphael Brothers */
 /* mon.c */
 /* various functions to do with monsters */
@@ -9,9 +10,7 @@
 /*               Revised function                   */ 
 /* WDT: code contributed by David J. Robertson */
 /* consider one monster's action */
-void m_pulse(m)
-struct monster *m;
-{
+void m_pulse(struct monster *m){
   int range = distance(m->x, m->y, Player.x,Player.y);
   int STRIKE=FALSE;
   pol prev;
@@ -68,10 +67,7 @@ struct monster *m;
 }
 
 /* actually make a move */
-void movemonster(m,newx,newy)
-struct monster *m;
-int newx,newy;
-{
+void movemonster(struct monster *m, int newx, int newy){
   if (Level->site[newx][newy].creature != NULL)
     return;
   if (Level->site[m->x][m->y].creature == m)
@@ -84,19 +80,14 @@ int newx,newy;
 
 
 /* give object o to monster m */
-void m_pickup(m,o)
-struct monster *m;
-struct object *o;
-{
+void m_pickup(struct monster *m, struct object *o){
   pol tmp = ((pol) checkmalloc(sizeof(oltype)));
   tmp->thing = o;
   tmp->next = m->possessions;
   m->possessions = tmp;
 }
 
-void m_dropstuff(m)
-struct monster *m;
-{
+void m_dropstuff(struct monster *m){
   pol tmp = m->possessions;
   if (tmp != NULL) {
     while (tmp->next != NULL)
@@ -110,10 +101,7 @@ struct monster *m;
 
 
 
-void m_damage(m,dmg,dtype)
-struct monster *m;
-int dmg,dtype;
-{
+void m_damage(struct monster *m, int dmg, int dtype){
   m_status_set(m,AWAKE);
   m_status_set(m,HOSTILE);
   if (m_immunityp(m,dtype)) {
@@ -131,9 +119,7 @@ int dmg,dtype;
 }
 
 
-void m_death(m)
-struct monster *m;
-{
+void m_death(struct monster *m){
   pob corpse;
   pml ml;
   int x,y,found=FALSE;
@@ -372,9 +358,7 @@ struct monster *m;
     
     
 				   
-void monster_move(m)
-struct monster *m;
-{
+void monster_move(struct monster *m){
   monster_action(m,m->movef);
 }
 
@@ -386,9 +370,7 @@ struct monster *m;
 
 
 
-void monster_strike(m)
-struct monster *m;
-{
+void monster_strike(struct monster *m){
   if (player_on_sanctuary())
     print1("The aegis of your deity protects you!");
   else {
@@ -399,9 +381,7 @@ struct monster *m;
   }
 }
 
-void monster_special(m)
-struct monster *m;
-{
+void monster_special(struct monster *m){
   /* since many special functions are really attacks, cancel them
      all if on sanctuary */
   if (! player_on_sanctuary())
@@ -409,16 +389,11 @@ struct monster *m;
 }  
 
 
-void monster_talk(m)
-struct monster *m;
-{
+void monster_talk(struct monster *m){
   monster_action(m,m->talkf);
 }
 
-void monster_action(m,action)
-struct monster *m;
-int action;
-{
+void monster_action(struct monster *m, int action){
   int meleef;
   if ((action >= M_MELEE_NORMAL) && (action < M_MOVE_NORMAL)) {
     /* kluge allows multiple attack forms */
@@ -526,10 +501,7 @@ int action;
 }
   
 /* makes one of the highscore npcs */    
-void make_hiscore_npc(npc,npcid)
-pmt npc;
-int npcid;
-{
+void make_hiscore_npc(pmt npc, int npcid){
   int st = -1;
   pob ob;
   *npc = Monsters[HISCORE_NPC];
@@ -623,10 +595,7 @@ int npcid;
 
 
 /* sets npc behavior given level and behavior code */
-void determine_npc_behavior(npc,level,behavior)
-pmt npc;
-int level,behavior;
-{
+void determine_npc_behavior(pmt npc, int level, int behavior){
   int combatype,competence,talktype;
   npc->hp = (level+1)*20;
   npc->status = AWAKE+MOBILE+WANDERING;
@@ -686,9 +655,7 @@ int level,behavior;
 
 
 /* makes an ordinary npc (maybe undead) */
-void make_log_npc(npc)
-struct monster *npc;
-{
+void make_log_npc(struct monster *npc){
   int i,n;
   int behavior,status,level;
   FILE *fd;
@@ -752,9 +719,7 @@ struct monster *npc;
 
 
 
-void m_trap_dart(m)
-struct monster *m;
-{
+void m_trap_dart(struct monster *m){
   if (los_p(m->x,m->y,Player.x,Player.y)) {
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
     else {
@@ -769,9 +734,7 @@ struct monster *m;
   m_damage(m,difficulty()*2,NORMAL_DAMAGE);
 }
 
-void m_trap_pit(m)
-struct monster *m;
-{
+void m_trap_pit(struct monster *m){
   if (los_p(m->x,m->y,Player.x,Player.y)) {
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
     else {
@@ -789,9 +752,7 @@ struct monster *m;
 
 }
 
-void m_trap_door(m)
-struct monster *m;
-{
+void m_trap_door(struct monster *m){
   if (los_p(m->x,m->y,Player.x,Player.y)) {
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
     else {
@@ -806,9 +767,7 @@ struct monster *m;
   m_vanish(m);
 }
 
-void m_trap_abyss(m)
-struct monster *m;
-{
+void m_trap_abyss(struct monster *m){
   char Str1[80];
   if (los_p(m->x,m->y,Player.x,Player.y)) {
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
@@ -828,9 +787,7 @@ struct monster *m;
   resetgamestatus(SUPPRESS_PRINTING);
 }
 
-void m_trap_snare(m)
-struct monster *m;
-{
+void m_trap_snare(struct monster *m){
   char Str1[80];
   Level->site[m->x][m->y].locchar = TRAP;
   lset(m->x, m->y, CHANGED);
@@ -846,9 +803,7 @@ struct monster *m;
   if (! m_statusp(m,INTANGIBLE)) m_status_reset(m,MOBILE);
 }
 
-void m_trap_blade(m)
-struct monster *m;
-{
+void m_trap_blade(struct monster *m){
   char Str1[80];
   Level->site[m->x][m->y].locchar = TRAP;
   lset(m->x, m->y, CHANGED);
@@ -863,9 +818,7 @@ struct monster *m;
   m_damage(m,(difficulty()+1)*7-Player.defense,NORMAL_DAMAGE);
 }
 
-void m_trap_fire(m)
-struct monster *m;
-{
+void m_trap_fire(struct monster *m){
   char Str1[80];
   Level->site[m->x][m->y].locchar = TRAP;
   lset(m->x, m->y, CHANGED);
@@ -882,9 +835,7 @@ struct monster *m;
 }
 
 
-void m_fire(m)
-struct monster *m;
-{
+void m_fire(struct monster *m){
   char Str1[80];
   if (los_p(m->x,m->y,Player.x,Player.y)) { 
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
@@ -898,9 +849,7 @@ struct monster *m;
   m_damage(m,random_range(100),FLAME);
 }
 
-void m_trap_teleport(m)
-struct monster *m;
-{
+void m_trap_teleport(struct monster *m){
   char Str1[80];
   Level->site[m->x][m->y].locchar = TRAP;
   lset(m->x, m->y, CHANGED);
@@ -916,9 +865,7 @@ struct monster *m;
   m_teleport(m);
 }
 
-void m_trap_disintegrate(m)
-struct monster *m;
-{
+void m_trap_disintegrate(struct monster *m){
   char Str1[80];
   if (los_p(m->x,m->y,Player.x,Player.y)) { 
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
@@ -934,9 +881,7 @@ struct monster *m;
   disintegrate(m->x,m->y);
 }
 
-void m_trap_sleepgas(m)
-struct monster *m;
-{
+void m_trap_sleepgas(struct monster *m){
   char Str1[80];
   if (los_p(m->x,m->y,Player.x,Player.y)) { 
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
@@ -952,9 +897,7 @@ struct monster *m;
   if (! m_immunityp(m,SLEEP)) m_status_reset(m,AWAKE);
 }
 
-void m_trap_acid(m)
-struct monster *m;
-{
+void m_trap_acid(struct monster *m){
   char Str1[80];
   if (los_p(m->x,m->y,Player.x,Player.y)) { 
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
@@ -970,9 +913,7 @@ struct monster *m;
   m_damage(m,random_range(difficulty()*difficulty()),ACID);
 }
 
-void m_trap_manadrain(m)
-struct monster *m;
-{
+void m_trap_manadrain(struct monster *m){
   char Str1[80];
   if (los_p(m->x,m->y,Player.x,Player.y)) { 
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
@@ -989,9 +930,7 @@ struct monster *m;
 }
 
 
-void m_water(m)
-struct monster *m;
-{
+void m_water(struct monster *m){
   char Str1[80];
   if ((! m_statusp(m,INTANGIBLE)) && 
       (! m_statusp(m,SWIMMING)) &&
@@ -1010,9 +949,7 @@ struct monster *m;
 }
 
 
-void m_abyss(m)
-struct monster *m;
-{
+void m_abyss(struct monster *m){
   char Str1[80];
   if (los_p(m->x,m->y,Player.x,Player.y)) {
     if (m->uniqueness != COMMON) strcpy(Str1,m->monstring);
@@ -1028,9 +965,7 @@ struct monster *m;
 
 
 
-void m_lava(m)
-struct monster *m;
-{
+void m_lava(struct monster *m){
   char Str1[80];
   if ((! m_immunityp(m,FLAME)) ||
       ((! m_statusp(m,SWIMMING))&& (! m_statusp(m,ONLYSWIM)))) {
@@ -1047,9 +982,7 @@ struct monster *m;
   }
 }
 
-void m_altar(m)
-struct monster *m;
-{
+void m_altar(struct monster *m){
   int visible = view_los_p(Player.x,Player.y,m->x,m->y);
   int reaction = 0;
   int altar = Level->site[m->x][m->y].aux;
@@ -1128,9 +1061,7 @@ char *mantype()
 }
 
 
-void strengthen_death(m)
-struct monster *m;
-{
+void strengthen_death(struct monster *m){
   pol ol = ((pol)checkmalloc(sizeof(oltype)));
   pob scythe = ((pob)checkmalloc(sizeof(objtype)));
 #ifdef MSDOS_SUPPORTED_ANTIQUE
@@ -1159,7 +1090,5 @@ struct monster *m;
 
 
 
-void m_no_op(m)
-struct monster *m;
-{
+void m_no_op(struct monster *m){
 }

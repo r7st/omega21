@@ -1,3 +1,4 @@
+
 /* omega copyright (C) 1987,1988,1989 by Laurence Raphael Brothers */
 /* itemf2.c */
 
@@ -9,9 +10,7 @@
 
 
 /* ring functions */
-void i_perm_knowledge(o)
-pob o;
-{
+void i_perm_knowledge(pob o){
   if (o->known < 1)
     o->known = 1;
   if (o->blessing > -1)
@@ -20,9 +19,7 @@ pob o;
     knowledge(o->blessing);
 }
 
-void i_perm_strength(o)
-pob o;
-{
+void i_perm_strength(pob o){
   if (o->known < 1) o->known = 1;
   Objects[o->id].known = 1;
   if (o->used){
@@ -42,9 +39,7 @@ pob o;
 
 
 
-void i_perm_burden(o)
-pob o;
-{
+void i_perm_burden(pob o){
   int i;
   
   if (o->used) {
@@ -63,23 +58,17 @@ pob o;
   }
 }
 
-void i_perm_gaze_immune(o)
-pob o;
-{
+void i_perm_gaze_immune(pob o){
   if (o->used) Player.immunity[GAZE]++;
   else Player.immunity[GAZE]--;
 }
 
-void i_perm_fire_resist(o)
-pob o;
-{
+void i_perm_fire_resist(pob o){
   if (o->used) Player.immunity[FLAME]++;
   else Player.immunity[FLAME]--;
 }
 
-void i_perm_poison_resist(o)
-pob o;
-{
+void i_perm_poison_resist(pob o){
   if (o->used) {
     if (o->blessing < 0) {
       Player.immunity[POISON] = 0;
@@ -104,9 +93,7 @@ pob o;
 
 
 
-void i_perm_regenerate(o)
-pob o;
-{
+void i_perm_regenerate(pob o){
   if (o->known < 1)  o->known = 1;
   if (o->blessing > -1)
     Objects[o->id].known = 1;
@@ -129,15 +116,11 @@ pob o;
 /* armor functions */
 
 
-void i_normal_armor(o)
-pob o;
-{
+void i_normal_armor(pob o){
   if (o->used) mprint("You put on your suit of armor.");
 }
 
-void i_perm_energy_resist(o)
-pob o;
-{
+void i_perm_energy_resist(pob o){
   if (o->used){
     Player.immunity[FLAME]++;
     Player.immunity[COLD]++;
@@ -152,9 +135,7 @@ pob o;
 
 
 
-void i_perm_fear_resist(o)
-pob o;
-{
+void i_perm_fear_resist(pob o){
   if (o->used){
     Player.immunity[FEAR]++;
     if (o->blessing < 0) {
@@ -176,9 +157,7 @@ pob o;
 
 
 
-void i_perm_breathing(o)
-pob o;
-{
+void i_perm_breathing(pob o){
   if (o->known < 1)  o->known = 1;
   if (o->blessing > -1)
     Objects[o->id].known = 1;
@@ -207,11 +186,7 @@ pob o;
 
 /* weapons functions */
 
-void weapon_acidwhip(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_acidwhip(int dmgmod, pob o, struct monster *m){
   if ((random_range(2) == 1) && (! m_immunityp(m,NORMAL_DAMAGE))) {
     mprint("You entangle the monster!");
     m_status_reset(m,MOBILE);
@@ -220,11 +195,7 @@ struct monster *m;
 
 }
 
-void weapon_scythe(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_scythe(int dmgmod, pob o, struct monster *m){
   mprint("Slice!");
   m_death(m);
   if (! Player.rank[ADEPT]) {
@@ -234,11 +205,7 @@ struct monster *m;
   }
 }
 
-void weapon_demonblade(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{ 
+void weapon_demonblade(int dmgmod, pob o, struct monster *m){
   if (o->blessing > -1) {
     mprint("Demonblade disintegrates with a soft sigh.");
     mprint("You stop foaming at the mouth.");
@@ -281,11 +248,7 @@ struct monster *m;
   }
 }
 
-void weapon_lightsabre(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_lightsabre(int dmgmod, pob o, struct monster *m){
   if (! o->known) {
     mprint("Fumbling with the cylinder, you press the wrong stud....");
     p_damage(100,UNSTOPPABLE,"fumbling with a lightsabre");
@@ -304,11 +267,7 @@ struct monster *m;
   }
 }
 
-void weapon_tangle(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_tangle(int dmgmod, pob o, struct monster *m){
   if ((random_range(2) == 1) && (! m_immunityp(m,NORMAL_DAMAGE))) {
     mprint("You entangle the monster!");
     m_status_reset(m,MOBILE);
@@ -317,11 +276,7 @@ struct monster *m;
 }
 
 /* if wielding a bow, add bow damage to arrow damage */
-void weapon_arrow(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_arrow(int dmgmod, pob o, struct monster *m){
   if ((Player.possessions[O_WEAPON_HAND] != NULL) &&
       (Player.possessions[O_WEAPON_HAND]->id == WEAPONID+26)) /* ie, using a bow */
     p_hit(m,Player.dmg+o->plus+o->dmg+dmgmod,NORMAL_DAMAGE);
@@ -329,11 +284,7 @@ struct monster *m;
 }
 
 /* if wielding a crossbow, add bow damage to arrow damage */
-void weapon_bolt(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_bolt(int dmgmod, pob o, struct monster *m){
   if ((Player.possessions[O_WEAPON_HAND] != NULL) &&
       (Player.possessions[O_WEAPON_HAND]->id == WEAPONID+27) && /*ie using a crossbow */
       (Player.possessions[O_WEAPON_HAND]->aux==LOADED)) {
@@ -344,11 +295,7 @@ struct monster *m;
 }
 
 
-void weapon_mace_disrupt(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_mace_disrupt(int dmgmod, pob o, struct monster *m){
   if (m->meleef == M_MELEE_SPIRIT) {
     mprint("The monster crumbles away to dust!");
     m_death(m);
@@ -356,27 +303,18 @@ struct monster *m;
   else p_hit(m,Player.dmg+dmgmod,UNSTOPPABLE);
 }
 
-void weapon_normal_hit(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_normal_hit(int dmgmod, pob o, struct monster *m){
   p_hit(m,Player.dmg+dmgmod,NORMAL_DAMAGE);
 }
 
 
 /* will be updated eventually */
-void weapon_bare_hands(dmgmod,m)
-int dmgmod;
-struct monster *m;
-{
+void weapon_bare_hands(int dmgmod, struct monster *m){
   p_hit(m,Player.dmg+dmgmod,NORMAL_DAMAGE);
 }
 
 
-void i_demonblade(o)
-pob o;
-{
+void i_demonblade(pob o){
   if (o->used) {
     o->known = 2;
     mprint("Demonblade's fangs open and bury themselves in your wrist!");
@@ -391,32 +329,22 @@ pob o;
   }
 }
 
-void i_normal_weapon(o)
-pob o;
-{
+void i_normal_weapon(pob o){
   if (o->used) mprint("You ready your weapon for battle.");
 }
 
-void i_lightsabre(o)
-pob o;
-{
+void i_lightsabre(pob o){
   if (o->used) mprint("You feel one with the Force.");
   else mprint("You feel out of touch with the Force.");
 }
 
-void i_mace_disrupt(o)
-pob o;
-{
+void i_mace_disrupt(pob o){
   mprint("That's a damned heavy mace!");
 }
 
 
 
-void weapon_vorpal(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_vorpal(int dmgmod, pob o, struct monster *m){
   if ((random_range(10) < 3) && (! m_immunityp(m,NORMAL_DAMAGE))) {
     o->known = 2;
     if (random_range(2) == 1)
@@ -427,11 +355,7 @@ struct monster *m;
   else weapon_normal_hit(dmgmod,o,m);
 }
 
-void weapon_desecrate(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_desecrate(int dmgmod, pob o, struct monster *m){
   o->known = 2;
   if (Player.alignment < 0) {
     mprint("Your opponent screams in agony!");
@@ -454,11 +378,7 @@ struct monster *m;
 
 
 
-void weapon_firestar(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_firestar(int dmgmod, pob o, struct monster *m){
   if (random_range(3) == 1) {
     o->known = 2;
     fball(Player.x,Player.y,Player.x,Player.y,max(Player.dmg,25));
@@ -466,11 +386,7 @@ struct monster *m;
   if (m->hp > 0) weapon_normal_hit(dmgmod,o,m);
 }
 
-void weapon_defend(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_defend(int dmgmod, pob o, struct monster *m){
   if ((Player.alignment < 0) && (o->blessing > 0)) {
       mprint("The Holy Defender screams in your hands....");
       mprint("You stagger before the sound of its rage....");
@@ -491,11 +407,7 @@ struct monster *m;
   weapon_normal_hit(dmgmod,o,m);
 }
 
-void weapon_victrix(dmgmod,o,m)
-int dmgmod;
-pob o;
-struct monster *m;
-{
+void weapon_victrix(int dmgmod, pob o, struct monster *m){
   if (m->meleef == M_MELEE_SPIRIT) {
     mprint("Your opponent dissipates in a harmless cloud of vapors...");
     m_death(m);
@@ -503,9 +415,7 @@ struct monster *m;
   else weapon_normal_hit(dmgmod,o,m);
 }
 
-void i_defend(o)
-pob o;
-{
+void i_defend(pob o){
   o->known = 2;
   if (o->used) {
     mprint("You feel under an aegis!");
@@ -515,9 +425,7 @@ pob o;
 }
 
 
-void i_victrix(o)
-pob o;
-{
+void i_victrix(pob o){
   o->known = 2;
   o->blessing = abs(o->blessing);
   if (o->used) {
@@ -533,9 +441,7 @@ pob o;
 }    
 
 
-void i_desecrate(o)
-pob o;
-{
+void i_desecrate(pob o){
   if (o->known < 1)  o->known = 2;
   if (o->blessing > 0) {
     mprint("How weird, a blessed desecrator... ");
@@ -548,16 +454,12 @@ pob o;
 
 
 /* shield functions */
-void i_normal_shield(o)
-pob o;
-{
+void i_normal_shield(pob o){
   if (o->used) mprint("You sling your shield across a forearm.");
 }
 
 
-void i_perm_deflect(o)
-pob o;
-{
+void i_perm_deflect(pob o){
   if (o->known < 1)  o->known = 2;
   if (o->blessing > -1) {
     if (o->used) {

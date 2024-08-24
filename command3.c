@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* command3.c */
 
@@ -894,9 +895,7 @@ void tunnel()
 
 
 
-void hunt(terrain)
-Symbol terrain;     
-{
+void hunt(Symbol terrain){
   int fertility=0;
   switch(terrain) {
   case SWAMP: 

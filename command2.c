@@ -1,3 +1,4 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* command2.c */
 
@@ -159,9 +160,7 @@ void eat()
 
 
 /* search all adjacent spots for secrecy */
-void search(searchval)
-int *searchval;
-{
+void search(int *searchval){
   int i;
   if (Player.status[AFRAID] > 0)
     print3("You are too terror-stricken to stop to search for anything.");
@@ -933,9 +932,7 @@ void bash_item()
 
 /* guess what this does */
 /* if force is true, exiting due to some problem - don't bomb out */
-void save(compress, force)
-int compress, force;
-{
+void save(int compress, int force){
   char fname[100];
   int pos, ok = TRUE;
 
@@ -1057,9 +1054,7 @@ void closedoor()
 }
 
 /* handle a h,j,k,l, etc. */
-void moveplayer(dx,dy)
-int dx,dy;
-{
+void moveplayer(int dx, int dy){
   if (p_moveable(Player.x+dx,Player.y+dy)) {
       
     if (Player.status[IMMOBILE] > 0) {
@@ -1121,9 +1116,7 @@ int dx,dy;
 
 
 /* handle a h,j,k,l, etc. */
-void movepincountry(dx,dy)
-int dx,dy;
-{
+void movepincountry(int dx, int dy){
   int i,takestime = TRUE;
   if ((Player.maxweight < Player.itemweight) && 
       random_range(2) &&

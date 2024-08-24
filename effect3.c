@@ -1,12 +1,11 @@
+
 /* omega copyright (C) by Laurence Raphael Brothers, 1987,1988,1989 */
 /* effect3.c */
 
 #include "glob.h"
 
 /* if know id, then summon that monster; else (if < 0) get one. */
-void summon(blessing,id)
-int blessing,id;
-{
+void summon(int blessing, int id){
   int i,looking=TRUE,x,y;
   pml tml;
 
@@ -45,9 +44,7 @@ int blessing,id;
 
 
 
-int itemlist(itemindex,num)
-int itemindex,num;
-{
+int itemlist(int itemindex, int num){
   int i,itemno;
 
   print2("Show ID list? ");
@@ -100,9 +97,7 @@ int monsterlist()
 
 
 /* uncurse all items, cure diseases, and neutralize poison */
-void cleanse(blessing)
-int blessing;
-{
+void cleanse(int blessing){
   int i;
 
   if (blessing > -1) {
@@ -136,9 +131,7 @@ int blessing;
   }
 }
 
-void annihilate(blessing)
-int blessing;
-{
+void annihilate(int blessing){
   pml ml;
   int i;
 
@@ -174,9 +167,7 @@ int blessing;
 
 
 
-void sleep_monster(blessing)
-int blessing;
-{
+void sleep_monster(int blessing){
   pml ml;
   int x=Player.x,y=Player.y;
   struct monster *target;
@@ -212,9 +203,7 @@ int blessing;
   }
 }
   
-void sleep_player(amount)
-int amount;
-{
+void sleep_player(int amount){
   if (Player.status[SLEPT] == 0) { /* prevent player from sleeping forever */
     mprint("You feel sleepy...");
     if (! p_immune(SLEEP)) {
@@ -225,9 +214,7 @@ int amount;
 }
 
 
-void hide(x,y)
-int x,y;
-{
+void hide(int x, int y){
   if (inbounds(x,y)) {
     lset(x,y,SECRET);
     lset(x, y, CHANGED);
@@ -236,9 +223,7 @@ int x,y;
   }
 }
 
-void clairvoyance(vision)
-int vision;
-{
+void clairvoyance(int vision){
   int i,j;
   int x = Player.x, y = Player.y;
   mprint("Clairvoyance... ");
@@ -268,9 +253,7 @@ void aggravate()
 
 
 
-void learnspell(blessing)
-int blessing;
-{
+void learnspell(int blessing){
   int i,spell,done=FALSE;
   if (blessing < 0) {
     for(i=NUMSPELLS;((i>-1) && (! done));i--)
@@ -320,10 +303,7 @@ void amnesia()
 
 
 /*affects player only */
-void level_drain(levels,source)
-int levels;
-char *source;
-{
+void level_drain(int levels, char *source){
   int decrement = ((int) (Player.maxhp / (Player.level+1)));
 
   Player.level -= levels;
@@ -338,9 +318,7 @@ char *source;
 
 
 
-void disrupt(x,y,amount)
-int x,y,amount;
-{
+void disrupt(int x, int y, int amount){
   struct monster *target;
 
   if ((x ==Player.x) && (y==Player.y)) {
@@ -372,9 +350,7 @@ int x,y,amount;
 
 
 
-void disintegrate(x,y)
-int x,y;
-{
+void disintegrate(int x, int y){
   struct monster *target;
   if (! inbounds(x,y)) mprint("You feel a sense of wastage.");
   else if ((x==Player.x)&&(y==Player.y)) {
@@ -500,9 +476,7 @@ void acid_cloud()
 
 
 /* teleport player */
-void p_teleport(type)
-int type;
-{
+void p_teleport(int type){
   int x=Player.x,y=Player.y;
   drawspot(x,y);
   if (type < 0) {
@@ -534,9 +508,7 @@ int type;
 }
 
 
-void p_poison(toxicity)
-int toxicity;
-{
+void p_poison(int toxicity){
   mprint("You feel sick.");
   if (! p_immune(POISON))
     Player.status[POISONED]+=toxicity;
@@ -544,9 +516,7 @@ int toxicity;
   showflags();
 }
 
-void apport(blessing)
-int blessing;
-{
+void apport(int blessing){
   int i,index,x=Player.x,y=Player.y;
   if (blessing > -1) {
     mprint("Apport from:");
@@ -571,9 +541,7 @@ int blessing;
 }
 
 
-void strategic_teleport(blessing)
-int blessing;
-{
+void strategic_teleport(int blessing){
   int new_env;
 
   /* WDT HACK: Game balance issue: the star gem is supposed to be the only
@@ -712,9 +680,7 @@ int blessing;
 
 
 
-void hero(blessing)
-int blessing;
-{
+void hero(int blessing){
   if (blessing > -1) {
       mprint("You feel super!");
       Player.status[HERO] += random_range(5)+1+blessing;
@@ -729,9 +695,7 @@ int blessing;
 }
 
 
-void levitate(blessing)
-int blessing;
-{
+void levitate(int blessing){
   if (blessing > -1) {
     if (gamestatusp(MOUNTED)) 
       mprint("You have a strange feeling of lightness in your saddle.");
@@ -767,9 +731,7 @@ void level_return()
 }
 
 
-void cure(blessing)
-int blessing;
-{
+void cure(int blessing){
   int happened = FALSE;
   if (blessing > -1) {
     if (Player.status[DISEASED]) {
@@ -798,9 +760,7 @@ int blessing;
   showflags();
 }
 
-void disease(amount)
-int amount;
-{
+void disease(int amount){
   mprint("You feel ill.");
   if (! Player.immunity[INFECTION]) {
     mprint("You begin to shiver with ague.");
@@ -809,9 +769,7 @@ int amount;
   else mprint("The illness fades.");
 }
 
-void truesight(blessing)
-int blessing;
-{
+void truesight(int blessing){
   if (blessing > -1) {
     Player.status[TRUESIGHT]+=random_range(10)+1;
     mprint("You feel sharp.");
@@ -824,9 +782,7 @@ int blessing;
 
 
 
-void dispel(blessing)
-int blessing;     
-{
+void dispel(int blessing){
   int i,x=Player.x,y=Player.y;
   pob o;
     if (blessing > -1) {
@@ -910,9 +866,7 @@ int blessing;
 }
 
 
-void polymorph(blessing)
-int blessing;     
-{
+void polymorph(int blessing){
   int x=Player.x,y=Player.y,newmonster;
   struct monster *m;
   setspot(&x,&y);
@@ -986,9 +940,7 @@ int blessing;
 
 
 
-void hellfire(x,y,blessing)
-int x,y,blessing;
-{
+void hellfire(int x, int y, int blessing){
   struct monster *m;
   if ((x==Player.x)&&(y==Player.y)) {
     mprint("You have been completely annihilated. Congratulations.");
@@ -1025,9 +977,7 @@ int x,y,blessing;
 }
 
 
-void drain(blessing)
-int blessing;
-{
+void drain(int blessing){
   int x=Player.x,y=Player.y;
   struct monster *m;
   setspot(&x,&y);
@@ -1130,9 +1080,7 @@ void shadowform()
   }
 }
 
-void illuminate(blessing)
-int blessing;
-{
+void illuminate(int blessing){
   int r=Level->site[Player.x][Player.y].roomnumber;
   if (blessing > -1) {
     if (r > ROOMBASE) {
@@ -1164,9 +1112,7 @@ int blessing;
 }
 
 
-void drain_life(amount)
-int amount;
-{
+void drain_life(int amount){
   amount = abs(amount);
   mprint("You feel cold!");
   if (p_immune(NEGENERGY))
@@ -1192,9 +1138,7 @@ int amount;
 }
 
 
-void inflict_fear(x,y)
-int x,y;
-{
+void inflict_fear(int x, int y){
   struct monster *m;
   if ((Player.x == x) && (Player.y == y)) {
     mprint("You shudder with otherworldly dread.");
@@ -1228,9 +1172,7 @@ int x,y;
 
 
 /*Turns on deflection status for the player */
-void deflection(blessing)
-int blessing;
-{
+void deflection(int blessing){
   if (blessing > -1) {
       mprint("You feel buffered.");
       Player.status[DEFLECTION] = blessing + random_range(6);

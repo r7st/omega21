@@ -1,12 +1,11 @@
+
 /* omega copyright (C) 1987,1988,1989 by Laurence Raphael Brothers */
 /* item.c */
 
 #include "glob.h"
 
 /* make a random new object, returning pointer */
-pob create_object(itemlevel)
-int itemlevel;
-{
+pob create_object(int itemlevel){
   pob new;
   int  r; 
   int ok = FALSE;
@@ -41,29 +40,20 @@ int itemlevel;
   return(new);
 }
 
-void make_cash(new,level)
-pob new;
-int level;
-{
+void make_cash(pob new, int level){
   *new = Objects[CASHID];
   new->basevalue = random_range(level*level+10)+1; /* aux is AU value */
   new->objstr = cashstr();
   new->cursestr = new->truename = new->objstr;
 }
 
-void make_food(new,id)
-pob new;
-int id;
-{
+void make_food(pob new, int id){
   if (id == -1) id = random_range(NUMFOODS);
   *new = Objects[FOODID+id];
 }
 
 
-void make_corpse(new,m)
-pob new;
-struct monster *m;
-{
+void make_corpse(pob new, struct monster *m){
   *new = Objects[CORPSEID];
   new->charge = m->id;
   new->weight = m->corpseweight;
@@ -140,10 +130,7 @@ struct monster *m;
 
 
 
-void make_ring(new,id)
-pob new;
-int id;
-{
+void make_ring(pob new, int id){
   if (id == -1) id = random_range(NUMRINGS);
   *new = Objects[RINGID+id];
   if (new->blessing == 0) new->blessing = itemblessing();
@@ -151,10 +138,7 @@ int id;
   if (new->blessing < 0) new->plus = -1 - abs(new->plus);
 }
 
-void make_thing(new,id)
-pob new;
-int id;
-{
+void make_thing(pob new, int id){
   if (id == -1) id = random_range(NUMTHINGS);
   *new = Objects[THINGID+id];
   if (strcmp(new->objstr,"grot") == 0) {
@@ -164,10 +148,7 @@ int id;
 }
 
 
-void make_scroll(new,id)
-pob new;
-int id;
-{
+void make_scroll(pob new, int id){
   if (id == -1) id = random_range(NUMSCROLLS);
   *new = Objects[SCROLLID+id];
   /* if a scroll of spells, aux is the spell id in Spells */
@@ -176,19 +157,13 @@ int id;
   }
 }
 
-void make_potion(new,id)
-pob new;
-int id;
-{
+void make_potion(pob new, int id){
   if (id == -1) id = random_range(NUMPOTIONS);
   *new = Objects[POTIONID+id];
   if (new->plus == 0) new->plus = itemplus();
 }
 
-void make_weapon(new,id)
-pob new;
-int id;
-{
+void make_weapon(pob new, int id){
   if (id == -1) id = random_range(NUMWEAPONS);
   *new = Objects[WEAPONID+id];
   if ((id == 28) || (id == 29)) /* bolt or arrow */
@@ -203,10 +178,7 @@ int id;
   }
 }
 
-void make_shield(new,id)
-pob new;
-int id;
-{
+void make_shield(pob new, int id){
   if (id == -1) id = random_range(NUMSHIELDS);
   *new = Objects[SHIELDID+id];
   if (new->plus == 0)
@@ -218,10 +190,7 @@ int id;
     new->plus = 1 + abs(new->plus);
 }
 
-void make_armor(new,id)
-pob new;
-int id;
-{
+void make_armor(pob new, int id){
   if (id == -1) id = random_range(NUMARMOR);
   *new = Objects[ARMORID+id];
   if (new->plus == 0) new->plus = itemplus();
@@ -232,39 +201,27 @@ int id;
     new->plus = 1 + abs(new->plus);  
 }
 
-void make_cloak(new,id)
-pob new;
-int id;
-{
+void make_cloak(pob new, int id){
   if (id == -1) id = random_range(NUMCLOAKS);
   Objects[CLOAKID+4].plus = 2;
   *new = Objects[CLOAKID+id];
   if (new->blessing == 0) new->blessing = itemblessing();
 }
 
-void make_boots(new,id)
-pob new;
-int id;
-{
+void make_boots(pob new, int id){
   if (id == -1) id = random_range(NUMBOOTS);
   *new = Objects[BOOTID+id];
   if (new->blessing == 0) new->blessing = itemblessing();
 }
 
-void make_stick(new,id)
-pob new;
-int id;
-{
+void make_stick(pob new, int id){
   if (id == -1) id = random_range(NUMSTICKS);
   *new = Objects[STICKID+id];
   new->charge = itemcharge();
   if (new->blessing == 0) new->blessing = itemblessing();
 }
 
-void make_artifact(new,id)
-pob new;
-int id;
-{
+void make_artifact(pob new, int id){
   if (id == -1)
     do
       id = random_range(NUMARTIFACTS);
@@ -275,10 +232,7 @@ int id;
 
 /* this function is used to shuffle the id numbers of scrolls, potions, etc */
 /* taken from Knuth 2 */
-void shuffle(ids, number)
-int ids[];
-int number;
-{
+void shuffle(int ids[], int number){
   int top, swap, with;
 
   for (top = 0; top < number; top++)
@@ -293,9 +247,7 @@ int number;
 
 /* item name functions */
 
-char *scrollname(id)
-int id;
-{
+char *scrollname(int id){
   switch(scroll_ids[id]) {
       case 0: return "scroll-GRISTOGRUE";
       case 1: return "scroll-Kho Reck Tighp";
@@ -361,9 +313,7 @@ char *grotname()
 
 
 
-char *potionname(id)
-int id;
-{
+char *potionname(int id){
   switch (potion_ids[id]) {
     case 0: return "vial of dewy liquid";
     case 1: return "jug of tarry black substance";
@@ -390,9 +340,7 @@ int id;
 }
 
 
-char *stickname(id)
-int id;
-{
+char *stickname(int id){
   switch (stick_ids[id]) {
     case 0: return "oaken staff";
     case 1: return "heavy metal rod";
@@ -418,9 +366,7 @@ int id;
   }      
 }
 
-char *ringname(id)
-int id;
-{
+char *ringname(int id){
   switch (ring_ids[id]) {
     case 0: return "gold ring with a blue gem";
     case 1: return "brass ring";
@@ -447,9 +393,7 @@ int id;
 }
 
 
-char *cloakname(id)
-int id;
-{
+char *cloakname(int id){
   switch (cloak_ids[id]) {
     case 0: return "tattered piece of cloth";
     case 1: return "fuligin cloak";
@@ -475,9 +419,7 @@ int id;
   }      
 }
 
-char *bootname(id)
-int id;
-{
+char *bootname(int id){
   switch (boot_ids[id]) {
     case 0: return "sturdy leather boots";
     case 1: return "calf-length moccasins";
@@ -533,9 +475,7 @@ int itemblessing()
 }
 
     
-int twohandedp(id)
-int id;
-{
+int twohandedp(int id){
   switch(id) {
   case WEAPONID+5:
   case WEAPONID+12:
@@ -553,9 +493,7 @@ int id;
 }
 
 
-void item_use(o)
-struct object *o;
-{
+void item_use(struct object *o){
   clearmsg();
   switch(o->usef) {
     case -1:i_no_op(o); break;
