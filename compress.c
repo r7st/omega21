@@ -1106,7 +1106,7 @@ getcode() {
 #ifndef __GO32__
 char *
 rindex(s, c)		/* For those who don't have it in libc.a */
-register char *s, c;
+register const char *s, c;
 {
 	char *p;
 	for (p = NULL; *s; s++)

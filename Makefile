@@ -26,7 +26,6 @@ CFLAGS += \
   -DSAVEDIR=\"${SAVEDIR}/\" \
   -Wno-dangling-else \
   -Wno-incompatible-pointer-types \
-  -Wno-knr-promoted-parameter \
   -Wno-parentheses \
   -Wno-shift-count-overflow
 
