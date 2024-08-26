@@ -657,7 +657,7 @@ int pack_item_cost(int index){
 }
 
 /* WDT -- 'response' must be an index into the pack. */
-int use_pack_item(int response, int slot){
+void use_pack_item(int response, int slot){
   pob item; int i;
   i = pack_item_cost(response);
   if (i > 10) {
@@ -826,6 +826,7 @@ int aux_top_take_from_pack(int slot, int display){
 int take_from_pack(int slot, int display){
   if (optionp(TOPINV)) aux_top_take_from_pack(slot,display);
   else aux_take_from_pack(slot);
+  return -1;
 }
 
 
@@ -1631,7 +1632,10 @@ void fixpack()
 /* show slots, with appropriate additional displays if two-handed weapons */
 /* are involved */
 void show_inventory_slot(int slotnum, int topline){
-  if (!topline)
+  if (slotnum == -1){
+    return;
+  }
+  else if (!topline)
     if (Player.possessions[O_READY_HAND] == Player.possessions[O_WEAPON_HAND] &&
       (slotnum == O_READY_HAND || slotnum == O_WEAPON_HAND))
     {
